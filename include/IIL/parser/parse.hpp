@@ -1,3 +1,4 @@
+#pragma once
 #include "lexer/tokens.hpp"
 #include <iostream>
 #include <vector>

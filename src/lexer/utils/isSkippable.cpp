@@ -1,4 +1,4 @@
-#include "../src/lexer/utils/include/isSkippable.hpp"
+#include "include/isSkippable.hpp"
 
 bool utils::isSkippable(char token) {
     if (token == ' '){ //checks for spaces. 

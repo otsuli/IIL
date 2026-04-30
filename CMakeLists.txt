@@ -9,14 +9,22 @@ project(IIL
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include_directories(include)
-
 add_executable(IIL
     src/main.cpp
     src/lexer/tokenization.cpp
+    src/lexer/utils/isDelimiter.cpp
+    src/lexer/utils/isNumber.cpp
+    src/lexer/utils/isSkippable.cpp
+    src/lexer/utils/shift.cpp
+    src/parser/errors/errorRoutines.cpp
+    src/parser/errors/parserError.cpp
+    src/parser/utils/helperRoutines.cpp
+    src/parser/parse.cpp
 )
 
-add_executable(lexer_test
-    tests/lexer_test.cpp
-    src/lexer/tokenization.cpp
+target_include_directories(IIL PRIVATE
+    ${CMAKE_SOURCE_DIR}/include/IIL
+    ${CMAKE_SOURCE_DIR}/src/lexer/utils/include
+    ${CMAKE_SOURCE_DIR}/src/parser/errors/include
+    ${CMAKE_SOURCE_DIR}/src/parser/utiles/include
 )

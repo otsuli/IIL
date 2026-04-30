@@ -1,4 +1,4 @@
-#include "../src/lexer/utils/include/isNumber.hpp"
+#include "include/isNumber.hpp"
 #include <string>
 #include <iostream>
 #include <algorithm>

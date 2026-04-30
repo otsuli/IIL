@@ -1,5 +1,5 @@
-#include "../src/lexer/utils/include/isDelimiter.hpp"
-#include "tokens.hpp"
+#include "include/isDelimiter.hpp"
+#include "../../../include/IIL/lexer/tokens.hpp"
 
 bool utils::isDelimiter(char ch)
 {

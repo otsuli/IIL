@@ -1,5 +1,5 @@
-#include "helperRoutines.hpp"
-#include "../include/IIL/lexer/tokens.hpp"
+#include "include/helperRoutines.hpp"
+#include "../../../include/IIL/lexer/tokens.hpp"
 #include <iostream>
 #include <vector>
 

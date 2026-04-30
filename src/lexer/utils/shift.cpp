@@ -1,4 +1,4 @@
-#include "../src/lexer/utils/include/shift.hpp"
+#include "include/shift.hpp"
 #include <bits/stdc++.h>
 #include <vector> 
 

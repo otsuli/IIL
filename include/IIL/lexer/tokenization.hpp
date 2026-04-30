@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include "lexerError.hpp"
 #include "tokens.hpp"
 
 class tokenizing
