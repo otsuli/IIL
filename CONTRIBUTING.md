@@ -18,7 +18,7 @@ It will make it easier for mainteners, and it will smooth out the experience for
 - [I Have a Question](#i-have-a-question)
 - [I Want To Contribute](#i-want-to-contribute)
 - [Reporting Bugs](#reporting-bugs)
-- [Suggesting Enhancements](#suggesting-enhancements/feautures)
+- [Suggesting Enhancements](#suggesting-enhancements)
 - [Commit Messages](#commit-messages)
 
 ## Code of Conduct
@@ -78,7 +78,7 @@ Once the issue is filed:
 > [!TIP]
 > All in all, I don't take this stuff seriously lol. So just don't be an idiot and try your best. 
 
-### Suggesting Enahancements/Features
+### Suggesting Enahancements
 
 So you have an idea for a feauture to add to IIL? This section guides you through submitting an enhance suggestion.  
 
