@@ -64,14 +64,17 @@ Please complete the following steps in advance to help me fix any potential bugs
 - Can you reproduce the issue? And can you reproduce it with older versions?
 
 #### How To Submit a Good Bug Report
-> [!CAUTION]
-> Please don't report security related issues, vulnerabilities or bugs including sensitive information to the issue tracker, or anywhere in public. Instead sensitive bugs should be sent by email to: otso.reijonen@icloud.com. (thx)
-
 This project uses GitHub issues to track bugs and errors. If you run into an issue just: 
 - Open an [Issue](/issues/new).
 - Explain the behavior you would expect and the actual behavior.
 - Please provide as much context as possible and describe the *reproduction steps* that someone else should follow to reproduce the issue.
 - Provide the info you collected in the previous section.
+
+> [!CAUTION]
+> Please don't report security related issues, vulnerabilities or bugs including 
+sensitive information to the issue tracker, or anywhere in public. Instead, 
+either send an email to otso.reijonen@icloud.com or submit a private 
+vulnerability report via GitHub's Security tab.
 
 Once the issue is filed: 
 - I'll fix em' when I can.
