@@ -1,7 +1,7 @@
-#include "include/errorRoutines.hpp"
+#include "errorRoutines.hpp"
 #include <memory>
 #include <iostream>
-#include "parser/parse.hpp"
+#include "../AST.hpp"
 
 std::unique_ptr<ExprAST> errorRoutines::LogError(const char *Str)
 {

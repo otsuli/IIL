@@ -27,6 +27,7 @@ add_executable(IIL
     src/parser/errors/parserError.cpp
     src/parser/utils/helperRoutines.cpp
     src/parser/AST.cpp
+    src/parser/parsing.cpp
 )
 
 target_include_directories(IIL PRIVATE
