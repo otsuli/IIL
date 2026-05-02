@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "tokens.hpp"
-
+#include "errors/lexerError.hpp"
 class tokenizing
 {
 public:
