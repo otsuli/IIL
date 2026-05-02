@@ -35,6 +35,7 @@ target_include_directories(IIL PRIVATE
     ${CMAKE_SOURCE_DIR}/src/lexer/utils/include
     ${CMAKE_SOURCE_DIR}/src/parser/errors/include
     ${CMAKE_SOURCE_DIR}/src/parser/utils/include
+    ${CMAKE_SOURCE_DIR}/include/IIL/parser
 )
 
 # Tests

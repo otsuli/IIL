@@ -1,7 +1,7 @@
-#include "../../include/IIL/parser/parsing.hpp"
+#include "parsing.hpp"
 #include <memory>
-#include "../../include/IIL/parser/AST.hpp"
-#include "utils/include/helperRoutines.hpp"
+#include "AST.hpp"
+#include "helperRoutines.hpp"
 
 static std::unique_ptr<ExprAST> ParseNumberExpr(){
     helperRoutines routines; 

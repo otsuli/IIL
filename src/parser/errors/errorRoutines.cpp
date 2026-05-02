@@ -1,7 +1,7 @@
 #include "errorRoutines.hpp"
 #include <memory>
 #include <iostream>
-#include "../AST.hpp"
+#include "AST.hpp"
 
 std::unique_ptr<ExprAST> errorRoutines::LogError(const char *Str)
 {
@@ -9,8 +9,8 @@ std::unique_ptr<ExprAST> errorRoutines::LogError(const char *Str)
     return nullptr; 
 } 
 
-std::unique_ptr<PrototypeAST> errorRoutines::LogErrorP (const char *Str)
+std::unique_ptr<PrototypeAST> errorRoutines::LogErrorP(const char *Str)
 {
     errorRoutines::LogError(Str); 
-    return nullptr; 
+    return nullptr;
 }

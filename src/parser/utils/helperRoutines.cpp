@@ -1,8 +1,7 @@
-#include "include/helperRoutines.hpp"
+#include "helperRoutines.hpp"
 #include "../../../include/IIL/lexer/tokens.hpp"
 #include <iostream>
 #include <vector>
-#include "include/helperRoutines.hpp"
 
 Token helperRoutines::getNextToken(std::vector<Token> tokens)
 {

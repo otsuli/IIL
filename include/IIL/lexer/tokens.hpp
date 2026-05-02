@@ -13,6 +13,7 @@ enum TokenType
     Delimiter,
     Indent,
     FileEnd,
+    UNKNOWN,
 };
 
 struct Token
@@ -22,9 +23,9 @@ struct Token
 
     int line;
     int column;
-
-    Token(TokenType type, std::string value, int line, int column) // initializer list
-        : type(type), value(value), line(line), column(column)
+    Token() : type(TokenType::UNKNOWN), value(""), line(0), column(0) {}
+    Token(TokenType type, std::string value, int line, int column)
+        : value(value), type(type), line(line), column(column)
     {
     }
 };
