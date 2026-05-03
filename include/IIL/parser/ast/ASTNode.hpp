@@ -13,7 +13,7 @@ struct ASTnode
 
     ASTnode(Token parent, Token NodeValue, ASTnode *leftChild, ASTnode *rightChild, ASTnode *ext_of_parent) //standard node with more than 2 children
     {
-        parent = parent;
+        parent = parent; 
         NodeValue = NodeValue;
         leftChild = leftChild;
         rightChild = rightChild;
