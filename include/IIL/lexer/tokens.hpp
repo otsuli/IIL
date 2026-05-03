@@ -3,7 +3,8 @@
 #include <unordered_set>
 
 enum TokenType
-{
+{   
+    NONE,
     Number,
     Identifier,
     Keyword,
@@ -14,6 +15,7 @@ enum TokenType
     Indent,
     FileEnd,
     UNKNOWN,
+    
 };
 
 struct Token
