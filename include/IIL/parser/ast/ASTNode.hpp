@@ -6,45 +6,32 @@
 
 struct ASTnode
 {
-    Token parent; 
-    Token NodeValue;
+    const Token NodeValue;
+    Token parent;
     ASTnode *leftChild, *rightChild;
     ASTnode *ext_of_parent;
 
-    ASTnode(Token parent, Token NodeValue, ASTnode *leftChild, ASTnode *rightChild, ASTnode *ext_of_parent) //standard node with more than 2 children
+    ASTnode()
     {
-        parent = parent; 
-        NodeValue = NodeValue;
-        leftChild = leftChild;
-        rightChild = rightChild;
-        ext_of_parent = ext_of_parent;
+        parent.column = NULL;
+        parent.line = NULL;
+        parent.value = " ";
+        parent.type = TokenType::NONE;
     }
-    ASTnode(Token parent, Token NodeValue, ASTnode *leftChild, ASTnode *rightChild) //standard node
-    {
-        parent = parent;
-        NodeValue = NodeValue;
-        leftChild = leftChild;
-        rightChild = rightChild;
-        ext_of_parent = nullptr;
-    }
-    ASTnode(Token parent, Token NodeValue) //leaf node constructor
-    {
-        parent = parent;
-        NodeValue = NodeValue;
-        rightChild = nullptr;
-        leftChild = nullptr;
-        ext_of_parent = nullptr;
-    }
-    ASTnode(Token NodeValue, ASTnode* leftChild, ASTnode* rightChild) // root node constructor
-    {
-        parent.type = TokenType::NONE; 
-        parent.value = "None"; 
-        parent.line = NULL; 
-        parent.column = NULL; 
-        
-        NodeValue = NodeValue;
-        rightChild = rightChild;
-        leftChild = leftChild; 
-        ext_of_parent = nullptr;
-    }
+
+    ASTnode(Token Value) : NodeValue(Value),
+                           leftChild(nullptr),
+                           rightChild(nullptr),
+                           ext_of_parent(nullptr) {}
+};
+
+enum Precedence
+{
+    // Paren,
+    Expo,
+    Multi,
+    Divis,
+    Modulus,
+    Addition,
+    Subtract,
 };

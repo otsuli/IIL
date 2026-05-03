@@ -3,7 +3,7 @@
 #include <unordered_set>
 
 enum TokenType
-{   
+{
     NONE,
     Number,
     Identifier,
@@ -15,13 +15,13 @@ enum TokenType
     Indent,
     FileEnd,
     UNKNOWN,
-    
+
 };
 
 struct Token
 {
-    std::string value;
     TokenType type;
+    std::string value;
 
     int line;
     int column;
