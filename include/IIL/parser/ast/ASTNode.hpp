@@ -27,11 +27,12 @@ struct ASTnode
 
 enum Precedence
 {
-    // Paren,
-    Expo,
-    Multi,
-    Divis,
-    Modulus,
-    Addition,
-    Subtract,
+    // Precedence in order of greatest to least
+    LEVEL4, // Parentheses 
+    LEVEL3, // Exponents 
+    LEVEL2, // Multiplication/Division/Modulus
+    LEVEL1, // Addition/Subtraction
+    LEVEL0, // Equality expression
+
 };
+
