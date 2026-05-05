@@ -3,5 +3,5 @@
 #include "tokens.hpp"
 class numericalExprAST {
     public: 
-    std::vector<ASTnode> NumExprAST(std::vector<Token> Tokens);
+    std::vector<ASTnode> NumExprAST(std::vector<Token> &Tokens);
 }; 

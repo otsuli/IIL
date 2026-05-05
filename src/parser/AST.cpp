@@ -3,7 +3,7 @@
 #include "helperRoutines.hpp"
 // Example: 1 + 1. Tokens are '1' '+' and '1'
 
-std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> Tokens)
+std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> &Tokens)
 {
     std::vector<ASTnode> nodes; 
     
@@ -28,6 +28,6 @@ std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> Tokens)
         }
     }
 
-   
+    
 }
 
