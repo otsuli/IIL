@@ -2,5 +2,5 @@
 #include "ASTNode.hpp"
 
 namespace parserUtils {
-    Precedence analyzePrecedence(ASTnode opNode); 
+    Precedence getPrecedence(ASTnode opNode); 
 }

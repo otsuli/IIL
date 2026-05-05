@@ -3,26 +3,30 @@
 #include "parserError.hpp"
 #include <exception>
 
-Precedence parserUtils::analyzePrecedence(ASTnode opNode) {
+Precedence parserUtils::getPrecedence(ASTnode const opNode) {
     std::string value = opNode.NodeValue.value; 
+    //! Add parentheses precedence
 
     if (value == "**"){
-        return Expo; 
+        return LEVEL3; 
     }
     else if (value == "*"){
-        return Multi; 
+        return LEVEL2; 
     }
     else if (value == "/"){
-        return Divis; 
+        return LEVEL2; 
     }
     else if (value == "%"){
-        return Modulus; 
+        return LEVEL2; 
     }
     else if (value == "+"){
-        return Addition; 
+        return LEVEL1; 
     }
     else if (value == "-"){
-        return Subtract; 
+        return LEVEL1; 
+    }
+    else if (value == "="){
+        return LEVEL0; 
     }
     else {
         //! Add error handling.
