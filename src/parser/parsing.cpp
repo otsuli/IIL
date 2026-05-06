@@ -6,7 +6,7 @@
 std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> &Tokens, const Precedence minPrecedence)
 {
 
-    /* PSEUDOCODE TO FOLLOW: 
+    /* PSEUDOCODE TO FOLLOW:
     parse_expression_1(lhs, min_precedence)
     lookahead := peek next token
     while lookahead is a binary operator whose precedence is >= min_precedence
@@ -23,19 +23,29 @@ std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> &Tokens, co
     return lhs
     */
 
-    std::string op;
+    Token op;
     Token CurTok;
     int i = 1;
     lookAheadToken lookAhead = Tokens[i + 1];
-    
+
     while (lookAhead.precedence >= minPrecedence && parserUtils::isBinary(lookAhead.value))
     {
         CurTok = Tokens[i];
         lookAhead = Tokens[i + 1];
-        op = lookAhead.value;
+        op = lookAhead; 
         i++;
 
-        // Logic Here:
+        parseRHS(CurTok, op);
 
+        // Logic Here:
     }
+}
+
+std::shared_ptr<ASTnode> numericalExprAST::parseRHS(const Token number, const Token Oper)
+{
+    struct std::shared_ptr<ASTnode> num; 
+    num->NodeValue = number; 
+
+    struct std::shared_ptr<ASTnode> op; 
+    op->leftChild = num; 
 }

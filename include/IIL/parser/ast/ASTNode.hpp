@@ -6,11 +6,8 @@
 
 struct ASTnode
 {
-    const Token NodeValue;
-    Token parent;
-    ASTnode *leftChild, *rightChild;
-    ASTnode *ext_of_parent;
-
+    Token NodeValue, parent;
+    std::shared_ptr<ASTnode> leftChild, rightChild, extension_of_parent; 
     ASTnode()
     {
         parent.column = NULL;
@@ -22,7 +19,7 @@ struct ASTnode
     ASTnode(Token Value) : NodeValue(Value),
                            leftChild(nullptr),
                            rightChild(nullptr),
-                           ext_of_parent(nullptr) {}
+                           extension_of_parent(nullptr) {}
 };
 
 enum Precedence
