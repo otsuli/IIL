@@ -32,22 +32,24 @@ std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> &Tokens, co
     {
         CurTok = Tokens[i];
         lookAhead = Tokens[i + 1];
-        op = lookAhead; 
+        op = lookAhead;
         i++;
 
         parseRHS(CurTok, op);
-        while (parserUtils::isBinary(lookAhead.value) && parserUtils::comparePrecedence<lookAheadToken, Token>(lookAhead, op) == lookAhead)
+        auto result = parserUtils::comparePrecedence<lookAheadToken, Token>(lookAhead, op);
+
+        while (parserUtils::isBinary(lookAhead.value) &&
+               parserUtils::comparePrecedence(lookAhead, op) == parserUtils::PrecedenceResult::Token2)
         {   
-            
         }
     }
 }
 
 std::shared_ptr<ASTnode> numericalExprAST::parseRHS(const Token number, const Token Oper)
 {
-    struct std::shared_ptr<ASTnode> num; 
-    num->NodeValue = number; 
+    struct std::shared_ptr<ASTnode> num;
+    num->NodeValue = number;
 
-    struct std::shared_ptr<ASTnode> op; 
-    op->leftChild = num; 
+    struct std::shared_ptr<ASTnode> op;
+    op->leftChild = num;
 }

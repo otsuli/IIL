@@ -1,23 +1,31 @@
 #pragma once
 #include "ASTNode.hpp"
 #include "tokens.hpp"
-#include <type_traits> 
-namespace parserUtils {
-    Precedence getPrecedence(ASTnode opNode); 
-    bool isBinary(std::string op); 
-    
-    template <typename T, typename U = T> T comparePrecedence(T token_1, U token_2 = T) {
-        Precedence token_1_precedence = getPrecedence(token_1.value); 
-        Precedence token_2_precedence = getPrecedence(token_2.value); 
+#include <type_traits>
+#include <variant>
+namespace parserUtils
+{
+    Precedence getPrecedence(ASTnode opNode);
+    bool isBinary(std::string op);
 
-        if (token_2_precedence > token_1_precedence) {
-            return token_2; 
-        }
-        else if (token_2_precedence == token_1_precedence) {
-            return NULL; 
-        }
-        else {
-            return token_1; 
-        }
+    enum class PrecedenceResult
+    {
+        Token1,
+        Token2,
+        Equal
+    };
+
+    template <typename T, typename U = T>
+    PrecedenceResult comparePrecedence(T token_1, U token_2)
+    {
+        Precedence p1 = getPrecedence(token_1.value);
+        Precedence p2 = getPrecedence(token_2.value);
+
+        if (p2 > p1)
+            return PrecedenceResult::Token2;
+        if (p2 == p1)
+            return PrecedenceResult::Equal;
+        return PrecedenceResult::Token1;
     }
+
 }
