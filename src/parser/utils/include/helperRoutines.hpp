@@ -3,9 +3,12 @@
 #include "tokens.hpp"
 #include <type_traits>
 #include <variant>
+#include <vector> 
 
 namespace parserUtils
 {
+    std::vector<Token> opBuffer;
+
     std::string right_associative_ops[10] =
         {
             "=",
@@ -42,5 +45,11 @@ namespace parserUtils
     }
 
     bool isRightAssociative(Token op); 
-    
+    void buffer_Op(Token token); 
+    void clearBuffer(); 
+    Token getHighestPrecedence(std::vector<Token> token);
+    void parserUtils::rem_buffered_op(Token op); 
+    std::shared_ptr<ASTnode> parserUtils::to_node(Token token); 
 }
+
+

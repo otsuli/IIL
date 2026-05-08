@@ -7,7 +7,7 @@ class numericalExprAST
     std::shared_ptr<ASTnode> numericalExprAST::parseRHS(const Token number, const Token Oper); 
 
 public:
-    std::vector<ASTnode> NumExprAST(std::vector<Token> &Tokens, Precedence minPrecedence);
+    std::vector<ASTnode> NumExprAST(std::vector<Token> &Tokens);
 };
 
 struct lookAheadToken : Token
