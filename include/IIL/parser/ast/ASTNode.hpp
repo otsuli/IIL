@@ -30,5 +30,6 @@ enum Precedence
     LEVEL2,
     LEVEL3,
     LEVEL4,
+    Undefined = -1, 
 };
 

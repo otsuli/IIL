@@ -1,6 +1,7 @@
 #include <vector>
 #include "ASTNode.hpp"
 #include "tokens.hpp"
+#include "helperRoutines.hpp"
 
 class numericalExprAST
 {
@@ -10,13 +11,23 @@ public:
     std::vector<ASTnode> NumExprAST(std::vector<Token> &Tokens);
 };
 
-struct lookAheadToken : Token
-{
-    Precedence precedence;
+struct OpTok : Token {
+    Precedence precedence; 
+    Token leftChild; 
+    Token rightChild; 
 
-    lookAheadToken(Token token) : precedence(LEVEL0), Token(token.type, token.value, token.line, token.column) {}
+    OpTok(Token left_child, Token right_child, Token value) {
+        std::unique_ptr<OpTok> ptrTok; 
+        leftChild = left_child; 
+        right_child = right_child; 
+        OpTok.value = value; 
+        Precedence precednece = Precedence::Undefined; 
+    }
 
-    lookAheadToken(Precedence prece) : precedence(prece) {}
-
-    lookAheadToken() : precedence(LEVEL0) {}
-};
+    OpTok(Token left_child, Token right_child) {
+        std::unique_ptr<OpTok> ptrTok; 
+        leftChild = left_child; 
+        right_child = right_child; 
+        Precedence precednece = Precedence::Undefined; 
+    }
+}; 

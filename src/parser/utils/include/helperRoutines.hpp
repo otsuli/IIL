@@ -32,7 +32,7 @@ namespace parserUtils
     };
 
     template <typename T, typename U = T>
-    PrecedenceResult comparePrecedence(T token_1, U token_2)
+    PrecedenceResult comparePrecedence(T token_1, U token_2) //! make specialized template 
     {
         Precedence p1 = getPrecedence(token_1.value);
         Precedence p2 = getPrecedence(token_2.value);

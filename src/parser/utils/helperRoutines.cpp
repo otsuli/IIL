@@ -7,7 +7,7 @@
 #include <iostream>
 #include <algorithm>
 
-Precedence parserUtils::getPrecedence(const Token token) {
+Precedence parserUtils::getPrecedence(const OpTok token) {
     std::string value = token.value; 
     //! Add parentheses precedence
 
