@@ -1,6 +1,7 @@
 #include "parsing.hpp"
 #include "ASTNode.hpp"
 #include "helperRoutines.hpp"
+#include <vector> 
 // Example: 1 + 1. Tokens are '1' '+' and '1'
 
 std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> &Tokens)

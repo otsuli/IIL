@@ -16,18 +16,22 @@ struct OpTok : Token {
     Token leftChild; 
     Token rightChild; 
 
-    OpTok(Token left_child, Token right_child, Token value) {
+    OpTok(Token left_child, Token right_child, Token val) {
         std::unique_ptr<OpTok> ptrTok; 
         leftChild = left_child; 
-        right_child = right_child; 
-        OpTok.value = value; 
+        rightChild = right_child; 
+        value = val.value; 
         Precedence precednece = Precedence::Undefined; 
     }
 
     OpTok(Token left_child, Token right_child) {
         std::unique_ptr<OpTok> ptrTok; 
         leftChild = left_child; 
-        right_child = right_child; 
+        rightChild = right_child; 
         Precedence precednece = Precedence::Undefined; 
     }
+    OpTok(Token val) {
+        value = val.value; 
+    }
+    
 }; 
