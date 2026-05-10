@@ -1,8 +1,17 @@
 #include "parsing.hpp"
 #include "ASTNode.hpp"
 #include "helperRoutines.hpp"
-#include <vector> 
+#include <vector>
 // Example: 1 + 1. Tokens are '1' '+' and '1'
+
+std::vector<std::shared_ptr<ASTnode>> numericalExprAST::connect_nodes(std::vector<OpTok> opTokens)
+{
+    Token highest_precedence_op = parserUtils::getHighestPrecedence(parserUtils::opBuffer);
+    std::shared_ptr<ASTnode> highest_precedence_node = parserUtils::to_node(highest_precedence_op);
+
+    parserUtils::rem_buffered_op(highest_precedence_op);
+}
+
 
 std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> &Tokens)
 {
@@ -14,13 +23,11 @@ std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> &Tokens)
         curTok = Tokens[i];
         if (parserUtils::isBinary(curTok.value))
         {
-            curTok.rightChild = Tokens[i - 1]; 
+            curTok.rightChild = Tokens[i - 1];
             parserUtils::buffer_Op(curTok);
-            curTok.leftChild = Tokens[i + 1]; 
+            curTok.leftChild = Tokens[i + 1];
         }
     }
-    Token highest_precedence_op = parserUtils::getHighestPrecedence(parserUtils::opBuffer);
-    std::shared_ptr<ASTnode> highest_precedence_node = parserUtils::to_node(highest_precedence_op);
-
-    parserUtils::rem_buffered_op(highest_precedence_op);
+    
 }
+
