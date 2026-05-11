@@ -4,11 +4,11 @@
 #include <vector>
 #include <memory>
 
-struct ASTnode
+struct ASTNode
 {
     Token NodeValue, parent;
-    std::unique_ptr<ASTnode> leftChild, rightChild, extension_of_parent; 
-    ASTnode()
+    std::unique_ptr<ASTNode> leftChild, rightChild, extension_of_parent; 
+    ASTNode()
     {
         parent.column = NULL;
         parent.line = NULL;
@@ -16,11 +16,11 @@ struct ASTnode
         parent.type = TokenType::NONE;
     }
 
-    ASTnode(Token Value) : NodeValue(Value),
+    ASTNode(Token Value) : NodeValue(Value),
                            leftChild(nullptr),
                            rightChild(nullptr),
                            extension_of_parent(nullptr) {}
-    ASTnode(std::unique_ptr<Token> token_right, std::unique_ptr<Token> token_left) : NodeValue(), 
+    ASTNode(std::unique_ptr<Token> token_right, std::unique_ptr<Token> token_left) : NodeValue(), 
                                                                                      leftChild(token_left), 
                                                                                      rightChild(token_right) {}
                                                                                      

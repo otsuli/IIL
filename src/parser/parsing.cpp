@@ -5,16 +5,16 @@
 #include <memory> 
 // Example: 1 + 1. Tokens are '1' '+' and '1'
 
-std::vector<std::shared_ptr<ASTnode>> numericalExprAST::connect_nodes(std::vector<OpTok> opTokens)
+std::vector<std::shared_ptr<ASTNode>> numericalExprAST::connect_nodes(std::vector<OpTok> opTokens)
 {
     OpTok highest_precedence_op = parserUtils::getHighestPrecedence(parserUtils::opBuffer);
-    std::shared_ptr<ASTnode> highest_precedence_node = parserUtils::to_node_op(highest_precedence_op);
+    std::shared_ptr<ASTNode> highest_precedence_node = parserUtils::to_node_op(highest_precedence_op);
 
     parserUtils::rem_buffered_op(highest_precedence_op);
 }
 
 
-std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> &Tokens)
+std::vector<ASTNode> numericalExprAST::NumExprAST(std::vector<Token> &Tokens)
 {
     parserUtils::clearBuffer();
 

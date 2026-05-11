@@ -37,7 +37,7 @@ inline const std::unordered_set<std::string> operators = {
 
 inline const std::unordered_set<std::string> delimiters = {
     ";", ",", "\""
-              ":"};
+            ":"};
 
 inline const std::unordered_set<std::string> keywords = {
     "ivar",

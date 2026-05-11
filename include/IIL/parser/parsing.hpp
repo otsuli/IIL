@@ -84,6 +84,6 @@ struct OpTok : Token
 class numericalExprAST
 {
 public:
-    std::vector<std::shared_ptr<ASTnode>> connect_nodes(std::vector<OpTok> opTokens);
-    std::vector<ASTnode> NumExprAST(std::vector<Token> &Tokens);
+    std::vector<std::shared_ptr<ASTNode>> connect_nodes(std::vector<OpTok> opTokens);
+    std::vector<ASTNode> NumExprAST(std::vector<Token> &Tokens);
 };

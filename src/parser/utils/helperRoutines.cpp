@@ -87,16 +87,16 @@ void parserUtils::rem_buffered_op(Token op) {
     return; 
 }
 
-std::unique_ptr<ASTnode> parserUtils::to_node_op(OpTok token) {
-    std::unique_ptr<ASTnode> node;
+std::unique_ptr<ASTNode> parserUtils::to_node_op(OpTok token) {
+    std::unique_ptr<ASTNode> node;
     node->NodeValue = token;
     node->leftChild = token.leftChild; 
     node->rightChild = token.rightChild;
     return node; 
 }
 
-std::unique_ptr<ASTnode> parserUtils::to_node_ptr_token(std::unique_ptr<Token> token) {
-    std::unique_ptr<ASTnode> node; 
+std::unique_ptr<ASTNode> parserUtils::to_node_ptr_token(std::unique_ptr<Token> token) {
+    std::unique_ptr<ASTNode> node; 
     
     return node; 
 }
