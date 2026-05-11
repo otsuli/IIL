@@ -2,6 +2,7 @@
 #include "ASTNode.hpp"
 #include "helperRoutines.hpp"
 #include <vector>
+#include <memory> 
 // Example: 1 + 1. Tokens are '1' '+' and '1'
 
 std::vector<std::shared_ptr<ASTnode>> numericalExprAST::connect_nodes(std::vector<OpTok> opTokens)
@@ -17,17 +18,17 @@ std::vector<ASTnode> numericalExprAST::NumExprAST(std::vector<Token> &Tokens)
 {
     parserUtils::clearBuffer();
 
-    OpTok curTok;
+    OpTok curTok; 
     for (int i = 0; i <= Tokens.size(); i++)
     {
         curTok = Tokens[i];
         if (parserUtils::isBinary(curTok.value))
         {
-            curTok.rightChild = Tokens[i - 1]; //TODO: Make Tokens a unique_ptr or something. Idk. 
+            std::unique_ptr<Token> unique_ptr_left = std::make_unique<Token>(Tokens[i - 1]); 
+            std::unique_ptr<Token> unique_ptr_right = std::make_unique<Token>(Tokens[i + 1]); 
+            curTok.rightChild = std::make_unique<OpTok>(unique_ptr_left, left_child_t{}); // Heap allocation
             parserUtils::buffer_Op(curTok);
-            curTok.leftChild = Tokens[i + 1];
+            curTok.rightChild = std::make_unique<OpTok>(unique_ptr_left, left_child_t{});
         }
     }
-    
 }
-

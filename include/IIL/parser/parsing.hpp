@@ -2,21 +2,21 @@
 #include "ASTNode.hpp"
 #include "tokens.hpp"
 #include "helperRoutines.hpp"
+#include <bits/stdc++.h>
 
-class numericalExprAST
+struct left_child_t
 {
-public:
-    std::vector<std::shared_ptr<ASTnode>> connect_nodes(std::vector<OpTok> opTokens); 
-    std::vector<ASTnode> NumExprAST(std::vector<Token> &Tokens);
 };
-
+struct right_child_t
+{
+};
 struct OpTok : Token
 {
     Precedence precedence;
     std::unique_ptr<Token> leftChild;
     std::unique_ptr<Token> rightChild;
 
-    OpTok(std::unique_ptr<Token>  left_child, std::unique_ptr<Token> right_child, Token val)
+    OpTok(std::unique_ptr<Token> left_child, std::unique_ptr<Token> right_child, Token val)
     {
         std::unique_ptr<OpTok> ptrTok;
         leftChild = std::move(left_child);
@@ -24,21 +24,20 @@ struct OpTok : Token
         value = val.value;
         Precedence precednece = Precedence::Undefined;
     }
-
-    OpTok(std::unique_ptr<Token>  left_child, std::unique_ptr<Token> right_child)
+    OpTok(std::unique_ptr<Token> left_child, std::unique_ptr<Token> right_child)
     {
         std::unique_ptr<OpTok> ptrTok;
         leftChild = std::move(left_child);
         rightChild = std::move(right_child);
         Precedence precednece = Precedence::Undefined;
     }
-    OpTok(std::unique_ptr<Token>  left_child)
+    OpTok(std::unique_ptr<Token> left_child, left_child_t)
     {
         std::unique_ptr<OpTok> ptrTok;
         leftChild = std::move(left_child);
         Precedence precednece = Precedence::Undefined;
     }
-    OpTok(std::unique_ptr<Token> right_child)
+    OpTok(std::unique_ptr<Token> right_child, right_child_t)
     {
         std::unique_ptr<OpTok> ptrTok;
         rightChild = std::move(right_child);
@@ -47,6 +46,8 @@ struct OpTok : Token
     OpTok(Token val)
     {
         value = val.value;
+        leftChild = std::make_unique<Token>();
+        rightChild = std::make_unique<Token>();
         leftChild->column = NULL;
         leftChild->line = NULL;
         leftChild->type = TokenType::NONE;
@@ -56,15 +57,27 @@ struct OpTok : Token
         rightChild->type = TokenType::NONE;
         rightChild->value = " ";
     }
+
     OpTok()
     {
-        leftChild->column = NULL;
-        leftChild->line = NULL;
+        leftChild = std::make_unique<Token>();
+        rightChild = std::make_unique<Token>();
+
+        leftChild->column = 0;
+        leftChild->line = 0;
         leftChild->type = TokenType::NONE;
         leftChild->value = " ";
-        rightChild->column = NULL;
-        rightChild->line = NULL;
+
+        rightChild->column = 0;
+        rightChild->line = 0;
         rightChild->type = TokenType::NONE;
         rightChild->value = " ";
     }
+};
+
+class numericalExprAST
+{
+public:
+    std::vector<std::shared_ptr<ASTnode>> connect_nodes(std::vector<OpTok> opTokens);
+    std::vector<ASTnode> NumExprAST(std::vector<Token> &Tokens);
 };

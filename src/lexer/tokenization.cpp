@@ -9,13 +9,12 @@
 #include <unordered_set>
 #include "../../include/IIL/lexer/tokenization.hpp"
 
-std::string source;
-int line = 1;
-int column = 1;
+
+
 
 std::vector<LexerError> errors;
 
-std::vector<std::string> tokenizing::splitString()
+[[nodiscard]] std::vector<std::string> tokenizing::splitString()
 {
     std::vector<std::string> chunks;
     std::string buffer;
@@ -51,7 +50,7 @@ std::vector<std::string> tokenizing::splitString()
                 chunks.push_back(buffer);
                 buffer.clear();
             }
-            i += 3; // skip firt 3 hashtags
+            i += 3; // skip first 3 hashtags
             while (i + 2 < source.size() && !(source[i] == '#' && source[i + 1] == '#' && source[i + 2] == '#'))
             {
                 i++;
@@ -92,7 +91,7 @@ std::vector<std::string> tokenizing::splitString()
     return chunks;
 }
 
-std::vector<Token> tokenizing::tokenize(std::string &sourceCode)
+[[nodiscard]] std::vector<Token> tokenizing::tokenize(std::string &sourceCode)
 {
     source = sourceCode;
     std::vector<Token> tokens;
