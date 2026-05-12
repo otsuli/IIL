@@ -6,24 +6,25 @@
 
 struct ASTNode
 {
-    Token NodeValue, parent;
+    std::unique_ptr<Token> NodeValue, parent;
     std::unique_ptr<ASTNode> leftChild, rightChild, extension_of_parent; 
     ASTNode()
     {
-        parent.column = NULL;
-        parent.line = NULL;
-        parent.value = " ";
-        parent.type = TokenType::NONE;
+        parent->column = NULL;
+        parent->line = NULL;
+        parent->value = " ";
+        parent->type = TokenType::NONE;
     }
 
     ASTNode(Token Value) : NodeValue(Value),
                            leftChild(nullptr),
                            rightChild(nullptr),
                            extension_of_parent(nullptr) {}
-    ASTNode(std::unique_ptr<Token> token_right, std::unique_ptr<Token> token_left) : NodeValue(), 
-                                                                                     leftChild(token_left), 
-                                                                                     rightChild(token_right) {}
-                                                                                     
+    ASTNode(std::unique_ptr<Token> token_right, std::unique_ptr<Token> token_left) : NodeValue()                     
+    {
+        leftChild->NodeValue = std::move(token_left); 
+        rightChild->NodeValue = std::move(token_right); 
+    }                                                                    
 };
 
 enum class Precedence
