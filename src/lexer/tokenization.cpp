@@ -12,7 +12,7 @@
 
 std::vector<LexerError> errors;
 
-[[nodiscard]] std::vector<std::string> tokenizing::splitString()
+std::vector<std::string> tokenizing::splitString()
 {
     std::vector<std::string> chunks;
     std::string buffer;

@@ -32,7 +32,7 @@ namespace parserUtils
     };
 
     template <typename T, typename U = T>
-    PrecedenceResult comparePrecedence(T token_1, U token_2) //! make specialized template 
+    PrecedenceResult comparePrecedence(T token_1, U token_2)
     {
         Precedence p1 = getPrecedence(token_1.value);
         Precedence p2 = getPrecedence(token_2.value);
@@ -44,14 +44,14 @@ namespace parserUtils
         return PrecedenceResult::Token1;
     }
 
-    bool isRightAssociative(Token op); 
+    [[nodiscard]] bool isRightAssociative(Token op); 
     void buffer_Op(Token token); 
     void clearBuffer(); 
-    Token getHighestPrecedence(std::vector<Token> token);
+    [[nodiscard]] Token getHighestPrecedence(std::vector<Token> token);
     void rem_buffered_op(Token op); 
-    std::shared_ptr<ASTNode> to_node_op(Token token); 
-    std::unique_ptr<ASTNode> to_node_ptr_token(std::unique_ptr<Token> token); 
-    std::unique_ptr<ASTNode> to_node_value_op();
+    [[nodiscard]] std::shared_ptr<ASTNode> to_node_op(Token token); 
+    [[nodiscard]] std::unique_ptr<ASTNode> to_node_ptr_token(std::unique_ptr<Token> token); 
+    [[nodiscard]] std::unique_ptr<ASTNode> to_node_value_op();
 }
 
 

@@ -13,8 +13,8 @@ private:
     int line = 1;
     int column = 1;
 
-    std::vector<std::string> splitString();
+    [[nodiscard]] std::vector<std::string> splitString();
 
 public:
-    std::vector<Token> tokenize(std::string &sourceCode);
+    [[nodiscard]] std::vector<Token> tokenize(std::string &sourceCode);
 };
