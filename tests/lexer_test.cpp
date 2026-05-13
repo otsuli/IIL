@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
-#include "../include/IIL/lexer/tokenization.hpp"
-#include "../include/IIL/lexer/tokens.hpp"
-
+#include "lexer/tokenization.hpp"
+#include "lexer/tokens.hpp"
 TEST(lexerTests, HandlesOperators)
 {
     std::string op = "+";

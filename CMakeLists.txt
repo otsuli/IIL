@@ -6,6 +6,12 @@ project(IIL
     LANGUAGES CXX
 )
 
+if(MINGW)
+    set(CMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES OFF)
+    set(CMAKE_C_USE_RESPONSE_FILE_FOR_INCLUDES OFF)
+endif()
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -16,40 +22,26 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
+file(GLOB_RECURSE IIL_SRC src/*)
+
 add_executable(IIL
-    src/main.cpp
-    src/lexer/tokenization.cpp
-    src/lexer/utils/isDelimiter.cpp
-    src/lexer/utils/isNumber.cpp
-    src/lexer/utils/isSkippable.cpp
-    src/lexer/utils/shift.cpp
-    src/parser/errors/parserError.cpp
-    src/parser/utils/helperRoutines.cpp
-    src/parser/parsing.cpp
-    include/IIL/lexer/tokens.hpp
+    ${IIL_SRC}
 )
 
 target_include_directories(IIL PRIVATE
     ${CMAKE_SOURCE_DIR}/include/IIL
-    ${CMAKE_SOURCE_DIR}/src/lexer/utils/include
-    ${CMAKE_SOURCE_DIR}/src/parser/errors/include
-    ${CMAKE_SOURCE_DIR}/src/parser/utils/include
-    ${CMAKE_SOURCE_DIR}/include/IIL/parser
+    ${CMAKE_SOURCE_DIR}/src
 )
-
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 enable_testing()
 
 add_executable(IIL_tests
     tests/lexer_test.cpp
-        src/parser/utils/helperRoutines.cpp
+    src/parser/utils/helperRoutines.cpp
 )
 target_link_libraries(IIL_tests gtest_main)
 target_include_directories(IIL_tests PRIVATE
     ${CMAKE_SOURCE_DIR}/include/IIL
-    ${CMAKE_SOURCE_DIR}/src/lexer/utils/include
-    ${CMAKE_SOURCE_DIR}/src/parser/errors/include
-    ${CMAKE_SOURCE_DIR}/src/parser/utils/include
+    ${CMAKE_SOURCE_DIR}/src
 )
 add_test(NAME lexer_test COMMAND IIL_tests)

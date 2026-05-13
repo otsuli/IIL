@@ -1,15 +1,13 @@
 #include <iostream>
 #include <vector>
-#include "../../include/IIL/lexer/tokens.hpp"
-#include "../../src/lexer/utils/include/isSkippable.hpp"
-#include "../../src/lexer/utils/include/isNumber.hpp"
-#include "../../src/lexer/utils/include/isDelimiter.hpp"
-#include "../../src/lexer/utils/include/shift.hpp"
-#include "../../include/IIL/lexer/errors/lexerError.hpp"
 #include <unordered_set>
-#include "../../include/IIL/lexer/tokenization.hpp"
-
-
+#include "lexer/tokens.hpp"
+#include "lexer/tokenization.hpp"
+#include "lexer/errors/lexerError.hpp"
+#include "lexer/utils/isSkippable.hpp"
+#include "lexer/utils/isNumber.hpp"
+#include "lexer/utils/isDelimiter.hpp"
+#include "lexer/utils/shift.hpp"
 
 
 std::vector<LexerError> errors;

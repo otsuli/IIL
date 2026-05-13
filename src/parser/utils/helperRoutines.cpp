@@ -1,12 +1,13 @@
-#include "ASTNode.hpp"
-#include "helperRoutines.hpp"
-#include "parserError.hpp"
-#include "parsing.hpp"
+#include "parser/ast/ASTNode.hpp"
+#include "parser/utils/helperRoutines.hpp"
+#include "parser/errors/parserError.hpp"
+#include "parser/parsing.hpp"
+#include "lexer/tokens.hpp"
 #include <exception>
-#include "tokens.hpp"
 #include <iostream>
 #include <algorithm>
-
+#include <string>
+#include <memory>
 Precedence parserUtils::getPrecedence(const OpTok token) {
     std::string value = token.value; 
     //! Add parentheses precedence
@@ -94,4 +95,3 @@ std::unique_ptr<ASTNode> parserUtils::to_node_op(OpTok token) {
     node->rightChild = std::make_unique<ASTNode>(token.rightChild); 
     return node; 
 }
-

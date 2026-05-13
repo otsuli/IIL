@@ -1,9 +1,7 @@
 #include <vector>
-#include "ASTNode.hpp"
-#include "tokens.hpp"
-#include "helperRoutines.hpp"
-#include <bits/stdc++.h>
-
+#include "parser/ast/ASTNode.hpp"
+#include "lexer/tokens.hpp"
+#include "parser/utils/helperRoutines.hpp"
 struct left_child_t
 {
 };

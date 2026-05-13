@@ -1,9 +1,9 @@
 #pragma once
-#include "ASTNode.hpp"
-#include "tokens.hpp"
+#include "parser/ast/ASTNode.hpp"
+#include "lexer/tokens.hpp"
 #include <type_traits>
 #include <variant>
-#include <vector> 
+#include <vector>
 #include <memory>
 namespace parserUtils
 {
@@ -51,7 +51,7 @@ namespace parserUtils
     void rem_buffered_op(Token op); 
     std::shared_ptr<ASTNode> to_node_op(Token token); 
     std::unique_ptr<ASTNode> to_node_ptr_token(std::unique_ptr<Token> token); 
-    std::unique_ptr<ASTNode> to_node_value_op()
+    std::unique_ptr<ASTNode> to_node_value_op();
 }
 
 
