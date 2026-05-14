@@ -23,8 +23,43 @@ namespace parserUtils
             clearBuffer(); 
         }
     }; 
+    template <typename T> 
+    Precedence getPrecedence(T token) 
+    {   
+        try {
+            std::string value = T.value;  //! This won't work for astnode yet idt. So fix this too. 
+        } catch ( ... ) { //! This is bad pracitce (It's only temporary)
+            std::cout << "template function getPrecedence() couldn't access T.value" << std::endl; 
+        }
+        std::string value = T.value; 
+        //! Add parentheses precedence
 
-    Precedence getPrecedence(ASTNode opNode);
+        if (value == "**"){
+            return Precedence::LEVEL3; 
+        }
+        else if (value == "*"){
+            return Precedence::LEVEL2; 
+        }
+        else if (value == "/"){
+            return Precedence::LEVEL2; 
+        }
+        else if (value == "%"){
+            return Precedence::LEVEL2; 
+        }
+        else if (value == "+"){
+            return Precedence::LEVEL1; 
+        }
+        else if (value == "-"){
+            return Precedence::LEVEL1; 
+        }
+        else if (value == "="){
+            return Precedence::LEVEL0; 
+        }
+        else {
+            //! Add error handling.
+        }
+    }
+
     bool isBinary(std::string op);
 
     enum class PrecedenceResult

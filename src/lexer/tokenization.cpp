@@ -89,7 +89,7 @@ std::vector<std::string> tokenizing::splitString()
     return chunks;
 }
 
-[[nodiscard]] std::vector<Token> tokenizing::tokenize(std::string &sourceCode)
+std::vector<Token> tokenizing::tokenize(std::string &sourceCode)
 {
     source = sourceCode;
     std::vector<Token> tokens;

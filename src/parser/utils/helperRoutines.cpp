@@ -8,35 +8,6 @@
 #include <algorithm>
 #include <string>
 #include <memory>
-Precedence parserUtils::getPrecedence(const OpTok token) {
-    std::string value = token.value; 
-    //! Add parentheses precedence
-
-    if (value == "**"){
-        return Precedence::LEVEL3; 
-    }
-    else if (value == "*"){
-        return Precedence::LEVEL2; 
-    }
-    else if (value == "/"){
-        return Precedence::LEVEL2; 
-    }
-    else if (value == "%"){
-        return Precedence::LEVEL2; 
-    }
-    else if (value == "+"){
-        return Precedence::LEVEL1; 
-    }
-    else if (value == "-"){
-        return Precedence::LEVEL1; 
-    }
-    else if (value == "="){
-        return Precedence::LEVEL0; 
-    }
-    else {
-        //! Add error handling.
-    }
-}
 
 
 bool parserUtils::isBinary(Token op) {

@@ -74,13 +74,12 @@ target_link_libraries(IIL_REPL PRIVATE ascii_art)
 
 enable_testing()
 
-add_executable(IIL_tests
+add_executable(IIL_lexer_test
     tests/lexer_test.cpp
-    src/parser/utils/helperRoutines.cpp
 )
-target_link_libraries(IIL_tests gtest_main)
-target_include_directories(IIL_tests PRIVATE
-    ${CMAKE_SOURCE_DIR}/include/IIL
-    ${CMAKE_SOURCE_DIR}/src
+target_link_libraries(IIL_lexer_test gtest_main)
+target_include_directories(IIL_lexer_test PRIVATE
+    ${CMAKE_SOURCE_DIR}/include/IIL/lexer
+    ${CMAKE_SOURCE_DIR}/src/lexer
 )
-add_test(NAME lexer_test COMMAND IIL_tests)
+add_test(NAME lexer_test COMMAND IIL_lexer_test)
