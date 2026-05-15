@@ -9,7 +9,6 @@
 #include "lexer/utils/isDelimiter.hpp"
 #include "lexer/utils/shift.hpp"
 
-
 std::vector<LexerError> errors;
 
 std::vector<std::string> tokenizing::splitString()
@@ -55,7 +54,7 @@ std::vector<std::string> tokenizing::splitString()
             }
             if (i + 2 >= source.size())
             {
-                errors.push_back(LexerError{"Unknown token: " + line, column});
+                errors.push_back(LexerError{"Unknown token: ",  line, column});
             }
             i += 3; // skip last 3 hashtags
         }

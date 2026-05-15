@@ -1,5 +1,5 @@
 #pragma once
-#include "parser/ast/ASTNode.hpp"
+#include "parser/ASTNode.hpp"
 #include "lexer/tokens.hpp"
 #include <type_traits>
 #include <variant>

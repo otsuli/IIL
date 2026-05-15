@@ -1,4 +1,4 @@
-#include "parser/ast/ASTNode.hpp"
+#include "parser/ASTNode.hpp"
 #include "parser/utils/helperRoutines.hpp"
 #include "parser/errors/parserError.hpp"
 #include "parser/parsing.hpp"
@@ -54,14 +54,3 @@ void parserUtils::operatorBuffer::rem_buffered_op(Token op)
     opBuffer.erase(iter);
 }
 
-std::unique_ptr<ASTNode> parserUtils::to_node_op(OpTok token)
-{
-    std::unique_ptr<ASTNode> node;
-    node->NodeValue->column = token.column;
-    node->NodeValue->line = token.line;
-    node->NodeValue->value = token.value;
-    node->NodeValue->type = token.type;
-    node->leftChild = std::make_unique<ASTNode>(token.leftChild);
-    node->rightChild = std::make_unique<ASTNode>(token.rightChild);
-    return node;
-}
