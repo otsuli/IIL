@@ -3,13 +3,13 @@
 #include <memory>
 struct Expr {
 
-  virtual ~Expr() = default;
+    virtual ~Expr() = default;
 };
 
 struct BinaryExpr : public Expr {
-  std::unique_ptr<Expr> left;
-  std::unique_ptr<Expr> right;
+    std::unique_ptr<Expr> left;
+    std::unique_ptr<Expr> right;
 
-  Token op;
-  BinaryExpr() : left(nullptr), right(nullptr) {}
+    Token op;
+    BinaryExpr() : left(nullptr), right(nullptr) {}
 };

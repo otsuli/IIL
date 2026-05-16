@@ -4,16 +4,16 @@
 #include <iostream>
 #include <vector>
 class tokenizing {
-public:
-  std::vector<LexerError> errors;
+  public:
+    std::vector<LexerError> errors;
 
-private:
-  std::string source;
-  std::optional<unsigned int> line = 1;
-  std::optional<unsigned int> column = 1;
+  private:
+    std::string source;
+    std::optional<unsigned int> line = 1;
+    std::optional<unsigned int> column = 1;
 
-  [[nodiscard]] std::vector<std::string> splitString();
+    [[nodiscard]] std::vector<std::string> splitString();
 
-public:
-  [[nodiscard]] std::vector<Token> tokenize(std::string &sourceCode);
+  public:
+    [[nodiscard]] std::vector<Token> tokenize(std::string &sourceCode);
 };

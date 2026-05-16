@@ -2,10 +2,10 @@
 
 class parserException : public std::exception {
 
-  std::string errorMsg;
+    std::string errorMsg;
 
-public:
-  parserException(const char *errorMsg) : errorMsg(errorMsg) {}
+  public:
+    parserException(const char *errorMsg) : errorMsg(errorMsg) {}
 
-  const char *what() const noexcept { return errorMsg.c_str(); }
+    const char *what() const noexcept { return errorMsg.c_str(); }
 };
