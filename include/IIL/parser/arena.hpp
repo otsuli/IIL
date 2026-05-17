@@ -47,7 +47,11 @@ class Arena {
         }
     }
 
-    template <typename T> T *make(Expr *left, Token op, Expr *right) {}
+    template <typename T> T *make(Expr *left, Token op, Expr *right) {
+        // allocate raw memory in arena
+        // construct object in that memory
+        // return a pointer to that object.
+    }
 
     void *allocate(std::size_t size, std::size_t alignment);
 

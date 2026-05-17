@@ -8,7 +8,6 @@ Read these:
 
 - [Syntax](docs/SYNTAX.md)
 
-
 ## Contributing
 
 Read this:
