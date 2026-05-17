@@ -2,15 +2,22 @@
 #include "lexer/tokens.hpp"
 #include "parser/Expr.hpp"
 #include "parser/parsing.hpp"
+#include <cstddef>
+#include <memory>
+#include <new>
 #include <vector>
 
 class Parser {
+
+  public:
     class expressionParsing {
         unsigned int current = 0;
+
+        Expr comparison();
         std::vector<Token> tokens;
         Token previous() const;
         Token peek() const;
-        bool isAtEnd() const;
+        auto isAtEnd() const;
         Token advance();
         bool check(TokenType type);
 

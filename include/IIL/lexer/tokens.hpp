@@ -15,6 +15,10 @@ enum TokenType {
     BangEqual,
     EqualEqual,
     NONE,
+    Greater,
+    GreaterEqual,
+    Less,
+    LessEqual,
 };
 
 struct Token {
