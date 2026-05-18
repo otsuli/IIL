@@ -28,6 +28,8 @@ class expressionParsing : public Parser {
     Token peek() const;
     auto isAtEnd() const;
 
+    Unary *unary();
+
     BinaryExpr *factor();
     BinaryExpr *term();
     BinaryExpr *comparison();

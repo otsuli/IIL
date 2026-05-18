@@ -22,7 +22,9 @@ enum TokenType {
     Minus,
     Plus,
     Slash,
-    Star
+    Star,
+    Bang,
+    Minus,
 };
 
 struct Token {

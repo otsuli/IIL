@@ -12,13 +12,26 @@ Token expressionParsing::previous() const { return tokens[current - 1]; }
 Token expressionParsing::peek() const { return tokens[current]; }
 auto expressionParsing::isAtEnd() const { return peek().type == TokenType::FileEnd; }
 
+// The rule for unary is:
+// ( "!" | "-" ) unary | primary ;
+Unary *expressionParsing::unary() {
+    if (match(Bang, Minus)) {
+        Token op = previous();
+        Unary right = unary();
+        return arena.make<Unary>(std::move(op), std::move(unary))
+    }
+    return primary();
+}
+
 BinaryExpr *expressionParsing::factor() {
+    // Todo: implement a "make_unary<>" function or template.
+    BinaryExpr *expr = unary();
     while (match(TokenType::Slash, TokenType::Star)) {
         Token op = previous();
         Unary *right = unary();
         return arena.make<BinaryExpr>(std::move(op), std::move(right))
     }
-    return primary();
+    return expr;
 }
 
 BinaryExpr *expressionParsing::term() {
