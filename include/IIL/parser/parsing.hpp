@@ -27,7 +27,7 @@ class expressionParsing : public Parser {
     Token previous() const;
     Token peek() const;
     auto isAtEnd() const;
-
+    Primary *primary();
     Unary *unary();
 
     BinaryExpr *factor();

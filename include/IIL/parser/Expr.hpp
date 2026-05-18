@@ -19,6 +19,9 @@ struct BinaryExpr : public Expr {
         delete right_;
     }
 };
-
+// TODO: finish these...
+// TODO: rename to UnaryExpr, and PrimaryExpr, and LiteralExpr etc.
 struct Unary : public Expr {};
-;
+struct Primary : public Expr {};
+struct Literal : public Expr {};
+struct Grouping : public Expr {}; // grouping may not need to inherit from Expr I'm not sure...

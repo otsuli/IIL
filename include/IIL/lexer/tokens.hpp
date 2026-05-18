@@ -25,6 +25,10 @@ enum TokenType {
     Star,
     Bang,
     Minus,
+    False,
+    True,
+    NIL,
+    String,
 };
 
 struct Token {

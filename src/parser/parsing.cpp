@@ -12,10 +12,36 @@ Token expressionParsing::previous() const { return tokens[current - 1]; }
 Token expressionParsing::peek() const { return tokens[current]; }
 auto expressionParsing::isAtEnd() const { return peek().type == TokenType::FileEnd; }
 
+// The rule for primary is:
+// NUMBER | STRING | "true" | "false" | "null" | "(" expression ")" ;
+Primary *expressionParsing::primary() {
+    // TODO: fix the errors lol
+    if (match(TokenType::False)) {
+        return arena.make<Literal>(false);
+    }
+    if (match(TokenType::True)) {
+        return arena.make<Literal>(false)
+    }
+    if (match(TokenType::NIL)) {
+        return arena.make<Literal>(NIL);
+    }
+
+    if (match(TokenType::Number, TokenType::String)) {
+        // TODO: FIX
+        return arena.make<Literal>(previous().literal)
+    }
+
+    if (match(TokenType::OpenParen)) {
+        BinaryExpr *expr = expression();
+        // TODO: Implement better error handling:
+        consume(TokenType::CloseParen, "Expect ')' after expression.");
+        return arena.make<Grouping>(expr);
+    }
+}
 // The rule for unary is:
 // ( "!" | "-" ) unary | primary ;
 Unary *expressionParsing::unary() {
-    if (match(Bang, Minus)) {
+    if (match(TokenType::Bang, TokenType::Minus)) {
         Token op = previous();
         Unary right = unary();
         return arena.make<Unary>(std::move(op), std::move(unary))

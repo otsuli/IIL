@@ -9,7 +9,7 @@
 #include <unordered_set>
 #include <vector>
 
-std::vector<LexerError> errors;
+// TODO: Tokenizing need to be rewritten completely:
 
 std::vector<std::string> tokenizing::splitString() {
     std::vector<std::string> chunks;
