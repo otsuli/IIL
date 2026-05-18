@@ -7,6 +7,14 @@
 #include <new>
 #include <vector>
 
+struct ParseError {
+    Token token_;
+    std::string message_;
+
+    ParseError() : token_(TokenType::NONE, " ", 0, 0), message_(" ") {}
+    ParseError(Token token, std::string message) : token_(token), message_(message) {}
+};
+
 class Parser {
   protected:
     Arena arena;
@@ -24,6 +32,8 @@ class expressionParsing : public Parser {
         //     ^ If this is true we evaluate this^
     }
 
+    ParseError error(Token token, std::string message);
+    Token consume(TokenType type, std::string message);
     Token previous() const;
     Token peek() const;
     auto isAtEnd() const;

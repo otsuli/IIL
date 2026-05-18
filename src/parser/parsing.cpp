@@ -12,6 +12,26 @@ Token expressionParsing::previous() const { return tokens[current - 1]; }
 Token expressionParsing::peek() const { return tokens[current]; }
 auto expressionParsing::isAtEnd() const { return peek().type == TokenType::FileEnd; }
 
+Token expressionParsing::advance() {
+    if (!isAtEnd())
+        current++;
+    return previous();
+}
+ParseError expressionParsing::error(Token token, std::string message) {
+    ParseError error;
+    error.message_ = message;
+    error.token_ = token;
+
+    return error;
+}
+
+Token expressionParsing::consume(TokenType type, std::string message) {
+    if (check(type)) {
+        return advance();
+    }
+    throw error(peek(), message);
+}
+
 // The rule for primary is:
 // NUMBER | STRING | "true" | "false" | "null" | "(" expression ")" ;
 Primary *expressionParsing::primary() {
@@ -34,6 +54,7 @@ Primary *expressionParsing::primary() {
     if (match(TokenType::OpenParen)) {
         BinaryExpr *expr = expression();
         // TODO: Implement better error handling:
+        // TODO: Implement auto parenthesis insertion.
         consume(TokenType::CloseParen, "Expect ')' after expression.");
         return arena.make<Grouping>(expr);
     }
@@ -83,12 +104,6 @@ BinaryExpr *expressionParsing::comparison() {
         expr = arena.make<BinaryExpr>(std::move(expr), op, std::move(right));
     }
     return expr;
-}
-
-Token expressionParsing::advance() {
-    if (!isAtEnd())
-        current++;
-    return previous();
 }
 
 // Check method returns true if the current token is of the given type.
