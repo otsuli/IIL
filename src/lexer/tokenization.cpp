@@ -27,7 +27,7 @@ std::vector<std::string> tokenizing::splitString() {
                     chunks.push_back(buf);
                     break;
                 }
-                buf = buf + source[k];
+                buf = buf + '"';
             }
         }
 
