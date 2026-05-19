@@ -48,7 +48,7 @@ Primary *expressionParsing::primary() {
 
     if (match(TokenType::Number, TokenType::String)) {
         // TODO: FIX
-        return arena.make<Literal>(previous().literal)
+        return arena.make<Literal>(previous().value);
     }
 
     if (match(TokenType::OpenParen)) {

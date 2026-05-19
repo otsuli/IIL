@@ -18,8 +18,18 @@ std::vector<std::string> tokenizing::splitString() {
 
     for (int i = 0; i < source.size(); i++) {
         char ch = source[i];
+        if (ch == '"') {
+            std::string buf;
+            for (int k = i; i < source.size(); ++k) {
+                if (source[k] == '"') {
+                    buf = buf + source[k];
+                    chunks.push_back(buf);
+                }
+                buf = buf + source[k];
+            }
+        }
 
-        if (utils::isDelimiter(ch)) { // split the strings based off some parameters.
+        else if (utils::isDelimiter(ch)) { // split the strings based off some parameters.
             if (!buffer.empty()) {
                 chunks.push_back(buffer); // push the buffer
                 buffer.clear();

@@ -32,6 +32,10 @@ class expressionParsing : public Parser {
         //     ^ If this is true we evaluate this^
     }
 
+    template <typename T> T make_unary(T type) {
+        // TODO: implement this
+    }
+
     ParseError error(Token token, std::string message);
     Token consume(TokenType type, std::string message);
     Token previous() const;
