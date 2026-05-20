@@ -1,13 +1,13 @@
 #include "lexer/tokenization.hpp"
+#include <iostream>
+#include <unordered_set>
+#include <vector>
 #include "lexer/errors/lexerError.hpp"
 #include "lexer/tokens.hpp"
 #include "lexer/utils/isDelimiter.hpp"
 #include "lexer/utils/isNumber.hpp"
 #include "lexer/utils/isSkippable.hpp"
 #include "lexer/utils/shift.hpp"
-#include <iostream>
-#include <unordered_set>
-#include <vector>
 
 // TODO: Tokenizing need to be rewritten completely:
 
@@ -31,12 +31,13 @@ std::vector<std::string> tokenizing::splitString() {
             }
         }
 
-        else if (utils::isDelimiter(ch)) { // split the strings based off some parameters.
+        else if (utils::isDelimiter(
+                     ch)) {  // split the strings based off some parameters.
             if (!buffer.empty()) {
-                chunks.push_back(buffer); // push the buffer
+                chunks.push_back(buffer);  // push the buffer
                 buffer.clear();
             }
-            chunks.push_back(std::string(1, ch)); // push the actual delimiter
+            chunks.push_back(std::string(1, ch));  // push the actual delimiter
         }
 
         else if (ch == ' ') {
@@ -52,15 +53,16 @@ std::vector<std::string> tokenizing::splitString() {
                 chunks.push_back(buffer);
                 buffer.clear();
             }
-            i += 3; // skip first 3 hashtags
+            i += 3;  // skip first 3 hashtags
             while (i + 2 < source.size() &&
-                   !(source[i] == '#' && source[i + 1] == '#' && source[i + 2] == '#')) {
+                   !(source[i] == '#' && source[i + 1] == '#' &&
+                     source[i + 2] == '#')) {
                 i++;
             }
             if (i + 2 >= source.size()) {
                 errors.push_back(LexerError{"Unknown token: ", line, column});
             }
-            i += 3; // skip last 3 hashtags
+            i += 3;  // skip last 3 hashtags
         }
 
         else if (ch == '#' && i + 1 < source.size() && source[i + 1] == '#') {
@@ -87,11 +89,11 @@ std::vector<std::string> tokenizing::splitString() {
     return chunks;
 }
 
-std::vector<Token> tokenizing::tokenize(std::string &sourceCode) {
+std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
     source = sourceCode;
     std::vector<Token> tokens;
     std::vector<std::string> src = splitString();
-    line = 1; // Reset each function call
+    line = 1;  // Reset each function call
     column = 1;
 
     while (!src.empty()) {
@@ -100,21 +102,27 @@ std::vector<Token> tokenizing::tokenize(std::string &sourceCode) {
             column = 1;
             utils::shift(src);
         } else if (operators.count(src.front())) {
-            tokens.emplace_back(TokenType::Operator, utils::shift(src), line, column);
+            tokens.emplace_back(TokenType::Operator, utils::shift(src), line,
+                                column);
             column++;
         } else if (delimiters.count(src.front())) {
-            tokens.emplace_back(TokenType::Delimiter, utils::shift(src), line, column);
+            tokens.emplace_back(TokenType::Delimiter, utils::shift(src), line,
+                                column);
             column++;
         } else if (src.front() == "(") {
-            tokens.emplace_back(TokenType::OpenParen, utils::shift(src), line, column);
+            tokens.emplace_back(TokenType::OpenParen, utils::shift(src), line,
+                                column);
             column++;
         } else if (src.front() == ")") {
-            tokens.emplace_back(TokenType::CloseParen, utils::shift(src), line, column);
+            tokens.emplace_back(TokenType::CloseParen, utils::shift(src), line,
+                                column);
             column++;
         } else if (keywords.count(src.front())) {
-            tokens.emplace_back(TokenType::Keyword, utils::shift(src), line, column);
+            tokens.emplace_back(TokenType::Keyword, utils::shift(src), line,
+                                column);
         } else if (src.front() == "\t") {
-            tokens.emplace_back(TokenType::Indent, utils::shift(src), line, column);
+            tokens.emplace_back(TokenType::Indent, utils::shift(src), line,
+                                column);
             column++;
         } else if (utils::isSkippable(src.front()[0])) {
             utils::shift(src);
@@ -129,7 +137,8 @@ std::vector<Token> tokenizing::tokenize(std::string &sourceCode) {
 
             tokens.emplace_back(TokenType::Number, number, line, column);
         } else {
-            tokens.emplace_back(TokenType::Identifier, utils::shift(src), line, column);
+            tokens.emplace_back(TokenType::Identifier, utils::shift(src), line,
+                                column);
             column++;
         }
     }

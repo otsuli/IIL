@@ -1,5 +1,5 @@
-#include "Ascii.h"
 #include <iostream>
+#include "Ascii.h"
 
 int main() {
     ascii::Ascii font(ascii::starwar);

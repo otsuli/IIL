@@ -3,15 +3,17 @@
 #include <iostream>
 #include <string>
 
-bool utils::isNumber(const std::string &s) {
-    return !s.empty() && std::find_if(s.begin(), // return true if the string is not empty and
-                                                 // if "find_if() == s.end" returns true.
-                                      s.end(), [](unsigned char c) { return !std::isdigit(c); }) ==
-                             s.end(); // find_if takes the parameters of where to start
-                                      // searching (iterator), where to stop searching
-                                      // (iterator). As well as the condition (lambda function
-                                      // in this case) to check on each element.
-                                      /*
+bool utils::isNumber(const std::string& s) {
+    return !s.empty() &&
+           std::find_if(
+               s.begin(),  // return true if the string is not empty and
+                           // if "find_if() == s.end" returns true.
+               s.end(), [](unsigned char c) { return !std::isdigit(c); }) ==
+               s.end();  // find_if takes the parameters of where to start
+                         // searching (iterator), where to stop searching
+    // (iterator). As well as the condition (lambda function
+    // in this case) to check on each element.
+    /*
                                       this lambda function is basically the same as:
                                       bool isNotDigit(unsigned char c){
                                           return !std::isdigit(c);
