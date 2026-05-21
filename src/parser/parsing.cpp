@@ -77,7 +77,7 @@ Expr* expressionParsing::unary() {
         Expr* right = unary();
         return arena.make<Expr>(std::move(op), std::move(unary));
     }
-    return make_unary_ptr<Expr*>(primary());
+    return primary();
 }
 
 Expr* expressionParsing::factor() {
@@ -149,4 +149,12 @@ Expr* expressionParsing::equality() {
 // Expresson := equality;
 Expr* expressionParsing::expression() {
     return equality();
+}
+
+Expr* expressionParsing::parse() {
+    try {
+        return expression();
+    } catch (ParseError error) {
+        return NULL;
+    }
 }
