@@ -2,7 +2,6 @@
 #include <iostream>
 #include <unordered_set>
 #include <vector>
-#include "lexer/errors/lexerError.hpp"
 #include "lexer/tokens.hpp"
 #include "lexer/utils/isDelimiter.hpp"
 #include "lexer/utils/isNumber.hpp"
@@ -60,7 +59,7 @@ std::vector<std::string> tokenizing::splitString() {
                 i++;
             }
             if (i + 2 >= source.size()) {
-                errors.push_back(LexerError{"Unknown token: ", line, column});
+                //! Implement error handling
             }
             i += 3;  // skip last 3 hashtags
         }

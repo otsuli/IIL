@@ -8,7 +8,7 @@
 
 namespace errors {
 
-void report(std::span<const std::string> errors);
+void report(std::vector<std::string> errors);
 
 void error(const Token& token, std::string_view message);
 
