@@ -155,6 +155,7 @@ Expr* expressionParsing::parse() {
     try {
         return expression();
     } catch (ParseError error) {
-        return NULL;
+        //! Handle error messages!
+        return nullptr;
     }
 }

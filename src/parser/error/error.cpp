@@ -1,4 +1,4 @@
-#include "error/error.hpp"
+#include "parser/error/error.hpp"
 #include <format>
 #include <memory>
 #include <set>
@@ -7,7 +7,7 @@
 #include <vector>
 #include "lexer/tokens.hpp"
 
-void errors::error(const Token& token, std::string_view message) {
+void ParserErrors::error(const Token& token, std::string_view message) {
     std::vector<std::string> errors;
 
     if (token.type_ == TokenType::FileEnd) {
@@ -19,4 +19,13 @@ void errors::error(const Token& token, std::string_view message) {
     }
 
     report(errors);
+}
+
+int ParserErrors::report(std::string message) {
+    if (message.size() != 0) {
+        throw ParseException(message.c_str());
+        return 0;
+    } else {
+        return 1;
+    }
 }
