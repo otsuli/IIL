@@ -1,5 +1,6 @@
 #include "lexer/tokenization.hpp"
 #include <iostream>
+#include <string>
 #include <unordered_set>
 #include <vector>
 #include "lexer/stringPool.hpp"
@@ -97,8 +98,28 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
     column = 1;
 
     while (!src.empty()) {
+        switch (src.front()[0]) {
+            case ';':
+                tokens.emplace_back(TokenType::semicolon, src.front()[0], line,
+                                    column);
+                break;
+            case ',':
+                tokens.emplace_back(TokenType::comma, src.front()[0], line,
+                                    column);
+                break;
+            case '\n':
+                tokens.emplace_back(TokenType::newline, src.front()[0], line,
+                                    column);
+                break;
+            case ':':
+                tokens.emplace_back(TokenType::colon, src.front()[0], line,
+                                    column);
+                break;
+            default:
+                break;
+        }
         TokenProcessor process;
-        Token tempTok = process.processTokenVal(src.front(), line, column);
+        Token tempTok = process.processTokenVal(&src.front(), line, column);
         if (tempTok != nullToken) {
             tokens.emplace_back(tempTok);
             column++;
@@ -111,37 +132,13 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
                                 column);
             column++;
             utils::shift(src);
-        } else if (delimiters.count(src.front())) {
-            tokens.emplace_back(TokenType::Delimiter, utils::shift(src), line,
-                                column);
-            column++;
-            utils::shift(src);
-        } else if (src.front() == "(") {
-            tokens.emplace_back(TokenType::OpenParen, utils::shift(src), line,
-                                column);
-            column++;
-            utils::shift(src);
-        } else if (src.front() == ")") {
-            tokens.emplace_back(TokenType::CloseParen, utils::shift(src), line,
-                                column);
-            column++;
-            utils::shift(src);
-        } else if (keywords.count(src.front())) {
-
-        } else if (src.front() == "\t") {
-            tokens.emplace_back(TokenType::Indent, utils::shift(src), line,
-                                column);
-            column++;
-            utils::shift(src);
         } else if (utils::isSkippable(src.front()[0])) {
             utils::shift(src);
-        }
-
-        else if (utils::isNumber(src.front())) {
-            std::string number;
+        } else if (utils::isNumber(src.front())) {
+            int number;
 
             while (!src.empty() && utils::isNumber(src.front())) {
-                number += utils::shift(src);
+                number += std::stoi(utils::shift(src));
             }
             tokens.emplace_back(TokenType::Number, number, line, column);
         } else {

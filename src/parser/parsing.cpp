@@ -6,9 +6,9 @@
 #include "parser/arena.hpp"
 #include "parser/expr.hpp"
 
-// Each method for parsing a grammar rule produces an AST for that rule and returns it to the
-// caller. When the body of the rule contains a nonterminal (a reference to another rule). We call
-// that other rule's method.
+// Each method for parsing a grammar rule produces an AST for that rule and
+// returns it to the caller. When the body of the rule contains a nonterminal (a
+// reference to another rule). We call that other rule's method.
 Token expressionParsing::previous() const {
     return tokens[current - 1];
 }
@@ -132,8 +132,8 @@ Expr* expressionParsing::equality() {
 
     // The (...)* loop in the rule is a while loop:
     // The rule states that we must find either a != or == token.
-    // So if we don't see one of those, we are done with the sequence of equality
-    // operators. We express that check using the match() method.
+    // So if we don't see one of those, we are done with the sequence of
+    // equality operators. We express that check using the match() method.
     while (match(TokenType::BangEqual, TokenType::EqualEqual)) {
         Token op = previous();
 

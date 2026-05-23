@@ -34,9 +34,10 @@ class expressionParsing : public Parser {
 
     Expr* parse();
 
-    // Check if the current token has any of the given types. If it does we consume the token
-    // and reutrn true. Else it returns false and leaves the token alone. The match() method is
-    // defined in terms of two ore more fundemental operations
+    // Check if the current token has any of the given types. If it does we
+    // consume the token and reutrn true. Else it returns false and leaves the
+    // token alone. The match() method is defined in terms of two ore more
+    // fundemental operations
     template <typename... Types>
     bool match(Types... types) const {
         return ((check(types) && (advance(), true)) || ...);

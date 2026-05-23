@@ -8,8 +8,8 @@ const std::string* StringPool::intern(const std::string& str) {
     return &(*it);
 }
 
-Token CommandProcessor::processPooledString(const std::string* str,
-                                            uint64_t line, uint64_t column) {
+Token TokenProcessor::processPooledString(const std::string* str, uint64_t line,
+                                          uint64_t column) {
     if (str == stringPool.intern("ivar")) {
         return Token::make_token(TokenType::ivar, *str, line, column);
     } else if (str == stringPool.intern("iglobal")) {
@@ -86,8 +86,8 @@ Token CommandProcessor::processPooledString(const std::string* str,
     }
 }
 
-Token CommandProcessor::processTokenVal(const std::string* command,
-                                        uint64_t line, uint64_t column) {
+Token TokenProcessor::processTokenVal(const std::string* command, uint64_t line,
+                                      uint64_t column) {
     const std::string* pooledString = stringPool.intern(*command);
     Token token = processPooledString(pooledString, line, column);
 }

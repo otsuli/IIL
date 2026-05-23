@@ -46,11 +46,19 @@ enum TokenType {
     NIL,
     String,
     ior,
+    semicolon,
+    comma,
+    newline,
+    colon
 };
 
 struct Token {
     TokenType type_;
-    std::string value_;
+    union {
+        std::string value_;
+        int value_;
+    };
+
     // Just in case some idiot wants to write
     // 9,223,372,036,854,775,807
     // Lines of code in 1 file.
@@ -67,16 +75,20 @@ struct Token {
         Token token(type, value, line, column);
         return token;
     }
+
+    bool operator!=(const Token& token) const {
+        if (type_ == token.type_ && value_ == token.value_ &&
+            line_ == token.line_ && column_ == token.column_) {
+            return false;
+        }
+        return true;
+    }
 };
 
 Token nullToken{Token::make_token(TokenType::NONE, " ", 0, 0)};
 
 inline const std::unordered_set<std::string> operators = {"+", "-", "*", "/",
                                                           "%", "<", ">", "="};
-
-inline const std::unordered_set<std::string> delimiters = {";", ",",
-                                                           "\""
-                                                           ":"};
 
 inline const std::unordered_set<std::string> keywords = {
     "ivar",     "iglobal", "NULL",    "if",   "else",   "eif",     "do",

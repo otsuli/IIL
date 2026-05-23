@@ -2,7 +2,7 @@
 #include <memory>
 #include "lexer/tokens.hpp"
 
-//These are AST nodes:
+// These are AST nodes:
 
 struct Expr {
     virtual ~Expr() = default;

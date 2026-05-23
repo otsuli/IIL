@@ -25,6 +25,6 @@ class TokenProcessor {
 
    public:
     Token processTokenVal(const std::string* command, uint64_t line,
-                          uint64_t column)
+                          uint64_t column);
 
 };  // class CommandProcessor
