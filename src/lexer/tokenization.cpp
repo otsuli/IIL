@@ -1,5 +1,6 @@
 #include "lexer/tokenization.hpp"
 #include <iostream>
+#include <stdexcept>
 #include <string>
 #include <unordered_set>
 #include <vector>
@@ -27,6 +28,8 @@ std::vector<std::string> tokenizing::splitString() {
                     buf = buf + source[k];
                     chunks.push_back(buf);
                     break;
+                } else if (source[k + 1] > source.size()) {
+                    //! Log error
                 }
                 buf = buf + '"';
             }
@@ -121,10 +124,14 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
 
         TokenProcessor process;
         Token tempTok = process.processTokenVal(&src.front(), line, column);
-
+        if (src.front()[0] = '"') {
+            tokens.emplace_back(TokenType::String, src.front(), line, column);
+            column++;
+        }
         if (tempTok != nullToken) {
             tokens.emplace_back(tempTok);
             column++;
+            utils::shift(src);
         } else if (src.front() == "\n") {
             line++;
             column = 1;

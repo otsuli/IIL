@@ -11,4 +11,6 @@ class tokenizing {
 
    public:
     [[nodiscard]] std::vector<Token> tokenize(std::string& sourceCode);
+
+    tokenizing(std::string src) : source(src) {}
 };

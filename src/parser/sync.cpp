@@ -14,7 +14,7 @@ void Parser::synchronize() {
             case TokenType::ivar:
                 break;
 
-            case TokenType::global:
+            case TokenType::iglobal:
                 break;
 
             case TokenType::ifstatement:
@@ -74,12 +74,6 @@ void Parser::synchronize() {
             case TokenType::CloseParen:
                 break;
 
-            case TokenType::Operator:
-                break;
-
-            case TokenType::Delimiter:
-                break;
-
             case TokenType::Indent:
                 break;
 
@@ -126,8 +120,6 @@ void Parser::synchronize() {
                 break;
 
             case TokenType::String:
-                break;
-            case TokenType::end:
                 break;
             case TokenType::ior:
                 break;
