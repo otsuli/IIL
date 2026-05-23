@@ -98,7 +98,7 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
     column = 1;
 
     while (!src.empty()) {
-        switch (src.front()[0]) {
+        switch (src.front()[0] && src.front().length() < 1) {
             case ';':
                 tokens.emplace_back(TokenType::semicolon, src.front()[0], line,
                                     column);
@@ -118,19 +118,16 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
             default:
                 break;
         }
+
         TokenProcessor process;
         Token tempTok = process.processTokenVal(&src.front(), line, column);
+
         if (tempTok != nullToken) {
             tokens.emplace_back(tempTok);
             column++;
         } else if (src.front() == "\n") {
             line++;
             column = 1;
-            utils::shift(src);
-        } else if (operators.count(src.front())) {
-            tokens.emplace_back(TokenType::Operator, utils::shift(src), line,
-                                column);
-            column++;
             utils::shift(src);
         } else if (utils::isSkippable(src.front()[0])) {
             utils::shift(src);
@@ -141,6 +138,7 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
                 number += std::stoi(utils::shift(src));
             }
             tokens.emplace_back(TokenType::Number, number, line, column);
+
         } else {
             tokens.emplace_back(TokenType::Identifier, utils::shift(src), line,
                                 column);

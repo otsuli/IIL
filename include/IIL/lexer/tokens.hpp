@@ -2,7 +2,7 @@
 #include <cstdint>
 #include <iostream>
 #include <unordered_set>
-
+#include <variant>
 enum TokenType {
     Number,
     Identifier,
@@ -54,10 +54,7 @@ enum TokenType {
 
 struct Token {
     TokenType type_;
-    union {
-        std::string value_;
-        int value_;
-    };
+    std::variant<std::string, int> value_;
 
     // Just in case some idiot wants to write
     // 9,223,372,036,854,775,807
@@ -65,32 +62,20 @@ struct Token {
     uint64_t line_;
     uint64_t column_;
 
-    Token(TokenType type, std::string value, unsigned int line,
-          unsigned int column)
+    Token(TokenType type, std::variant<std::string, int> value, uint64_t line,
+          uint64_t column)
         : type_(type), value_(std::move(value)), line_(line), column_(column) {}
-    virtual ~Token() = default;
 
-    static Token make_token(TokenType type, std::string value,
-                            unsigned int line, unsigned int column) {
-        Token token(type, value, line, column);
-        return token;
+    static Token make_token(TokenType type,
+                            std::variant<std::string, int> value, uint64_t line,
+                            uint64_t column) {
+        return Token(type, std::move(value), line, column);
     }
 
     bool operator!=(const Token& token) const {
-        if (type_ == token.type_ && value_ == token.value_ &&
-            line_ == token.line_ && column_ == token.column_) {
-            return false;
-        }
-        return true;
+        return !(type_ == token.type_ && value_ == token.value_ &&
+                 line_ == token.line_ && column_ == token.column_);
     }
 };
 
 Token nullToken{Token::make_token(TokenType::NONE, " ", 0, 0)};
-
-inline const std::unordered_set<std::string> operators = {"+", "-", "*", "/",
-                                                          "%", "<", ">", "="};
-
-inline const std::unordered_set<std::string> keywords = {
-    "ivar",     "iglobal", "NULL",    "if",   "else",   "eif",     "do",
-    "iwhile",   "iend",    "iexit",   "ifor", "ibreak", "itry",    "iexcept",
-    "ifinally", "ifunc",   "ireturn", "True", "False",  "iexplode"};
