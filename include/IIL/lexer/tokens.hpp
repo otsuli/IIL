@@ -27,8 +27,6 @@ enum TokenType {
     False,
     OpenParen,
     CloseParen,
-    Operator,
-    Delimiter,
     Indent,
     FileEnd,
     BangEqual,
@@ -43,12 +41,10 @@ enum TokenType {
     Slash,
     Star,
     Bang,
-    Minus,
     False,
     True,
     NIL,
     String,
-    end,
     ior,
 };
 
