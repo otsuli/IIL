@@ -3,14 +3,14 @@
 #include "parser/expr.hpp"
 
 using Object = std::variant<double, std::string, bool, std::nullptr_t, Token,
-                            Expr, UnaryExpr, Grouping, Literal>;
+                            Expr*, UnaryExpr*, Grouping*, Literal*>;
 
 Object Interpreter::visitLiteralExpr(Literal expr) {
     return expr.value_;
 }
 Object Interpreter::visitGroupingExpr(Grouping expr) {
     //! Todo: Fix
-    return evaluate(expr.expression);
+    return evaluate(expr);
 }
 Object Interpreter::evaluate(Expr expr) {
     //! TODO: FIX

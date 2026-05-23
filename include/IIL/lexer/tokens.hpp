@@ -1,4 +1,5 @@
 #pragma once
+#include <cstdint>
 #include <iostream>
 #include <unordered_set>
 
@@ -6,7 +7,7 @@ enum TokenType {
     Number,
     Identifier,
     ivar,
-    global,
+    iglobal,
     ifstatement,
     elsestatement,
     elseifstatement,
@@ -54,8 +55,11 @@ enum TokenType {
 struct Token {
     TokenType type_;
     std::string value_;
-    unsigned int line_;
-    unsigned int column_;
+    // Just in case some idiot wants to write
+    // 9,223,372,036,854,775,807
+    // Lines of code in 1 file.
+    uint64_t line_;
+    uint64_t column_;
 
     Token(TokenType type, std::string value, unsigned int line,
           unsigned int column)
@@ -79,6 +83,6 @@ inline const std::unordered_set<std::string> delimiters = {";", ",",
                                                            ":"};
 
 inline const std::unordered_set<std::string> keywords = {
-    "ivar",     "global", "NULL",    "if",   "else",   "eif",  "do",
-    "iwhile",   "iend",   "iexit",   "ifor", "ibreak", "itry", "iexcept",
-    "ifinally", "ifunc",  "ireturn", "True", "False"};
+    "ivar",     "iglobal", "NULL",    "if",   "else",   "eif",     "do",
+    "iwhile",   "iend",    "iexit",   "ifor", "ibreak", "itry",    "iexcept",
+    "ifinally", "ifunc",   "ireturn", "True", "False",  "iexplode"};
