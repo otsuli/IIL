@@ -11,7 +11,7 @@
 #include "lexer/utils/isSkippable.hpp"
 #include "lexer/utils/shift.hpp"
 
-std::vector<std::string> tokenizing::splitString() {
+std::vector<std::string> tokenizing::splitString(std::string& source) {
     std::vector<std::string> chunks;
     std::string buffer;
     std::string val;
@@ -92,9 +92,8 @@ std::vector<std::string> tokenizing::splitString() {
 }
 
 std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
-    source = sourceCode;
     std::vector<Token> tokens;
-    std::vector<std::string> src = splitString();
+    std::vector<std::string> src = splitString(sourceCode);
     line = 1;  // Reset each function call
     column = 1;
 

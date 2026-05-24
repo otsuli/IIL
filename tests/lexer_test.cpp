@@ -9,6 +9,6 @@ TEST(lexerTests, HandlesOperators) {
     std::vector<Token> expectedOutput = {
         Token{TokenType::Plus, op, expected_line, expected_column}};
 
-    tokenizing lexer(op);
+    tokenizing lexer;
     EXPECT_EQ(lexer.tokenize(op), expectedOutput);
 }
