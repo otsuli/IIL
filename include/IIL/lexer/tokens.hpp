@@ -41,8 +41,6 @@ enum TokenType {
     Slash,
     Star,
     Bang,
-    False,
-    True,
     NIL,
     String,
     ior,
@@ -77,6 +75,10 @@ struct Token {
     bool operator!=(const Token& token) const {
         return !(type_ == token.type_ && value_ == token.value_ &&
                  line_ == token.line_ && column_ == token.column_);
+    }
+    bool operator==(const Token& token) const {
+        return (type_ == token.type_ && value_ == token.value_ &&
+                line_ == token.line_ && column_ == token.column_);
     }
 };
 

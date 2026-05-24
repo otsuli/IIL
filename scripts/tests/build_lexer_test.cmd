@@ -1,7 +1,7 @@
 echo "building REPL"
 
-:: -S . means the source directory is the current folder
-:: -B  means put the generated build files the build/ folder
+REM -S . means the source directory is the current folder
+REM -B  means put the generated build files the build/ folder
 
 cmake -S .. -B build 
 cmake --build build --target IIL_lexer_test
