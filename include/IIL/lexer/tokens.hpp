@@ -50,7 +50,8 @@ enum TokenType {
     comma,
     newline,
     colon,
-    equal
+    equal,
+    FloorDiv,
 };
 
 struct Token {
