@@ -112,7 +112,8 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
                 break;
             case ',':
                 tokens.emplace_back(TokenType::comma, src.front()[0], line,
-                                    column) utils::shift(src);
+                                    column);
+                utils::shift(src);
                 break;
             case '\n':
                 tokens.emplace_back(TokenType::newline, src.front()[0], line,
