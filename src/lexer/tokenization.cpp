@@ -11,8 +11,6 @@
 #include "lexer/utils/isSkippable.hpp"
 #include "lexer/utils/shift.hpp"
 
-// TODO: Tokenizing need to be rewritten completely:
-
 std::vector<std::string> tokenizing::splitString() {
     std::vector<std::string> chunks;
     std::string buffer;
@@ -109,31 +107,38 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
                 tokens.emplace_back(TokenType::semicolon, src.front()[0], line,
                                     column);
                 utils::shift(src);
+                column++;
                 break;
             case ',':
                 tokens.emplace_back(TokenType::comma, src.front()[0], line,
                                     column);
                 utils::shift(src);
+                column++;
                 break;
             case '\n':
                 tokens.emplace_back(TokenType::newline, src.front()[0], line,
                                     column);
+                line++;
+                column = 1;
                 utils::shift(src);
                 break;
             case ':':
                 tokens.emplace_back(TokenType::colon, src.front()[0], line,
                                     column);
                 utils::shift(src);
+                column++;
                 break;
             case '(':
                 tokens.emplace_back(TokenType::OpenParen, src.front()[0], line,
                                     column);
                 utils::shift(src);
+                column++;
                 break;
             case ')':
                 tokens.emplace_back(TokenType::CloseParen, src.front()[0], line,
                                     column);
                 utils::shift(src);
+                column++;
                 break;
             // ---------------------------
             // INDENTS:
@@ -142,6 +147,7 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
                 tokens.emplace_back(TokenType::Indent, src.front()[0], line,
                                     column);
                 utils::shift(src);
+                column++;
                 break;
             // ----------------------------
             // COMPARISONS:
@@ -151,11 +157,13 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
                 tokens.emplace_back(TokenType::Greater, src.front()[0], line,
                                     column);
                 utils::shift(src);
+                column++;
                 break;
             case '<':
                 tokens.emplace_back(TokenType::Less, src.front()[0], line,
                                     column);
                 utils::shift(src);
+                column++;
                 break;
 
             // ---------------------------
@@ -165,6 +173,7 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
                 tokens.emplace_back(TokenType::equal, src.front()[0], line,
                                     column);
                 utils::shift(src);
+                column++;
                 break;
             // ---------------------------
             // OTHER OPERATORS:
@@ -173,26 +182,31 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
                 tokens.emplace_back(TokenType::Minus, src.front()[0], line,
                                     column);
                 utils::shift(src);
+                column++;
                 break;
             case '+':
                 tokens.emplace_back(TokenType::Plus, src.front()[0], line,
                                     column);
                 utils::shift(src);
+                column++;
                 break;
             case '*':
                 tokens.emplace_back(TokenType::Star, src.front()[0], line,
                                     column);
                 utils::shift(src);
+                column++;
                 break;
             case '!':
                 tokens.emplace_back(TokenType::Bang, src.front()[0], line,
                                     column);
                 utils::shift(src);
+                column++;
                 break;
             case '/':
                 tokens.emplace_back(TokenType::Slash, src.front()[0], line,
                                     column);
                 utils::shift(src);
+                column++;
                 break;
             default:
                 break;
@@ -203,15 +217,13 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
             column++;
             utils::shift(src);
         }
+
         TokenProcessor process;
         Token tempTok = process.processTokenVal(&src.front(), line, column);
+
         if (tempTok != nullToken) {
             tokens.emplace_back(tempTok);
             column++;
-            utils::shift(src);
-        } else if (src.front() == "\n") {
-            line++;
-            column = 1;
             utils::shift(src);
         } else if (utils::isSkippable(src.front()[0])) {
             utils::shift(src);
