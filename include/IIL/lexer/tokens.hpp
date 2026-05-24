@@ -49,7 +49,8 @@ enum TokenType {
     semicolon,
     comma,
     newline,
-    colon
+    colon,
+    equal
 };
 
 struct Token {

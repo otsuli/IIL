@@ -102,32 +102,108 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
 
     while (!src.empty()) {
         switch (src.front()[0] && src.front().length() < 1) {
+            // ----------------------
+            // DELIMITERS:
+            // ----------------------
             case ';':
                 tokens.emplace_back(TokenType::semicolon, src.front()[0], line,
                                     column);
+                utils::shift(src);
                 break;
             case ',':
                 tokens.emplace_back(TokenType::comma, src.front()[0], line,
-                                    column);
+                                    column) utils::shift(src);
                 break;
             case '\n':
                 tokens.emplace_back(TokenType::newline, src.front()[0], line,
                                     column);
+                utils::shift(src);
                 break;
             case ':':
                 tokens.emplace_back(TokenType::colon, src.front()[0], line,
                                     column);
+                utils::shift(src);
+                break;
+            case '(':
+                tokens.emplace_back(TokenType::OpenParen, src.front()[0], line,
+                                    column);
+                utils::shift(src);
+                break;
+            case ')':
+                tokens.emplace_back(TokenType::CloseParen, src.front()[0], line,
+                                    column);
+                utils::shift(src);
+                break;
+            // ---------------------------
+            // INDENTS:
+            // ---------------------------
+            case '\t':
+                tokens.emplace_back(TokenType::Indent, src.front()[0], line,
+                                    column);
+                utils::shift(src);
+                break;
+            // ----------------------------
+            // COMPARISONS:
+            // Note other comparisons are found in stringpooling.
+            // ----------------------------
+            case '>':
+                tokens.emplace_back(TokenType::Greater, src.front()[0], line,
+                                    column);
+                utils::shift(src);
+                break;
+            case '<':
+                tokens.emplace_back(TokenType::Less, src.front()[0], line,
+                                    column);
+                utils::shift(src);
+                break;
+
+            // ---------------------------
+            // ASSIGNMENT:
+            // ---------------------------
+            case '=':
+                tokens.emplace_back(TokenType::equal, src.front()[0], line,
+                                    column);
+                utils::shift(src);
+                break;
+            // ---------------------------
+            // OTHER OPERATORS:
+            // ---------------------------
+            case '-':
+                tokens.emplace_back(TokenType::Minus, src.front()[0], line,
+                                    column);
+                utils::shift(src);
+                break;
+            case '+':
+                tokens.emplace_back(TokenType::Plus, src.front()[0], line,
+                                    column);
+                utils::shift(src);
+                break;
+            case '*':
+                tokens.emplace_back(TokenType::Star, src.front()[0], line,
+                                    column);
+                utils::shift(src);
+                break;
+            case '!':
+                tokens.emplace_back(TokenType::Bang, src.front()[0], line,
+                                    column);
+                utils::shift(src);
+                break;
+            case '/':
+                tokens.emplace_back(TokenType::Slash, src.front()[0], line,
+                                    column);
+                utils::shift(src);
                 break;
             default:
                 break;
         }
 
-        TokenProcessor process;
-        Token tempTok = process.processTokenVal(&src.front(), line, column);
         if (src.front()[0] = '"') {
             tokens.emplace_back(TokenType::String, src.front(), line, column);
             column++;
+            utils::shift(src);
         }
+        TokenProcessor process;
+        Token tempTok = process.processTokenVal(&src.front(), line, column);
         if (tempTok != nullToken) {
             tokens.emplace_back(tempTok);
             column++;
