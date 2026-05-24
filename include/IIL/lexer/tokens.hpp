@@ -80,6 +80,10 @@ struct Token {
         return (type_ == token.type_ && value_ == token.value_ &&
                 line_ == token.line_ && column_ == token.column_);
     }
+    Token operator+(const Token& other) = delete;
+    Token operator-(const Token& other) = delete;
+    Token operator/(const Token& other) = delete;
+    Token operator*(const Token& other) = delete;
 };
 
 Token nullToken{Token::make_token(TokenType::NONE, " ", 0, 0)};
