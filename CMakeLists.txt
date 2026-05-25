@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.25)
 
+
 project(IIL
     VERSION 1.0
     DESCRIPTION "Interesting Interpreted Language"
@@ -73,9 +74,13 @@ target_link_libraries(IIL_REPL PRIVATE ascii_art)
 # ------------------------------------
 
 enable_testing()
+file(GLOB_RECURSE LEXER_TEST_SRC CONFIGURE_DEPENDS
+    src/lexer/*.cpp
+)
 
 add_executable(IIL_lexer_test
     tests/lexer_test.cpp
+    ${LEXER_TEST_SRC}
 )
 target_link_libraries(IIL_lexer_test gtest_main)
 

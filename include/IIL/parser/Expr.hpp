@@ -15,7 +15,7 @@ struct BinaryExpr : public Expr {
 
     BinaryExpr(Expr* left, Expr* right, Token op)
         : left_(left), right_(right), op_(op) {}
-    BinaryExpr() : left_(nullptr), right_(nullptr), op_(nullToken) {}
+    BinaryExpr() : left_(nullptr), right_(nullptr), op_(null::nullToken) {}
 };
 
 // TODO: finish these...
@@ -33,7 +33,7 @@ struct PrimaryExpr : public Expr {
 struct Literal : public Expr {
     Token value_;
     Literal(Token value) : value_(value) {}
-    Literal() : value_(nullToken) {}
+    Literal() : value_(null::nullToken) {}
 };
 struct Grouping : public Expr {
 };  // grouping may not need to inherit from Expr I'm not sure...

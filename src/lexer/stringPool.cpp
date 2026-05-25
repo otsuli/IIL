@@ -53,7 +53,7 @@ Token TokenProcessor::processPooledString(const std::string* str, uint64_t line,
     auto it = keywordMap.find(str);
     if (it != keywordMap.end())
         return Token::make_token(it->second, *str, line, column);
-    return nullToken;
+    return null::nullToken;
 }
 
 Token TokenProcessor::processTokenVal(const std::string* command, uint64_t line,

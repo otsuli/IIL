@@ -98,120 +98,122 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
     column = 1;
 
     while (!src.empty()) {
-        switch (src.front()[0] && src.front().length() < 1) {
-            // ----------------------
-            // DELIMITERS:
-            // ----------------------
-            case ';':
-                tokens.emplace_back(TokenType::semicolon, src.front()[0], line,
-                                    column);
-                utils::shift(src);
-                column++;
-                break;
-            case ',':
-                tokens.emplace_back(TokenType::comma, src.front()[0], line,
-                                    column);
-                utils::shift(src);
-                column++;
-                break;
-            case '\n':
-                tokens.emplace_back(TokenType::newline, src.front()[0], line,
-                                    column);
-                line++;
-                column = 1;
-                utils::shift(src);
-                break;
-            case ':':
-                tokens.emplace_back(TokenType::colon, src.front()[0], line,
-                                    column);
-                utils::shift(src);
-                column++;
-                break;
-            case '(':
-                tokens.emplace_back(TokenType::OpenParen, src.front()[0], line,
-                                    column);
-                utils::shift(src);
-                column++;
-                break;
-            case ')':
-                tokens.emplace_back(TokenType::CloseParen, src.front()[0], line,
-                                    column);
-                utils::shift(src);
-                column++;
-                break;
-            // ---------------------------
-            // INDENTS:
-            // ---------------------------
-            case '\t':
-                tokens.emplace_back(TokenType::Indent, src.front()[0], line,
-                                    column);
-                utils::shift(src);
-                column++;
-                break;
-            // ----------------------------
-            // COMPARISONS:
-            // Note other comparisons are found in stringpooling.
-            // ----------------------------
-            case '>':
-                tokens.emplace_back(TokenType::Greater, src.front()[0], line,
-                                    column);
-                utils::shift(src);
-                column++;
-                break;
-            case '<':
-                tokens.emplace_back(TokenType::Less, src.front()[0], line,
-                                    column);
-                utils::shift(src);
-                column++;
-                break;
+        if (src.front().length() < 1) {
+            switch (src.front()[0]) {
+                // ----------------------
+                // DELIMITERS:
+                // ----------------------
+                case ';':
+                    tokens.emplace_back(TokenType::semicolon, src.front()[0],
+                                        line, column);
+                    utils::shift(src);
+                    column++;
+                    break;
+                case ',':
+                    tokens.emplace_back(TokenType::comma, src.front()[0], line,
+                                        column);
+                    utils::shift(src);
+                    column++;
+                    break;
+                case '\n':
+                    tokens.emplace_back(TokenType::newline, src.front()[0],
+                                        line, column);
+                    line++;
+                    column = 1;
+                    utils::shift(src);
+                    break;
+                case ':':
+                    tokens.emplace_back(TokenType::colon, src.front()[0], line,
+                                        column);
+                    utils::shift(src);
+                    column++;
+                    break;
+                case '(':
+                    tokens.emplace_back(TokenType::OpenParen, src.front()[0],
+                                        line, column);
+                    utils::shift(src);
+                    column++;
+                    break;
+                case ')':
+                    tokens.emplace_back(TokenType::CloseParen, src.front()[0],
+                                        line, column);
+                    utils::shift(src);
+                    column++;
+                    break;
+                // ---------------------------
+                // INDENTS:
+                // ---------------------------
+                case '\t':
+                    tokens.emplace_back(TokenType::Indent, src.front()[0], line,
+                                        column);
+                    utils::shift(src);
+                    column++;
+                    break;
+                // ----------------------------
+                // COMPARISONS:
+                // Note other comparisons are found in stringpooling.
+                // ----------------------------
+                case '>':
+                    tokens.emplace_back(TokenType::Greater, src.front()[0],
+                                        line, column);
+                    utils::shift(src);
+                    column++;
+                    break;
+                case '<':
+                    tokens.emplace_back(TokenType::Less, src.front()[0], line,
+                                        column);
+                    utils::shift(src);
+                    column++;
+                    break;
 
-            // ---------------------------
-            // ASSIGNMENT:
-            // ---------------------------
-            case '=':
-                tokens.emplace_back(TokenType::equal, src.front()[0], line,
-                                    column);
-                utils::shift(src);
-                column++;
-                break;
-            // ---------------------------
-            // OTHER OPERATORS:
-            // ---------------------------
-            case '-':
-                tokens.emplace_back(TokenType::Minus, src.front()[0], line,
-                                    column);
-                utils::shift(src);
-                column++;
-                break;
-            case '+':
-                tokens.emplace_back(TokenType::Plus, src.front()[0], line,
-                                    column);
-                utils::shift(src);
-                column++;
-                break;
-            case '*':
-                tokens.emplace_back(TokenType::Star, src.front()[0], line,
-                                    column);
-                utils::shift(src);
-                column++;
-                break;
-            case '!':
-                tokens.emplace_back(TokenType::Bang, src.front()[0], line,
-                                    column);
-                utils::shift(src);
-                column++;
-                break;
-            case '/':
-                tokens.emplace_back(TokenType::Slash, src.front()[0], line,
-                                    column);
-                utils::shift(src);
-                column++;
-                break;
-            default:
-                break;
+                // ---------------------------
+                // ASSIGNMENT:
+                // ---------------------------
+                case '=':
+                    tokens.emplace_back(TokenType::equal, src.front()[0], line,
+                                        column);
+                    utils::shift(src);
+                    column++;
+                    break;
+                // ---------------------------
+                // OTHER OPERATORS:
+                // ---------------------------
+                case '-':
+                    tokens.emplace_back(TokenType::Minus, src.front()[0], line,
+                                        column);
+                    utils::shift(src);
+                    column++;
+                    break;
+                case '+':
+                    tokens.emplace_back(TokenType::Plus, src.front()[0], line,
+                                        column);
+                    utils::shift(src);
+                    column++;
+                    break;
+                case '*':
+                    tokens.emplace_back(TokenType::Star, src.front()[0], line,
+                                        column);
+                    utils::shift(src);
+                    column++;
+                    break;
+                case '!':
+                    tokens.emplace_back(TokenType::Bang, src.front()[0], line,
+                                        column);
+                    utils::shift(src);
+                    column++;
+                    break;
+                case '/':
+                    tokens.emplace_back(TokenType::Slash, src.front()[0], line,
+                                        column);
+                    utils::shift(src);
+                    column++;
+                    break;
+                default:
+                    break;
+            }
         }
 
-        if (src.front()[0] = '"') {
+        else if (src.front()[0] = '"') {
             tokens.emplace_back(TokenType::String, src.front(), line, column);
             column++;
             utils::shift(src);
@@ -220,7 +222,7 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
         TokenProcessor process;
         Token tempTok = process.processTokenVal(&src.front(), line, column);
 
-        if (tempTok != nullToken) {
+        if (tempTok != null::nullToken) {
             tokens.emplace_back(tempTok);
             column++;
             utils::shift(src);
