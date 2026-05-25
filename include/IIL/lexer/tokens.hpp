@@ -59,16 +59,16 @@ struct Token {
     // Just in case some idiot wants to write
     // 9,223,372,036,854,775,807
     // Lines of code in 1 file.
-    uint64_t line_;
-    uint64_t column_;
+    u16 line_;
+    u16 column_;
 
-    Token(TokenType type, std::variant<std::string, int> value, uint64_t line,
-          uint64_t column)
+    Token(TokenType type, std::variant<std::string, int> value, u16 line,
+          u16 column)
         : type_(type), value_(std::move(value)), line_(line), column_(column) {}
 
     static Token make_token(TokenType type,
-                            std::variant<std::string, int> value, uint64_t line,
-                            uint64_t column) {
+                            std::variant<std::string, int> value, u16 line,
+                            u16 column) {
         return Token(type, std::move(value), line, column);
     }
 

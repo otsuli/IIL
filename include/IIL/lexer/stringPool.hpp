@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include "lexer/tokens.hpp"
-
+#include "types.hpp"
 class StringPool {
     // Technical info:
     // to analyze split strings IIL uses string poolin gin order to reduce
@@ -25,11 +25,9 @@ class TokenProcessor {
     std::unordered_map<const std::string*, TokenType> keywordMap;
     void initKeywordMap();
     StringPool stringPool;
-    Token processPooledString(const std::string* str, uint64_t line,
-                              uint64_t column);
+    Token processPooledString(const std::string* str, u16 line, u16 column);
 
    public:
-    Token processTokenVal(const std::string* command, uint64_t line,
-                          uint64_t column);
+    Token processTokenVal(const std::string* command, u16 line, u16 column);
 
 };  // class CommandProcessor
