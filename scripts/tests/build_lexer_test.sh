@@ -5,3 +5,4 @@ echo "building lexer test"
 
 cmake -S .. -B build
 cmake --build build --target IIL_lexer_test
+ctest --test-dir build --output-on-failure

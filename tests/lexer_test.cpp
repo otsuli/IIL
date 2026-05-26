@@ -6,6 +6,10 @@
 #include "types.hpp"
 
 TEST(lexerTests, HandlesOperators) {
+    // GDB COMMANDS :/ (for when you need to debug *cry* )
+    // break LexerTest_BasicTokens_Test::TestBody
+    // run --gtest_filter=lexerTests.HandlesOperators
+
     std::string op = "+";
     u16 expected_line = 1;
     u16 expected_column = 1;

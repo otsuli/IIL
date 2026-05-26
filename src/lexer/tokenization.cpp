@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <string>
 #include <unordered_set>
+#include <variant>
 #include <vector>
 #include "lexer/stringPool.hpp"
 #include "lexer/tokens.hpp"
@@ -221,11 +222,15 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
 
         TokenProcessor process;
         Token tempTok = process.processTokenVal(&src.front(), line, column);
-
-        if (tempTok != null::nullToken) {
-            tokens.emplace_back(tempTok);
-            column++;
-            utils::shift(src);
+        auto* str_ptr = std::get_if<std::string>(&tempTok.value_);
+        if (str_ptr) {
+            if (!str_ptr->empty()) {
+                if (tempTok != null::nullToken) {
+                    tokens.emplace_back(tempTok);
+                    column++;
+                    utils::shift(src);
+                }
+            }
         } else if (utils::isSkippable(src.front()[0])) {
             utils::shift(src);
         } else if (utils::isNumber(src.front())) {
@@ -235,7 +240,6 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
                 number += std::stoi(utils::shift(src));
             }
             tokens.emplace_back(TokenType::Number, number, line, column);
-
         } else {
             tokens.emplace_back(TokenType::Identifier, utils::shift(src), line,
                                 column);
