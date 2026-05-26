@@ -44,8 +44,8 @@ class expressionParsing : public Parser {
         //     ^ If this is true we evaluate this^
     }
 
-    ParseError error(Token token, std::string message);
-    Token consume(TokenType type, std::string message);
+    ParseError* error(const Token& token, const std::string& message);
+    Token consume(const TokenType& type, const std::string& message);
     Token previous() const;
     Token peek() const override;
     bool isAtEnd() const override;

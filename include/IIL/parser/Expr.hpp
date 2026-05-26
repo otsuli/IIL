@@ -13,8 +13,8 @@ struct BinaryExpr : public Expr {
     Expr* right_;
     Token op_;
 
-    BinaryExpr(Expr* left, Expr* right, Token op)
-        : left_(left), right_(right), op_(op) {}
+    BinaryExpr(Expr& left, Expr& right, Token op)
+        : left_(&left), right_(&right), op_(op) {}
     BinaryExpr() : left_(nullptr), right_(nullptr), op_(null::nullToken) {}
 };
 

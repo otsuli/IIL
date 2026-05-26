@@ -24,15 +24,17 @@ Token expressionParsing::advance() {
         current++;
     return previous();
 }
-ParseError expressionParsing::error(Token token, std::string message) {
-    ParseError error;
-    error.message_ = message;
-    error.token_ = token;
+ParseError* expressionParsing::error(const Token& token,
+                                     const std::string& message) {
+    ParseError* error;
+    error->message_ = message;
+    error->token_ = token;
 
     return error;
 }
 
-Token expressionParsing::consume(TokenType type, std::string message) {
+Token expressionParsing::consume(const TokenType& type,
+                                 const std::string& message) {
     if (check(type)) {
         return advance();
     }
