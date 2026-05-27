@@ -12,15 +12,15 @@ TEST(lexerTests, HandlesOperators) {
     // break LexerTest_BasicTokens_Test::TestBody
     // run --gtest_filter=lexerTests.HandlesOperators
 
-    auto op = std::make_unique<std::string>("+");
-    u16 expected_line = 1;
-    u16 expected_column = 1;
+    const auto op = std::make_unique<std::string>("+");
+    const u16 expected_line = 1;
+    const u16 expected_column = 1;
 
-    std::unique_ptr<std::vector<Token>> expectedOutput =
+    const std::unique_ptr<std::vector<Token>> expectedOutput =
         std::make_unique<std::vector<Token>>(TokenType::Plus, *op,
                                              expected_line, expected_column);
     tokenizing lexer;
 
-    EXPECT_EQ(lexer.tokenize(op), expectedOutput)
+    EXPECT_EQ(lexer.tokenize(op), *expectedOutput)
         << "Handles Operators test failed.";
 }
