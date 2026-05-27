@@ -97,8 +97,11 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
     std::vector<std::string> src = splitString(sourceCode);
     line = 1;  // Reset each function call
     column = 1;
+    TokenProcessor process;
 
     while (!src.empty()) {
+        Token tempTok = process.processTokenVal(&src.front(), line, column);
+        auto* str_ptr = std::get_if<std::string>(&tempTok.value_);
         if (src.front().length() < 1) {
             switch (src.front()[0]) {
                 // ----------------------
@@ -177,7 +180,7 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
                     column++;
                     break;
                 // ---------------------------
-                // OTHER OPERATORS:
+                // OTHER OPERATORS:S
                 // ---------------------------
                 case '-':
                     tokens.emplace_back(TokenType::Minus, src.front()[0], line,
@@ -220,10 +223,7 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
             utils::shift(src);
         }
 
-        TokenProcessor process;
-        Token tempTok = process.processTokenVal(&src.front(), line, column);
-        auto* str_ptr = std::get_if<std::string>(&tempTok.value_);
-        if (str_ptr) {
+        else if (str_ptr) {
             if (!str_ptr->empty()) {
                 if (tempTok != null::nullToken) {
                     tokens.emplace_back(tempTok);
