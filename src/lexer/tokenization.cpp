@@ -290,7 +290,7 @@ std::vector<Token> tokenizing::tokenize(
     line++;
 
     tokens.emplace_back(
-        Token::make_token(TokenType::FileEnd, "fileEnd", line, column));
+        Token::make_token(TokenType::FileEnd, "fileEnd", line, 1));
 
     return tokens;
 }
