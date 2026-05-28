@@ -89,4 +89,4 @@ target_include_directories(IIL_lexer_operators_test PRIVATE
     ${CMAKE_SOURCE_DIR}/src
 )
 
-add_test(NAME lexer_test COMMAND IIL_lexer_test)
+add_test(NAME lexer_test COMMAND IIL_lexer_operators_test)
