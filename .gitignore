@@ -67,3 +67,4 @@ cmake-build-debug
 .VSCodeCounter
 
 .vs
+out
