@@ -1,5 +1,4 @@
 #include "lexer/tokenization.hpp"
-
 #include <memory>
 #include <string>
 #include <variant>
