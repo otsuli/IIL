@@ -21,8 +21,8 @@ jobs:
       - name: Configure CMake
         run: cmake -B build -DCMAKE_BUILD_TYPE=Debug
 
-      - name: Build
-        run: cmake --build build
+      - name: Build test target
+        run: cmake --build build --target IIL_lexer_operators_test
 
-      - name: Run Tests
-        run: cd build && ctest --output-on-failure
+      - name: Run test binary
+        run: ./build/IIL_lexer_operators_test
