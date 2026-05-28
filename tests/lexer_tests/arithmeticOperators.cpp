@@ -120,5 +120,3 @@ TEST(lexerTests, HandlesModuloOperator) {
     EXPECT_EQ(lexer.tokenize(op), *expectedOutput)
         << "Handles Mutliplication Operators test failed.";
 }
-
-//! Add floor division operator.

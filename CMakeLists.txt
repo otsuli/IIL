@@ -74,19 +74,45 @@ target_link_libraries(IIL_REPL PRIVATE ascii_art)
 # ------------------------------------
 
 enable_testing()
+
+# ------------------------------------
+# LEXER TESTS:
+# ------------------------------------
+
 file(GLOB_RECURSE LEXER_TEST_SRC CONFIGURE_DEPENDS
     src/lexer/*.cpp
 )
+# -----------------------------------
+# ARITHMETIC:
+# -----------------------------------
 
-add_executable(IIL_lexer_operators_test
+add_executable(IIL_lexer_arithmetic_operators_test
     tests/lexer_tests/arithmeticOperators.cpp
     ${LEXER_TEST_SRC}
 )
-target_link_libraries(IIL_lexer_operators_test gtest_main)
+target_link_libraries(IIL_lexer_arithmetic_operators_test gtest_main)
 
-target_include_directories(IIL_lexer_operators_test PRIVATE
+target_include_directories(IIL_lexer_arithmetic_operators_test PRIVATE
     ${CMAKE_SOURCE_DIR}/include/IIL
     ${CMAKE_SOURCE_DIR}/src
 )
 
-add_test(NAME lexer_test COMMAND IIL_lexer_operators_test)
+add_test(NAME lexer_test_arithmetic COMMAND IIL_lexer_arithmetic_operators_test)
+
+# --------------------------------
+# COMPARISON: 
+# --------------------------------
+
+add_executable(IIL_lexer_comparison_operators_test
+    tests/lexer_tests/comparisonOperators.cpp
+    ${LEXER_TEST_SRC}
+)
+target_link_libraries(IIL_lexer_comparison_operators_test gtest_main)
+
+target_include_directories(IIL_lexer_comparison_operators_test PRIVATE
+    ${CMAKE_SOURCE_DIR}/include/IIL
+    ${CMAKE_SOURCE_DIR}/src
+)
+
+add_test(NAME lexer_test_comparison COMMAND IIL_lexer_comparison_operators_test)
+

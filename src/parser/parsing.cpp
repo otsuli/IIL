@@ -83,7 +83,6 @@ Expr* expressionParsing::unary() {
 }
 
 Expr* expressionParsing::factor() {
-    // Todo: implement a "make_unary<>" function or template.
     Expr* expr = unary();
     while (match(TokenType::Slash, TokenType::Star)) {
         Token op = previous();

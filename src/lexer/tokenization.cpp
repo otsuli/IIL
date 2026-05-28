@@ -110,7 +110,9 @@ std::vector<Token> tokenizing::tokenize(
 
         if (src.front().length() < 2) {
             switch (src.front()[0]) {
-
+                // --------------------
+                // DELIMITERS:
+                // --------------------
                 case ';':
                     tokens.emplace_back(Token::make_token(
                         TokenType::semicolon, std::string(1, src.front()[0]),
@@ -167,7 +169,9 @@ std::vector<Token> tokenizing::tokenize(
                     utils::shift(src);
                     column++;
                     break;
-
+                // -----------------------
+                // COMPARISON:
+                // -----------------------
                 case '>':
                     tokens.emplace_back(Token::make_token(
                         TokenType::Greater, std::string(1, src.front()[0]),
@@ -191,7 +195,9 @@ std::vector<Token> tokenizing::tokenize(
                     utils::shift(src);
                     column++;
                     break;
-
+                // -------------------
+                // ARITHMETIC
+                // -------------------
                 case '-':
                     tokens.emplace_back(Token::make_token(
                         TokenType::Minus, std::string(1, src.front()[0]), line,

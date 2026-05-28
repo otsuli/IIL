@@ -21,8 +21,14 @@ jobs:
       - name: Configure CMake
         run: cmake -B build -DCMAKE_BUILD_TYPE=Debug
 
-      - name: Build test target
-        run: cmake --build build --target IIL_lexer_operators_test
+      - name: Build test target arithmetic operators
+        run: cmake --build build --target IIL_lexer_arithmetic_operators_test
 
-      - name: Run test binary
-        run: ./build/IIL_lexer_operators_test
+      - name: Build test target comparison operators
+        run: cmake --build build --target IIL_lexer_comparison_operators_test
+
+      - name: Run test binary arithmetic operators test
+        run: ./build/IIL_lexer_arithmetic_operators_test
+
+      - name: Run test binary comparison operators test
+        run: ./build/IIL_lexer_comparison_operators_test
