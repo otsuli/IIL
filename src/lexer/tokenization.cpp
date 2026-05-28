@@ -1,9 +1,7 @@
 #include "lexer/tokenization.hpp"
-#include <iostream>
+
 #include <memory>
-#include <stdexcept>
 #include <string>
-#include <unordered_set>
 #include <variant>
 #include <vector>
 #include "lexer/stringPool.hpp"
