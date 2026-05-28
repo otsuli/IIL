@@ -99,7 +99,7 @@ std::vector<Token> tokenizing::tokenize(
 
     std::vector<Token> tokens;
     std::vector<std::string> src = splitString(sourceCode);
-    line = 1;  // Reset each function call
+    line = 1;
     column = 1;
     TokenProcessor process;
 
@@ -110,127 +110,144 @@ std::vector<Token> tokenizing::tokenize(
 
         if (src.front().length() < 2) {
             switch (src.front()[0]) {
-                // ----------------------
-                // DELIMITERS:
-                // ----------------------
+
                 case ';':
-                    tokens.emplace_back(TokenType::semicolon, src.front()[0],
-                                        line, column);
-                    utils::shift(src);
-                    column++;
-                    break;
-                case ',':
-                    tokens.emplace_back(TokenType::comma, src.front()[0], line,
-                                        column);
-                    utils::shift(src);
-                    column++;
-                    break;
-                case '\n':
-                    tokens.emplace_back(TokenType::newline, src.front()[0],
-                                        line, column);
-                    line++;
-                    column = 1;
-                    utils::shift(src);
-                    break;
-                case ':':
-                    tokens.emplace_back(TokenType::colon, src.front()[0], line,
-                                        column);
-                    utils::shift(src);
-                    column++;
-                    break;
-                case '(':
-                    tokens.emplace_back(TokenType::OpenParen, src.front()[0],
-                                        line, column);
-                    utils::shift(src);
-                    column++;
-                    break;
-                case ')':
-                    tokens.emplace_back(TokenType::CloseParen, src.front()[0],
-                                        line, column);
-                    utils::shift(src);
-                    column++;
-                    break;
-                // ---------------------------
-                // INDENTS:
-                // ---------------------------
-                case '\t':
-                    tokens.emplace_back(TokenType::Indent, src.front()[0], line,
-                                        column);
-                    utils::shift(src);
-                    column++;
-                    break;
-                // ----------------------------
-                // COMPARISONS:
-                // Note other comparisons are found in stringpooling.
-                // ----------------------------
-                case '>':
-                    tokens.emplace_back(TokenType::Greater, src.front()[0],
-                                        line, column);
-                    utils::shift(src);
-                    column++;
-                    break;
-                case '<':
-                    tokens.emplace_back(TokenType::Less, src.front()[0], line,
-                                        column);
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::semicolon, std::string(1, src.front()[0]),
+                        line, column));
                     utils::shift(src);
                     column++;
                     break;
 
-                // ---------------------------
-                // ASSIGNMENT:
-                // ---------------------------
+                case ',':
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::comma, std::string(1, src.front()[0]), line,
+                        column));
+                    utils::shift(src);
+                    column++;
+                    break;
+
+                case '\n':
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::newline, std::string(1, src.front()[0]),
+                        line, column));
+                    line++;
+                    column = 1;
+                    utils::shift(src);
+                    break;
+
+                case ':':
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::colon, std::string(1, src.front()[0]), line,
+                        column));
+                    utils::shift(src);
+                    column++;
+                    break;
+
+                case '(':
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::OpenParen, std::string(1, src.front()[0]),
+                        line, column));
+                    utils::shift(src);
+                    column++;
+                    break;
+
+                case ')':
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::CloseParen, std::string(1, src.front()[0]),
+                        line, column));
+                    utils::shift(src);
+                    column++;
+                    break;
+
+                case '\t':
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::Indent, std::string(1, src.front()[0]), line,
+                        column));
+                    utils::shift(src);
+                    column++;
+                    break;
+
+                case '>':
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::Greater, std::string(1, src.front()[0]),
+                        line, column));
+                    utils::shift(src);
+                    column++;
+                    break;
+
+                case '<':
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::Less, std::string(1, src.front()[0]), line,
+                        column));
+                    utils::shift(src);
+                    column++;
+                    break;
+
                 case '=':
-                    tokens.emplace_back(TokenType::equal, src.front()[0], line,
-                                        column);
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::equal, std::string(1, src.front()[0]), line,
+                        column));
                     utils::shift(src);
                     column++;
                     break;
-                // ---------------------------
-                // OTHER OPERATORS:
-                // ---------------------------
+
                 case '-':
-                    tokens.emplace_back(TokenType::Minus, src.front()[0], line,
-                                        column);
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::Minus, std::string(1, src.front()[0]), line,
+                        column));
                     utils::shift(src);
                     column++;
                     break;
+
                 case '+':
-                    tokens.emplace_back(TokenType::Plus, src.front()[0], line,
-                                        column);
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::Plus, std::string(1, src.front()[0]), line,
+                        column));
                     utils::shift(src);
                     column++;
                     break;
+
                 case '*':
-                    tokens.emplace_back(TokenType::Star, src.front()[0], line,
-                                        column);
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::Star, std::string(1, src.front()[0]), line,
+                        column));
                     utils::shift(src);
                     column++;
                     break;
+
                 case '!':
-                    tokens.emplace_back(TokenType::Bang, src.front()[0], line,
-                                        column);
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::Bang, std::string(1, src.front()[0]), line,
+                        column));
                     utils::shift(src);
                     column++;
                     break;
+
                 case '/':
-                    tokens.emplace_back(TokenType::Slash, src.front()[0], line,
-                                        column);
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::Slash, std::string(1, src.front()[0]), line,
+                        column));
                     utils::shift(src);
                     column++;
                     break;
+
                 case '%':
-                    tokens.emplace_back(TokenType::Modulo, src.front()[0], line,
-                                        column);
+                    tokens.emplace_back(Token::make_token(
+                        TokenType::Modulo, std::string(1, src.front()[0]), line,
+                        column));
                     utils::shift(src);
                     column++;
                     break;
+
                 default:
                     break;
             }
         }
 
-        else if (src.front()[0] = '"') {
-            tokens.emplace_back(TokenType::String, src.front(), line, column);
+        else if (src.front()[0] == '"') {
+            tokens.emplace_back(Token::make_token(TokenType::String,
+                                                  src.front(), line, column));
             column++;
             utils::shift(src);
         }
@@ -238,27 +255,42 @@ std::vector<Token> tokenizing::tokenize(
         else if (str_ptr) {
             if (!str_ptr->empty()) {
                 if (tempTok != null::nullToken) {
-                    tokens.emplace_back(tempTok);
+                    tokens.emplace_back(Token::make_token(
+                        tempTok.type_, tempTok.value_, line, column));
                     column++;
                     utils::shift(src);
                 }
             }
-        } else if (utils::isSkippable(src.front()[0])) {
+        }
+
+        else if (utils::isSkippable(src.front()[0])) {
             utils::shift(src);
-        } else if (utils::isNumber(src.front())) {
+        }
+
+        else if (utils::isNumber(src.front())) {
             int number;
 
             while (!src.empty() && utils::isNumber(src.front())) {
                 number += std::stoi(utils::shift(src));
             }
-            tokens.emplace_back(TokenType::Number, number, line, column);
-        } else {
-            tokens.emplace_back(TokenType::Identifier, utils::shift(src), line,
-                                column);
+
+            tokens.emplace_back(
+                Token::make_token(TokenType::Number, number, line, column));
+        }
+
+        else {
+            tokens.emplace_back(Token::make_token(
+                TokenType::Identifier, utils::shift(src), line, column));
+
             column++;
             utils::shift(src);
         }
     }
-    tokens.emplace_back(TokenType::FileEnd, "fileEnd", line, column);
+
+    line++;
+
+    tokens.emplace_back(
+        Token::make_token(TokenType::FileEnd, "fileEnd", line, column));
+
     return tokens;
 }

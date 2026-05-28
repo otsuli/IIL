@@ -18,7 +18,7 @@ TEST(lexerTests, HandlesPlusOperator) {
     Token tok =
         Token::make_token(TokenType::Plus, *op, expected_line, expected_column);
     Token EOFTok = Token::make_token(TokenType::FileEnd, "fileEnd",
-                                     expected_line + 1, expected_column + 1);
+                                     expected_line + 1, expected_column);
     const std::unique_ptr<std::vector<Token>> expectedOutput =
         std::make_unique<std::vector<Token>>();
 
@@ -42,7 +42,7 @@ TEST(lexerTests, HandlesSubtractionOperator) {
     Token tok = Token::make_token(TokenType::Minus, *op, expected_line,
                                   expected_column);
     Token EOFTok = Token::make_token(TokenType::FileEnd, "fileEnd",
-                                     expected_line + 1, expected_column + 1);
+                                     expected_line + 1, expected_column);
     const std::unique_ptr<std::vector<Token>> expectedOutput =
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
@@ -64,7 +64,7 @@ TEST(lexerTests, HandlesDivisionOperator) {
     Token tok = Token::make_token(TokenType::Slash, *op, expected_line,
                                   expected_column);
     Token EOFTok = Token::make_token(TokenType::FileEnd, "fileEnd",
-                                     expected_line + 1, expected_column + 1);
+                                     expected_line + 1, expected_column);
     const std::unique_ptr<std::vector<Token>> expectedOutput =
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
@@ -86,7 +86,7 @@ TEST(lexerTests, HandlesMultiplicationOperator) {
     Token tok =
         Token::make_token(TokenType::Star, *op, expected_line, expected_column);
     Token EOFTok = Token::make_token(TokenType::FileEnd, "fileEnd",
-                                     expected_line + 1, expected_column + 1);
+                                     expected_line + 1, expected_column);
     const std::unique_ptr<std::vector<Token>> expectedOutput =
         std::make_unique<std::vector<Token>>();
 
@@ -109,7 +109,7 @@ TEST(lexerTests, HandlesModuloOperator) {
     Token tok = Token::make_token(TokenType::Modulo, *op, expected_line,
                                   expected_column);
     Token EOFTok = Token::make_token(TokenType::FileEnd, "fileEnd",
-                                     expected_line + 1, expected_column + 1);
+                                     expected_line + 1, expected_column);
     const std::unique_ptr<std::vector<Token>> expectedOutput =
         std::make_unique<std::vector<Token>>();
 
