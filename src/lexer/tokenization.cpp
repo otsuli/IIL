@@ -108,7 +108,7 @@ std::vector<Token> tokenizing::tokenize(
         Token tempTok = process.processTokenVal(&src.front(), line, column);
         auto* str_ptr = std::get_if<std::string>(&tempTok.value_);
 
-        if (src.front().length() < 1) {
+        if (src.front().length() < 2) {
             switch (src.front()[0]) {
                 // ----------------------
                 // DELIMITERS:
