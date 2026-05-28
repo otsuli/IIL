@@ -78,13 +78,13 @@ file(GLOB_RECURSE LEXER_TEST_SRC CONFIGURE_DEPENDS
     src/lexer/*.cpp
 )
 
-add_executable(IIL_lexer_test
-    tests/lexer_test.cpp
+add_executable(IIL_lexer_operators_test
+    tests/lexer_tests/arithmeticOperators.cpp
     ${LEXER_TEST_SRC}
 )
-target_link_libraries(IIL_lexer_test gtest_main)
+target_link_libraries(IIL_lexer_operators_test gtest_main)
 
-target_include_directories(IIL_lexer_test PRIVATE
+target_include_directories(IIL_lexer_operators_test PRIVATE
     ${CMAKE_SOURCE_DIR}/include/IIL
     ${CMAKE_SOURCE_DIR}/src
 )

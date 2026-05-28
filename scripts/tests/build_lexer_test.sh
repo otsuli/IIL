@@ -4,5 +4,5 @@ echo "building lexer test"
 # -B build means build directory
 
 cmake -S .. -B build
-cmake --build build --target IIL_lexer_test
+cmake --build build --target IIL_lexer_operators_test
 ctest --test-dir build --output-on-failure

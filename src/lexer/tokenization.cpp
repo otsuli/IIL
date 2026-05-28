@@ -1,5 +1,6 @@
 #include "lexer/tokenization.hpp"
 #include <iostream>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <unordered_set>
@@ -12,22 +13,24 @@
 #include "lexer/utils/isSkippable.hpp"
 #include "lexer/utils/shift.hpp"
 
-std::vector<std::string> tokenizing::splitString(std::string& source) {
+std::vector<std::string> tokenizing::splitString(
+    const std::unique_ptr<std::string>& source) {
+
     std::vector<std::string> chunks;
     std::string buffer;
     std::string val;
 
-    for (int i = 0; i < source.size(); i++) {
-        char ch = source[i];
+    for (int i = 0; i < source->size(); i++) {
+        char ch = (*source)[i];
         if (ch == '"') {
             std::string buf;
-            buf = buf + source[i];
-            for (int k = i; i < source.size(); ++k) {
-                if (source[k] == '"') {
-                    buf = buf + source[k];
-                    chunks.push_back(buf);
+            buf = buf + (*source)[i];
+            for (int k = i; i < source->size(); ++k) {
+                if ((*source)[k] == '"') {
+                    buf = buf + (*source)[k];
+                    chunks.emplace_back(buf);
                     break;
-                } else if (source[k + 1] > source.size()) {
+                } else if ((*source)[k + 1] > source->size()) {
                     //! Log error
                 }
                 buf = buf + '"';
@@ -37,44 +40,43 @@ std::vector<std::string> tokenizing::splitString(std::string& source) {
         else if (utils::isDelimiter(
                      ch)) {  // split the strings based off some parameters.
             if (!buffer.empty()) {
-                chunks.push_back(buffer);  // push the buffer
-                buffer.clear();
+                chunks.emplace_back(std::move(buffer));  // push the buffer
             }
-            chunks.push_back(std::string(1, ch));  // push the actual delimiter
+            chunks.emplace_back(
+                std::string(1, ch));  // push the actual delimiter
         }
 
         else if (ch == ' ') {
             if (!buffer.empty()) {
-                chunks.push_back(buffer);
-                buffer.clear();
+                chunks.emplace_back(std::move(buffer));
             }
         }
 
-        else if (ch == '#' && i + 1 < source.size() && source[i + 1] == '#' &&
-                 i + 2 < source.size() && source[i + 2] == '#') {
+        else if (ch == '#' && i + 1 < source->size() &&
+                 (*source)[i + 1] == '#' && i + 2 < source->size() &&
+                 (*source)[i + 2] == '#') {
             if (!buffer.empty()) {
-                chunks.push_back(buffer);
-                buffer.clear();
+                chunks.emplace_back(std::move(buffer));
             }
             i += 3;  // skip first 3 hashtags
-            while (i + 2 < source.size() &&
-                   !(source[i] == '#' && source[i + 1] == '#' &&
-                     source[i + 2] == '#')) {
+            while (i + 2 < source->size() &&
+                   !((*source)[i] == '#' && (*source)[i + 1] == '#' &&
+                     (*source)[i + 2] == '#')) {
                 i++;
             }
-            if (i + 2 >= source.size()) {
+            if (i + 2 >= source->size()) {
                 //! Implement error handling
             }
             i += 3;  // skip last 3 hashtags
         }
 
-        else if (ch == '#' && i + 1 < source.size() && source[i + 1] == '#') {
+        else if (ch == '#' && i + 1 < source->size() &&
+                 (*source)[i + 1] == '#') {
 
             if (!buffer.empty()) {
-                chunks.push_back(buffer);
-                buffer.clear();
+                chunks.emplace_back(std::move(buffer));
             }
-            while (i < source.size() && source[i] != '\n') {
+            while (i < source->size() && (*source)[i] != '\n') {
                 i++;
             }
             continue;
@@ -86,13 +88,15 @@ std::vector<std::string> tokenizing::splitString(std::string& source) {
     }
 
     if (!buffer.empty()) {
-        chunks.push_back(buffer);
+        chunks.emplace_back(std::move(buffer));
     }
 
     return chunks;
 }
 
-std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
+std::vector<Token> tokenizing::tokenize(
+    const std::unique_ptr<std::string>& sourceCode) {
+
     std::vector<Token> tokens;
     std::vector<std::string> src = splitString(sourceCode);
     line = 1;  // Reset each function call
@@ -100,8 +104,10 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
     TokenProcessor process;
 
     while (!src.empty()) {
+
         Token tempTok = process.processTokenVal(&src.front(), line, column);
         auto* str_ptr = std::get_if<std::string>(&tempTok.value_);
+
         if (src.front().length() < 1) {
             switch (src.front()[0]) {
                 // ----------------------
@@ -180,7 +186,7 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
                     column++;
                     break;
                 // ---------------------------
-                // OTHER OPERATORS:S
+                // OTHER OPERATORS:
                 // ---------------------------
                 case '-':
                     tokens.emplace_back(TokenType::Minus, src.front()[0], line,
@@ -208,6 +214,12 @@ std::vector<Token> tokenizing::tokenize(std::string& sourceCode) {
                     break;
                 case '/':
                     tokens.emplace_back(TokenType::Slash, src.front()[0], line,
+                                        column);
+                    utils::shift(src);
+                    column++;
+                    break;
+                case '%':
+                    tokens.emplace_back(TokenType::Modulo, src.front()[0], line,
                                         column);
                     utils::shift(src);
                     column++;

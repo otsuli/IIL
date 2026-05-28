@@ -51,6 +51,7 @@ enum TokenType {
     colon,
     equal,
     FloorDiv,
+    Modulo,
 };
 
 struct Token {
