@@ -19,6 +19,7 @@ std::vector<std::string> tokenizing::splitString(
 
     for (int i = 0; i < source->size(); i++) {
         char ch = (*source)[i];
+        // For strings
         if (ch == '"') {
             std::string buf;
             buf.push_back(ch);
