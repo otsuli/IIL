@@ -29,6 +29,6 @@ jobs:
 
       - name: Run tests
         run: |
-          ./build/IIL_lexer_comparison_operators_test
-          ./build/IIL_lexer_arithmetic_operators_test
-          ./build/IIL_lexer_string_test
+          ./build/tests/IIL_lexer_comparison_operators_test
+          ./build/tests/IIL_lexer_arithmetic_operators_test
+          ./build/tests/IIL_lexer_string_test
