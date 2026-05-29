@@ -93,7 +93,7 @@ With IIL
 
 Read these:
 
-- [Syntax](docs/SYNTAX.md)
+- [Syntax](docs/DOCUMENTATION.MD)
 
 ## Contributing
 
