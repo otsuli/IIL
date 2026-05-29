@@ -72,7 +72,7 @@ explode myException("An error happened during this chunk", 69) {
 ### Sometimes you want a certain function to throw a custom error: 
 First define the exception: 
 ```
-exception myException = "an error was throws during this function"
+iexception myException = "an error was throws during this function"
 ```
 Call the function and use the name of your exception: 
 ```
