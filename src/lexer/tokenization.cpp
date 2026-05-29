@@ -21,17 +21,18 @@ std::vector<std::string> tokenizing::splitString(
         char ch = (*source)[i];
         if (ch == '"') {
             std::string buf;
-            buf = buf + (*source)[i];
-            for (int k = i; i < source->size(); ++k) {
+            buf.push_back(ch);
+            for (int k = i + 1; i < source->size(); k++) {
                 if ((*source)[k] == '"') {
-                    buf = buf + (*source)[k];
+                    buf.push_back((*source)[k]);
                     chunks.emplace_back(buf);
                     break;
                 } else if ((*source)[k + 1] > source->size()) {
                     //! Log error
                 }
-                buf = buf + '"';
+                buf.push_back((*source)[k]);
             }
+            break;
         }
 
         else if (utils::isDelimiter(
