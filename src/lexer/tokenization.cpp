@@ -1,10 +1,10 @@
-#include "tokenization.hpp"
+#include "lexer/tokenization.hpp"
 #include <memory>
 #include <string>
 #include <variant>
 #include <vector>
-#include "stringPool.hpp"
-#include "tokens.hpp"
+#include "lexer/stringPool.hpp"
+#include "lexer/tokens.hpp"
 #include "utils/isDelimiter.hpp"
 #include "utils/isNumber.hpp"
 #include "utils/isSkippable.hpp"
