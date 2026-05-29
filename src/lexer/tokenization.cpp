@@ -1,14 +1,14 @@
-#include "lexer/tokenization.hpp"
+#include "tokenization.hpp"
 #include <memory>
 #include <string>
 #include <variant>
 #include <vector>
-#include "lexer/stringPool.hpp"
-#include "lexer/tokens.hpp"
-#include "lexer/utils/isDelimiter.hpp"
-#include "lexer/utils/isNumber.hpp"
-#include "lexer/utils/isSkippable.hpp"
-#include "lexer/utils/shift.hpp"
+#include "stringPool.hpp"
+#include "tokens.hpp"
+#include "utils/isDelimiter.hpp"
+#include "utils/isNumber.hpp"
+#include "utils/isSkippable.hpp"
+#include "utils/shift.hpp"
 
 std::vector<std::string> tokenizing::splitString(
     const std::unique_ptr<std::string>& source) {
@@ -247,7 +247,8 @@ std::vector<Token> tokenizing::tokenize(
                     break;
             }
         }
-
+        // Checking for a second quote is done during split string.
+        // We shouldn't need to worry about it here...
         else if (src.front()[0] == '"') {
             tokens.emplace_back(Token::make_token(TokenType::String,
                                                   src.front(), line, column));

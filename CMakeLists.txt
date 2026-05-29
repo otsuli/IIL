@@ -19,9 +19,26 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(FetchContent)
 FetchContent_Declare(
   googletest
-  URL https://github.com/google/googletest/archive/refs/tags/v1.14.0.zip
+  URL https://github.com/google/googletest/archive/refs/tags/v1.17.0.zip
 )
 FetchContent_MakeAvailable(googletest)
+
+# -----------------------------------
+# LEXER LIBRARY:
+# -----------------------------------
+
+file(GLOB_RECURSE IIL_LEXER_SRC CONFIGURE_DEPENDS
+    src/lexer/*.cpp
+)
+
+add_library(IIL_lexer STATIC
+    ${IIL_LEXER_SRC}
+)
+
+target_include_directories(IIL_lexer PUBLIC
+    ${CMAKE_SOURCE_DIR}/include/IIL
+    ${CMAKE_SOURCE_DIR}/src/lexer
+)
 
 # -----------------------------------
 # MAIN: 
@@ -35,10 +52,12 @@ add_executable(IIL
     ${IIL_SRC}
 )
 
+target_link_libraries(IIL PRIVATE IIL_lexer)
+
 target_include_directories(IIL PRIVATE
     ${CMAKE_SOURCE_DIR}/include/IIL
-    ${CMAKE_SOURCE_DIR}/src
 )
+
 # -------------------------------------
 # REPL: 
 # -------------------------------------
@@ -67,52 +86,14 @@ target_include_directories(IIL_REPL PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/stdlib/REPL/src
 )
 
-target_link_libraries(IIL_REPL PRIVATE ascii_art)
+target_link_libraries(IIL_REPL PRIVATE
+    ascii_art
+    IIL_lexer
+)
 
-# ------------------------------------
-# TESTING: 
-# ------------------------------------
+# -----------------------------------
+# TESTING:
+# -----------------------------------
 
 enable_testing()
-
-# ------------------------------------
-# LEXER TESTS:
-# ------------------------------------
-
-file(GLOB_RECURSE LEXER_TEST_SRC CONFIGURE_DEPENDS
-    src/lexer/*.cpp
-)
-# -----------------------------------
-# ARITHMETIC:
-# -----------------------------------
-
-add_executable(IIL_lexer_arithmetic_operators_test
-    tests/lexer_tests/arithmeticOperators.cpp
-    ${LEXER_TEST_SRC}
-)
-target_link_libraries(IIL_lexer_arithmetic_operators_test gtest_main)
-
-target_include_directories(IIL_lexer_arithmetic_operators_test PRIVATE
-    ${CMAKE_SOURCE_DIR}/include/IIL
-    ${CMAKE_SOURCE_DIR}/src
-)
-
-add_test(NAME lexer_test_arithmetic COMMAND IIL_lexer_arithmetic_operators_test)
-
-# --------------------------------
-# COMPARISON: 
-# --------------------------------
-
-add_executable(IIL_lexer_comparison_operators_test
-    tests/lexer_tests/comparisonOperators.cpp
-    ${LEXER_TEST_SRC}
-)
-target_link_libraries(IIL_lexer_comparison_operators_test gtest_main)
-
-target_include_directories(IIL_lexer_comparison_operators_test PRIVATE
-    ${CMAKE_SOURCE_DIR}/include/IIL
-    ${CMAKE_SOURCE_DIR}/src
-)
-
-add_test(NAME lexer_test_comparison COMMAND IIL_lexer_comparison_operators_test)
-
+add_subdirectory(tests)
