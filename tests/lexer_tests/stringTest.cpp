@@ -12,7 +12,7 @@ TEST(lexerTests, HandlesStrings) {
     // break LexerTest_BasicTokens_Test::TestBody
     // run --gtest_filter=lexerTests.HandlesStrings
 
-    const auto string = std::make_unique<std::string>("\"n\"");
+    const auto string = std::make_unique<std::string>("\"This is a string\"");
     const u16 expected_line = 1;
     const u16 expected_column = 1;
 
