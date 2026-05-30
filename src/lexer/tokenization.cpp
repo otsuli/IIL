@@ -288,15 +288,11 @@ std::vector<Token> tokenizing::tokenize(
             utils::shift(src);
         }
 
-        else if (str_ptr) {
-            if (!str_ptr->empty()) {
-                if (tempTok != null::nullToken) {
-                    tokens.emplace_back(Token::make_token(
-                        tempTok.type_, tempTok.value_, line, column));
-                    column++;
-                    utils::shift(src);
-                }
-            }
+        else if (str_ptr && !str_ptr->empty() && tempTok != null::nullToken) {
+            tokens.emplace_back(
+                Token::make_token(tempTok.type_, tempTok.value_, line, column));
+            column++;
+            utils::shift(src);
         }
 
         else {
@@ -304,7 +300,6 @@ std::vector<Token> tokenizing::tokenize(
                 TokenType::Identifier, utils::shift(src), line, column));
 
             column++;
-            utils::shift(src);
         }
     }
 
