@@ -80,3 +80,17 @@ target_link_libraries(IIL_lexer_identifier_test PRIVATE
 
 add_test(NAME lexer_test_identifier COMMAND IIL_lexer_identifier_test)
 
+# ---------------
+# DELIMITERS:
+# ---------------
+
+add_executable(IIL_lexer_delimiter_test
+    lexer_tests/delimiterTest.cpp
+)
+
+target_link_libraries(IIL_lexer_delimiter_test PRIVATE
+    GTest::gtest_main
+    IIL_lexer
+)
+
+add_test(NAME lexer_test_delimiter COMMAND IIL_lexer_delimiter_test)

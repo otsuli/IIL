@@ -105,4 +105,5 @@ add_custom_target(all_tests DEPENDS
     IIL_lexer_string_test
     IIL_lexer_number_test
     IIL_lexer_identifier_test
+    IIL_lexer_delimiter_test
 )
