@@ -103,4 +103,5 @@ add_custom_target(all_tests DEPENDS
     IIL_lexer_arithmetic_operators_test
     IIL_lexer_comparison_operators_test
     IIL_lexer_string_test
+    IIL_lexer_number_test
 )

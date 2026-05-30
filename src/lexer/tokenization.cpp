@@ -16,11 +16,16 @@ std::vector<std::string> tokenizing::splitString(
     std::vector<std::string> chunks;
     std::string buffer;
     std::string val;
+    bool nextTokenSkippable = false;
 
     for (int i = 0; i < source->size(); i++) {
         char ch = (*source)[i];
+        if (nextTokenSkippable) {
+            continue;
+        }
+
         // For strings
-        if (ch == '"') {
+        else if (ch == '"') {
             std::string buf;
             buf.push_back(ch);
             for (int k = i + 1; i < source->size(); k++) {
@@ -48,6 +53,7 @@ std::vector<std::string> tokenizing::splitString(
         else if (ch == ' ') {
             if (!buffer.empty()) {
                 chunks.emplace_back(std::move(buffer));
+                nextTokenSkippable = true;
             }
         }
 
@@ -258,6 +264,18 @@ std::vector<Token> tokenizing::tokenize(
             utils::shift(src);
         }
 
+        else if (utils::isNumber(src.front())) {
+            int number;
+            int i = 0;
+            while (!src.empty() && utils::isNumber(src.front())) {
+                number += src.front()[i] - '0';  // Remove the 0 from the ascii
+                i++;
+            }
+
+            tokens.emplace_back(
+                Token::make_token(TokenType::Number, number, line, column));
+        }
+
         else if (str_ptr) {
             if (!str_ptr->empty()) {
                 if (tempTok != null::nullToken) {
@@ -267,21 +285,6 @@ std::vector<Token> tokenizing::tokenize(
                     utils::shift(src);
                 }
             }
-        }
-
-        else if (utils::isSkippable(src.front()[0])) {
-            utils::shift(src);
-        }
-
-        else if (utils::isNumber(src.front())) {
-            int number;
-
-            while (!src.empty() && utils::isNumber(src.front())) {
-                number += std::stoi(utils::shift(src));
-            }
-
-            tokens.emplace_back(
-                Token::make_token(TokenType::Number, number, line, column));
         }
 
         else {
