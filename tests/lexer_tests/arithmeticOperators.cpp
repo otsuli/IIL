@@ -77,7 +77,7 @@ TEST(lexerTests, HandlesDivisionOperator) {
 
 TEST(lexerTests, HandlesMultiplicationOperator) {
     // GDB COMMANDS :/ (for when you need to debug *cry* )
-    // break LexerTest_BasicTokens_Test::TestBody
+    // break LexerTest_BasicTokens_Test::TestBody()
     // run --gtest_filter=lexerTests.HandlesMultiplicationOperator
 
     const auto op = std::make_unique<std::string>("*");

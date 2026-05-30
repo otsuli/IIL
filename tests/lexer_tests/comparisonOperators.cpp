@@ -9,7 +9,7 @@
 
 TEST(lexerTests, HandlesGreaterOperator) {
     // GDB COMMANDS :/ (for when you need to debug *cry* )
-    // break LexerTest_BasicTokens_Test::TestBody
+    // break LexerTest_BasicTokens_Test::TestBody()
     // run --gtest_filter=lexerTests.HandlesGreaterOperator
 
     const auto op = std::make_unique<std::string>(">");

@@ -1,6 +1,9 @@
 #include "lexer/tokenization.hpp"
+#include <charconv>
 #include <memory>
 #include <string>
+#include <system_error>
+#include <utility>
 #include <variant>
 #include <vector>
 #include "lexer/stringPool.hpp"
@@ -266,14 +269,23 @@ std::vector<Token> tokenizing::tokenize(
 
         else if (utils::isNumber(src.front())) {
             int number;
-            int i = 0;
-            while (!src.empty() && utils::isNumber(src.front())) {
-                number += src.front()[i] - '0';  // Remove the 0 from the ascii
-                i++;
+            // src.front().data() is a pointer to the first character of the
+            // string src.front().data() + user_input.size() calculates the
+            // memory address exactly one byte past the last char of the string
+            // result is the destination variable
+            auto [ptr, ec] = std::from_chars(
+                src.front().data(), src.front().data() + src.front().size(),
+                number);
+            if (ec == std::errc::result_out_of_range) {
+                //! Handle error
+            } else {
+                Token tok =
+                    Token::make_token(TokenType::Number, number, line, column);
+                tokens.emplace_back(tok);
             }
 
-            tokens.emplace_back(
-                Token::make_token(TokenType::Number, number, line, column));
+            column++;
+            utils::shift(src);
         }
 
         else if (str_ptr) {
