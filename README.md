@@ -27,11 +27,13 @@ Single line comments:
 ```
 Multi-line comments: 
 ```
-### This 
-### is 
-### a 
-### multi-line
-### comment
+### 
+This 
+is 
+a 
+multi-line
+comment
+###
 ```
 
 ## Dynamic Types
