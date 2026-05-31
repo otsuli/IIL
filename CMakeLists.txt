@@ -14,21 +14,22 @@ if(MINGW)
   set(CMAKE_C_USE_RESPONSE_FILE_FOR_INCLUDES OFF)
 endif()
 
+set(BENCHMARK_ENABLE_TESTING
+    OFF
+    CACHE BOOL "" FORCE)
+set(BENCHMARK_ENABLE_GTEST_TESTS
+    OFF
+    CACHE BOOL "" FORCE)
+set(BENCHMARK_ENABLE_LIBPFM
+    OFF
+    CACHE BOOL "" FORCE)
+
+add_subdirectory(external/googletest)
+add_subdirectory(external/benchmark)
+
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/refs/tags/v1.17.0.zip)
-
-FetchContent_Declare(
-  googlebenchmark
-  GIT_REPOSITORY https://github.com/google/benchmark.git
-  GIT_TAG main # need main for benchmark::benchmark
-)
-FetchContent_MakeAvailable(googletest googlebenchmark)
 
 # -----------------------------------
 # LEXER LIBRARY:

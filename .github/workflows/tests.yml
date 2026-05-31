@@ -25,4 +25,4 @@ jobs:
         run: cmake --build build --target all_tests
 
       - name: Run tests
-        run: ctest --test-dir build -C Debug --output-on-failure
+        run: ctest --test-dir build --output-on-failure
