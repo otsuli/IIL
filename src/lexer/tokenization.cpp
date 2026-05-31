@@ -19,16 +19,12 @@ std::vector<std::string> tokenizing::splitString(
     std::vector<std::string> chunks;
     std::string buffer;
     std::string val;
-    bool nextTokenSkippable = false;
 
     for (int i = 0; i < source->size(); i++) {
         char ch = (*source)[i];
-        if (nextTokenSkippable) {
-            continue;
-        }
 
         // For strings
-        else if (ch == '"') {
+        if (ch == '"') {
             std::string buf;
             buf.push_back(ch);
             for (int k = i + 1; i < source->size(); k++) {
@@ -56,7 +52,6 @@ std::vector<std::string> tokenizing::splitString(
         else if (ch == ' ') {
             if (!buffer.empty()) {
                 chunks.emplace_back(std::move(buffer));
-                nextTokenSkippable = true;
             }
         }
 

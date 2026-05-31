@@ -83,3 +83,13 @@ target_link_libraries(IIL_lexer_keyword_test PRIVATE GTest::gtest_main
                                                      IIL_lexer)
 
 add_test(NAME lexer_test_keyword COMMAND IIL_lexer_keyword_test)
+
+# ------------
+# WHITESPACE:
+# ------------
+add_executable(IIL_lexer_whitespace_test lexer_tests/handlesWhiteSpace.cpp)
+
+target_link_libraries(IIL_lexer_whitespace_test PRIVATE GTest::gtest_main
+                                                        IIL_lexer)
+
+add_test(NAME lexer_test_whitespace COMMAND IIL_lexer_whitespace_test)
