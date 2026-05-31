@@ -112,7 +112,7 @@ add_test(NAME lexer_test_singleLineComments
 # -------------------
 
 add_executable(IIL_lexer_multi_line_comments_test
-               lexer_tests/handlesMultiLIneComments.cpp)
+               lexer_tests/handlesMultiLineComments.cpp)
 
 target_link_libraries(IIL_lexer_multi_line_comments_test
                       PRIVATE GTest::gtest_main IIL_lexer)
