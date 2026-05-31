@@ -58,9 +58,9 @@ Token TokenProcessor::processPooledString(const std::string* str, u16 line,
     return null::nullToken;
 }
 
-Token TokenProcessor::processTokenVal(const std::string* command, u16 line,
+Token TokenProcessor::processTokenVal(const std::string& command, u16 line,
                                       u16 column) {
-    const std::string* pooledString = stringPool.intern(*command);
-    Token token = processPooledString(pooledString, line, column);
+    const std::string* pooledString = stringPool.intern(command);
+    Token token = processPooledString(*&pooledString, line, column);
     return token;
 }

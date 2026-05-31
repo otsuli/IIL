@@ -28,6 +28,6 @@ class TokenProcessor {
     Token processPooledString(const std::string* str, u16 line, u16 column);
 
    public:
-    Token processTokenVal(const std::string* command, u16 line, u16 column);
-
+    Token processTokenVal(const std::string& command, u16 line, u16 column);
+    TokenProcessor() { initKeywordMap(); }
 };  // class CommandProcessor

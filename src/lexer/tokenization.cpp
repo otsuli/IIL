@@ -113,7 +113,7 @@ std::vector<Token> tokenizing::tokenize(
 
     while (!src.empty()) {
 
-        Token tempTok = process.processTokenVal(&src.front(), line, column);
+        Token tempTok = process.processTokenVal(src.front(), line, column);
         auto* str_ptr = std::get_if<std::string>(&tempTok.value_);
 
         if (src.front().length() < 2) {
