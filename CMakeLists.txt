@@ -14,18 +14,31 @@ if(MINGW)
   set(CMAKE_C_USE_RESPONSE_FILE_FOR_INCLUDES OFF)
 endif()
 
+set(gtest_force_shared_crt
+    ON
+    CACHE BOOL "" FORCE)
+set(BUILD_TESTING
+    OFF
+    CACHE BOOL "" FORCE)
+set(INSTALL_GTEST
+    OFF
+    CACHE BOOL "" FORCE)
+
 set(BENCHMARK_ENABLE_TESTING
     OFF
     CACHE BOOL "" FORCE)
 set(BENCHMARK_ENABLE_GTEST_TESTS
     OFF
     CACHE BOOL "" FORCE)
-set(BENCHMARK_ENABLE_LIBPFM
-    OFF
-    CACHE BOOL "" FORCE)
 
+# Now add the directories safely
 add_subdirectory(external/googletest)
 add_subdirectory(external/benchmark)
+
+set(BUILD_TESTING
+    ON
+    CACHE BOOL "" FORCE)
+enable_testing()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 23)
