@@ -104,4 +104,6 @@ add_custom_target(
           IIL_lexer_identifier_test
           IIL_lexer_delimiter_test
           IIL_lexer_keyword_test
-          IIL_lexer_whitespace_test)
+          IIL_lexer_whitespace_test
+          IIL_lexer_single_line_comments_test
+          IIL_lexer_multi_line_comments_test)

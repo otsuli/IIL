@@ -93,3 +93,29 @@ target_link_libraries(IIL_lexer_whitespace_test PRIVATE GTest::gtest_main
                                                         IIL_lexer)
 
 add_test(NAME lexer_test_whitespace COMMAND IIL_lexer_whitespace_test)
+
+# --------------------
+# Single Line Comments
+# --------------------
+
+add_executable(IIL_lexer_single_line_comments_test
+               lexer_tests/handlesSingleLineComments.cpp)
+
+target_link_libraries(IIL_lexer_single_line_comments_test
+                      PRIVATE GTest::gtest_main IIL_lexer)
+
+add_test(NAME lexer_test_singleLineComments
+         COMMAND IIL_lexer_single_line_comments_test)
+
+# -------------------
+# Multi-line Comments
+# -------------------
+
+add_executable(IIL_lexer_multi_line_comments_test
+               lexer_tests/handlesMultiLIneComments.cpp)
+
+target_link_libraries(IIL_lexer_multi_line_comments_test
+                      PRIVATE GTest::gtest_main IIL_lexer)
+
+add_test(NAME lexer_test_multi_line_comments
+         COMMAND IIL_lexer_multi_line_comments_test)
