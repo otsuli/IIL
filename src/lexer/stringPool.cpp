@@ -39,6 +39,7 @@ void TokenProcessor::initKeywordMap() {
     add("ifunc", TokenType::ifunc);
     add("ireturn", TokenType::ireturn);
     add("True", TokenType::True);
+    add("iexception", TokenType::iexception);
     add("False", TokenType::False);
     add("NULL", TokenType::NIL);
     add("ior", TokenType::ior);

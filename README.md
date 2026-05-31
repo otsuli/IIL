@@ -40,27 +40,27 @@ comment
 IIL is dynamically typed. Meaning that you don't need to specify the type of a variable. Types are determined at runtime.
 
 ## Custom Errors
-IIL makes producing custom exceptions very simple. To throw a custom exception you must first define an exception: 
+IIL makes producing custom exceptions very simple. To throw a custom exception you must first define an exception using the ```iexception``` keyword: 
 ```
 iexception myException {
     message 
     errorCode
 }
 ```
-Then to throw the exception you use the ```explode``` keyword:
+Then to throw the exception you use the ```iexplode``` keyword:
 ```
-explode(myException("An error happened during execution", 67))
+iexplode(myException("An error happened during execution", 67))
 ```
 You can also add personalized messages for a certain throw: 
 
 ```
-explode(myException("An error happened during execution", 67), "this is a custom message")
+iexplode(myException("An error happened during execution", 67), "this is a custom message")
 ```
 
 ### Sometimes you want the interpreter to throw your own messages for syntax errors and bugs:
-To throw a custom error for the entire duration of a certain code snippet it can be done like this using the ```explode``` keyword: 
+To throw a custom error for the entire duration of a certain code snippet it can be done like this using the ```iexplode``` keyword: 
 ```
-explode myException("An error happened during this chunk", 69) {
+iexplode myException("An error happened during this chunk", 69) {
     ifunc foo(): 
         iprint("foo")
     

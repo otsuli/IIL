@@ -102,4 +102,6 @@ add_custom_target(
           IIL_lexer_string_test
           IIL_lexer_number_test
           IIL_lexer_identifier_test
-          IIL_lexer_delimiter_test)
+          IIL_lexer_delimiter_test
+          IIL_lexer_keyword_test
+          )

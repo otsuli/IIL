@@ -72,3 +72,14 @@ target_link_libraries(IIL_lexer_delimiter_test PRIVATE GTest::gtest_main
                                                        IIL_lexer)
 
 add_test(NAME lexer_test_delimiter COMMAND IIL_lexer_delimiter_test)
+
+# --------------
+# KEYWORDS:
+# --------------
+
+add_executable(IIL_lexer_keyword_test lexer_tests/keywordTest.cpp)
+
+target_link_libraries(IIL_lexer_keyword_test PRIVATE GTest::gtest_main
+                                                     IIL_lexer)
+
+add_test(NAME lexer_test_keyword COMMAND IIL_lexer_keyword_test)

@@ -52,8 +52,8 @@ enum TokenType {
     equal,
     FloorDiv,
     Modulo,
+    iexception,
 };
-
 struct Token {
     const TokenType type_;
     const std::variant<std::string, int> value_;
