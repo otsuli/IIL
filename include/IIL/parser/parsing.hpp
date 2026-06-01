@@ -30,7 +30,7 @@ class Parser {
 };  // Class: Parser
 
 class expressionParsing : public Parser {
-    unsigned int current = 0;
+    u32 current = 0;
 
     Expr* parse();
 

@@ -9,10 +9,10 @@ using Object = std::variant<double, std::string, bool, std::nullptr_t, Token,
                             Expr, UnaryExpr, Grouping, Literal>;
 
 class Interpreter {
-    Object evaluate(Expr expr);
+    Object evaluate(Expr* expr);
 
    public:
-    Object visitLiteralExpr(Literal expr);
-    Object visitGroupingExpr(Grouping expr);
-    Object visitUnaryExpr(UnaryExpr expr);
+    Object visitLiteralExpr(Literal* expr);
+    Object visitGroupingExpr(Grouping* expr);
+    Object visitUnaryExpr(UnaryExpr* expr);
 };
