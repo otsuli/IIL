@@ -9,7 +9,7 @@
 
 TEST(lexerTests, HandlesSingleLineComments) {
     // GDB COMMANDS :/ (for when you need to debug *cry* )
-    // break LexerTest_BasicTokens_Test::TestBody
+    // break LexerTest_HandlesSingleLineComments_Test::TestBody
     // run --gtest_filter=lexerTests.HandlesSingleLineComments
 
     const auto string = std::make_unique<std::string>(

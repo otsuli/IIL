@@ -30,14 +30,15 @@ std::vector<std::string> tokenizing::splitString(
             for (int k = i + 1; i < source->size(); k++) {
                 if ((*source)[k] == '"') {
                     buf.push_back((*source)[k]);
-                    chunks.emplace_back(buf);
+                    i += buf.size();
+                    chunks.emplace_back(std::move(buf));
                     break;
                 } else if ((*source)[k + 1] > source->size()) {
                     //! Log error
                 }
                 buf.push_back((*source)[k]);
             }
-            break;
+            goto next_token;
         }
 
         else if (utils::isDelimiter(
@@ -88,6 +89,8 @@ std::vector<std::string> tokenizing::splitString(
         else {
             buffer += ch;
         }
+
+    next_token:
     }
 
     if (!buffer.empty()) {

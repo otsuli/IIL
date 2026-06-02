@@ -119,3 +119,16 @@ target_link_libraries(IIL_lexer_multi_line_comments_test
 
 add_test(NAME lexer_test_multi_line_comments
          COMMAND IIL_lexer_multi_line_comments_test)
+
+# --------------------
+# Delimiter Seperation
+# --------------------
+
+add_executable(IIL_lexer_delimiter_seperation_test
+               lexer_tests/toksSeperatedByDelimiterTest.cpp)
+
+target_link_libraries(IIL_lexer_delimiter_seperation_test
+                      PRIVATE GTest::gtest_main IIL_lexer)
+
+add_test(NAME lexer_test_delimiter_seperation
+         COMMAND IIL_lexer_delimiter_seperation_test)
