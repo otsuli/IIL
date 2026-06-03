@@ -16,7 +16,7 @@ TEST(lexerTests, HandlesDelimiterSeperation) {
     const u16 expected_line = 1;
     const u16 expected_column = 1;
 
-    Token tok1 = Token::make_token(TokenType::String, "Yes", expected_line,
+    Token tok1 = Token::make_token(TokenType::String, "\"Yes\"", expected_line,
                                    expected_column);
     Token tok2 = Token::make_token(TokenType::comma, ",", expected_line,
                                    expected_column + 1);
