@@ -10,6 +10,7 @@ using Object = std::variant<double, std::string, bool, std::nullptr_t, Token,
 
 class Interpreter {
     Object evaluate(Expr* expr);
+    bool isTruthy(Object object);
 
    public:
     Object visitLiteralExpr(Literal* expr);

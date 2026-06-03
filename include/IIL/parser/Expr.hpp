@@ -36,4 +36,8 @@ struct Literal : public Expr {
     Literal() : value_(null::nullToken) {}
 };
 struct Grouping : public Expr {
-};  // grouping may not need to inherit from Expr I'm not sure...
+    // Contained expression is the inner node for the exprtession contained
+    // inside the parentheses
+    Expr* contained_expression_;
+    Grouping() : contained_expression_(nullptr) {}
+};
