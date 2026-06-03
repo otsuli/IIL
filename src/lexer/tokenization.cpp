@@ -26,11 +26,12 @@ std::vector<std::string> tokenizing::splitString(
         // For strings
         if (ch == '"') {
             std::string buf;
-            buf.push_back(ch);
+            buf.push_back('"');
+            std::cout << "size is: " << buf.size() << '\n';
             for (int k = i + 1; i < source->size(); k++) {
                 if ((*source)[k] == '"') {
-                    buf.push_back((*source)[k]);
-                    i += buf.size();
+                    buf.push_back('"');
+                    i += buf.size() - 1;
                     chunks.emplace_back(std::move(buf));
                     break;
                 } else if ((*source)[k + 1] > source->size()) {
