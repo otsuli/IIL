@@ -1,6 +1,24 @@
 #include "interpreter/interpreter.hpp"
+#include "exceptions/evalTime.hpp"
 #include "lexer/tokens.hpp"
 #include "parser/expr.hpp"
+
+void Interpreter::checkNumberOperands(const Token& oper,
+                                      const Object& left_operand,
+                                      const Object& right_operand) {
+    if (std::holds_alternative<double>(left_operand) &&
+        std::holds_alternative<double>(right_operand)) {
+        return;
+    }
+    throw evalTimeError(oper, "Operands must be numbers");
+}
+
+void Interpreter::checkNumberOperand(const Token& oper, const Object& operand) {
+    if (std::holds_alternative<double>(operand)) {
+        return;
+    }
+    throw evalTimeError(oper, "Operand type must be a number");
+}
 
 bool Interpreter::isEqual(const Object* a, const Object* b) {
     if (a == nullptr && b == nullptr)
@@ -27,44 +45,49 @@ Object Interpreter::visitBinaryExpr(BinaryExpr* expr) {
 
                 return std::get<std::string>(left) +
                        std::get<std::string>(right);
-
-            } else {
-                //! Throw
             }
+            throw evalTimeError(expr->op_,
+                                "Operands must be two numbers or two strings");
             break;
         case Minus:
+            checkNumberOperands(expr->op_, left, right);
             return std::get<double>(left) - std::get<double>(right);
             break;
         case Slash:
+            checkNumberOperands(expr->op_, left, right);
             return std::get<double>(left) / std::get<double>(right);
             break;
         case Star:
+            checkNumberOperands(expr->op_, left, right);
             return std::get<double>(left) * std::get<double>(right);
             break;
         case Greater:
+            checkNumberOperands(expr->op_, left, right);
             return std::get<double>(left) > std::get<double>(right);
             break;
         case GreaterEqual:
+            checkNumberOperands(expr->op_, left, right);
             return std::get<double>(left) >= std::get<double>(right);
             break;
         case Less:
+            checkNumberOperands(expr->op_, left, right);
             return std::get<double>(left) < std::get<double>(right);
             break;
         case LessEqual:
+            checkNumberOperands(expr->op_, left, right);
             return std::get<double>(left) <= std::get<double>(right);
             break;
         case BangEqual:
-            return !isEqual(left, right);
+            return !isEqual(&left, &right);
             break;
         case EqualEqual:
-            return isEqual(left, right);
+            return isEqual(&left, &right);
             break;
         default:
             //! Throw or smth
             break;
-
-            return nullptr;
     }
+    return nullptr;
 }
 
 bool Interpreter::isTruthy(Object* object) {
@@ -121,6 +144,7 @@ Object Interpreter::visitUnaryExpr(UnaryExpr* expr) {
     Object right = evaluate(expr->right_);
     switch (expr->op_.type_) {
         case Minus:
+            checkNumberOperand(expr->op_, right);
             return static_cast<double>(std::get<double>(right));
             break;
         case Bang:
