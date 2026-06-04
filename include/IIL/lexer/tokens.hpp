@@ -3,7 +3,9 @@
 #include <iostream>
 #include <unordered_set>
 #include <variant>
+#include "exceptions/lexTime.hpp"
 #include "types.hpp"
+
 enum TokenType {
     Number,
     Identifier,
@@ -58,16 +60,23 @@ struct Token {
     const TokenType type_;
     const std::variant<std::string, int> value_;
 
-    // Just in case some idiot wants to write
-    // 9,223,372,036,854,775,807
-    // Lines of code in 1 file.
     const u16 line_;
     const u16 column_;
 
     Token(TokenType type, std::variant<std::string, int> value, u16 line,
           u16 column)
         : type_(type), value_(std::move(value)), line_(line), column_(column) {}
+    Token(Token* tok)
+        : type_(tok->type_),
+          value_(tok->value_),
+          line_(tok->line_),
+          column_(tok->column_) {}
 
+    Token(const std::optional<Token>& tok)
+        : Token(tok ? *tok
+                    : throw lexerTimeError(std::nullopt,
+                                           "std::optional<Token> value not "
+                                           "found in constructor arguments")) {}
     static Token make_token(TokenType type,
                             std::variant<std::string, int> value, u16 line,
                             u16 column) {
