@@ -2,19 +2,84 @@
 #include "lexer/tokens.hpp"
 #include "parser/expr.hpp"
 
-bool Interpreter::isTruthy(Object object) {
-    if (std::holds_alternative<Token>(object)) {
-        if (std::get<Token>(object).type_ == TokenType::True) {
+bool Interpreter::isEqual(const Object* a, const Object* b) {
+    if (a == nullptr && b == nullptr)
+        return true;
+    if (a == nullptr || b == nullptr)
+        return false;
+
+    return *a == *b;
+}
+
+Object Interpreter::visitBinaryExpr(BinaryExpr* expr) {
+    Object left = evaluate(expr->left_);
+    Object right = evaluate(expr->left_);
+
+    switch (expr->op_.type_) {
+        case Plus:
+            if (std::holds_alternative<double>(left) &&
+                std::holds_alternative<double>(right)) {
+
+                return std::get<double>(left) + std::get<double>(right);
+
+            } else if (std::holds_alternative<std::string>(left) &&
+                       std::holds_alternative<std::string>(right)) {
+
+                return std::get<std::string>(left) +
+                       std::get<std::string>(right);
+
+            } else {
+                //! Throw
+            }
+            break;
+        case Minus:
+            return std::get<double>(left) - std::get<double>(right);
+            break;
+        case Slash:
+            return std::get<double>(left) / std::get<double>(right);
+            break;
+        case Star:
+            return std::get<double>(left) * std::get<double>(right);
+            break;
+        case Greater:
+            return std::get<double>(left) > std::get<double>(right);
+            break;
+        case GreaterEqual:
+            return std::get<double>(left) >= std::get<double>(right);
+            break;
+        case Less:
+            return std::get<double>(left) < std::get<double>(right);
+            break;
+        case LessEqual:
+            return std::get<double>(left) <= std::get<double>(right);
+            break;
+        case BangEqual:
+            return !isEqual(left, right);
+            break;
+        case EqualEqual:
+            return isEqual(left, right);
+            break;
+        default:
+            //! Throw or smth
+            break;
+
+            return nullptr;
+    }
+}
+
+bool Interpreter::isTruthy(Object* object) {
+    if (std::holds_alternative<Token>(*object)) {
+        if (std::get<Token>(*object).type_ == TokenType::True) {
             return true;
-        } else if (std::get<Token>(object).type_ == TokenType::False) {
+        } else if (std::get<Token>(*object).type_ == TokenType::False) {
             return false;
         }
-    } else if (std::holds_alternative<std::string>(object)) {
+    } else if (std::holds_alternative<std::string>(*object)) {
         //! Throw
-    } else if (std::holds_alternative<double>(object)) {
+    } else if (std::holds_alternative<double>(*object)) {
         //! Throw
-    } else if (std::holds_alternative<bool>(object)) {
-        switch (std::get<bool>(object)) {
+    } else if (std::holds_alternative<bool>(*object)) {
+        switch (std::get<bool>(*object)) {
             case true:
                 return true;
                 break;
@@ -22,16 +87,17 @@ bool Interpreter::isTruthy(Object object) {
                 return false;
             default:
                 //! handle
+                break;
         }
-    } else if (std::holds_alternative<std::nullptr_t>(object)) {
+    } else if (std::holds_alternative<std::nullptr_t>(*object)) {
         //! Throw
-    } else if (std::holds_alternative<Expr>(object)) {
+    } else if (std::holds_alternative<Expr>(*object)) {
         //! Throw
-    } else if (std::holds_alternative<UnaryExpr>(object)) {
+    } else if (std::holds_alternative<UnaryExpr>(*object)) {
         //! Throw
-    } else if (std::holds_alternative<Grouping>(object)) {
+    } else if (std::holds_alternative<Grouping>(*object)) {
         //! Throw
-    } else if (std::holds_alternative<Literal>(object)) {
+    } else if (std::holds_alternative<Literal>(*object)) {
         //! Throw
     }
 }
@@ -58,7 +124,7 @@ Object Interpreter::visitUnaryExpr(UnaryExpr* expr) {
             return static_cast<double>(std::get<double>(right));
             break;
         case Bang:
-            return !isTruthy(right);
+            return !isTruthy(&right);
             break;
         default:
             //! Handle
