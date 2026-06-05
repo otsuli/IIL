@@ -27,7 +27,7 @@ TEST(lexerTests, HandlesWhitespace) {
     expectedOutput->push_back(tok1);
     expectedOutput->push_back(tok2);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keywords), *expectedOutput)
         << "Handles whitespace test failed.";

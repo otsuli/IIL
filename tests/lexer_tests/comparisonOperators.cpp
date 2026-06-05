@@ -24,7 +24,7 @@ TEST(lexerTests, HandlesGreaterOperator) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(op), *expectedOutput)
         << "Handles Greater Operators test failed.";
@@ -47,7 +47,7 @@ TEST(lexerTests, HandlesLessOperator) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(op), *expectedOutput)
         << "Handles Less Operators test failed.";
@@ -70,7 +70,7 @@ TEST(lexerTests, HandlesEqualOperator) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(op), *expectedOutput)
         << "Handles Equal Operators test failed.";
@@ -93,7 +93,7 @@ TEST(lexerTests, HandlesEqualEqualOperator) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(op), *expectedOutput)
         << "Handles EqualEqual Operators test failed.";
@@ -116,7 +116,7 @@ TEST(lexerTests, HandlesNotEqualOperator) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(op), *expectedOutput)
         << "Handles NotEqual Operators test failed.";
@@ -139,7 +139,7 @@ TEST(lexerTests, HandlesGreaterEqualOperator) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(op), *expectedOutput)
         << "Handles greater equal Operators test failed.";
@@ -162,7 +162,7 @@ TEST(lexerTests, HandlesLessEqualOperator) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(op), *expectedOutput)
         << "Handles less equal Operators test failed.";

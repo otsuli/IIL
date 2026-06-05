@@ -24,7 +24,7 @@ TEST(lexerTests, HandlesKeywordIvar) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles ivar test failed.";
@@ -45,7 +45,7 @@ TEST(lexerTests, HandlesKeywordIglobal) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles iglobal test failed.";
@@ -66,7 +66,7 @@ TEST(lexerTests, HandlesKeywordIfStatement) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles if statement test failed.";
@@ -87,7 +87,7 @@ TEST(lexerTests, HandlesKeywordElseStatement) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles else statement test failed.";
@@ -108,7 +108,7 @@ TEST(lexerTests, HandlesKeywordElseIfStatement) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles elseif statement test failed.";
@@ -129,7 +129,7 @@ TEST(lexerTests, HandlesKeywordDoStatement) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles do statement test failed.";
@@ -150,7 +150,7 @@ TEST(lexerTests, HandlesKeywordIwhile) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles iwhile test failed.";
@@ -171,7 +171,7 @@ TEST(lexerTests, HandlesKeywordIend) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles iend test failed.";
@@ -192,7 +192,7 @@ TEST(lexerTests, HandlesKeywordIexit) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles iexit test failed.";
@@ -213,7 +213,7 @@ TEST(lexerTests, HandlesKeywordIfor) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles ifor test failed.";
@@ -234,7 +234,7 @@ TEST(lexerTests, HandlesKeywordIBreak) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles ibreak test failed.";
@@ -255,7 +255,7 @@ TEST(lexerTests, HandlesKeywordITry) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles itry test failed.";
@@ -276,7 +276,7 @@ TEST(lexerTests, HandlesKeywordIExcept) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles iexcept test failed.";
@@ -297,7 +297,7 @@ TEST(lexerTests, HandlesKeywordIFinally) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles ifinally test failed.";
@@ -318,7 +318,7 @@ TEST(lexerTests, HandlesKeywordIExplode) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles iexplode test failed.";
@@ -339,7 +339,7 @@ TEST(lexerTests, HandlesKeywordIFunc) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles ifunc test failed.";
@@ -360,7 +360,7 @@ TEST(lexerTests, HandlesKeywordIReturn) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles ireturn test failed.";
@@ -381,7 +381,7 @@ TEST(lexerTests, HandlesKeywordTrue) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles True test failed.";
@@ -402,7 +402,7 @@ TEST(lexerTests, HandlesKeywordIException) {
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
 
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(keyword), *expectedOutput)
         << "Handles iexception test failed.";

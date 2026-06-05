@@ -1,8 +1,36 @@
 #include "interpreter/interpreter.hpp"
+#include <utility>
 #include "exceptions/evalTime.hpp"
 #include "exceptions/internalEval.hpp"
 #include "lexer/tokens.hpp"
 #include "parser/expr.hpp"
+
+// The public interpreter API:
+void Interpreter::interpret(const Expr& expression) {
+    try {
+        const Object value = evaluate(&expression);
+        std::cout << (stringify(&value));
+    } catch (IILException& error) {
+        IIL::runtimeError(error);
+    }
+}
+
+// The private parser methods:
+std::string stringify(const Object* object) {
+    if (object == nullptr) {
+        return "nil";
+    }
+    if (std::holds_alternative<double>) {
+        std::string text = std::to_string(std::get<double>(*object));
+        const char* dotZero = ".0";
+        if (text.back() = *dotZero) {
+            text = text.substr(0, text.length() - 2);
+        }
+        return text;
+    }
+    //! Todo: fix
+    return std::to_string(*object);
+}
 
 void Interpreter::checkNumberOperands(const Token& oper,
                                       const Object& left_operand,
@@ -99,8 +127,8 @@ bool Interpreter::isTruthy(Object* object) {
             return false;
         }
     } else if (std::holds_alternative<std::string>(*object)) {
-        throw IILInternalEvalError(*object,
-                                   "Can not call isTruthy() on a string");
+        throw IILInternalEvalError(
+            *object, std::to_string("Can not call isTruthy() on a string"));
     } else if (std::holds_alternative<double>(*object)) {
         throw IILInternalEvalError(*object,
                                    "Can not call isTruthy() on a double");
@@ -115,21 +143,6 @@ bool Interpreter::isTruthy(Object* object) {
                 //! handle
                 break;
         }
-    } else if (std::holds_alternative<std::nullptr_t>(*object)) {
-        throw IILInternalEvalError(*object,
-                                   "Can not call isTruthy() on a nullptr");
-    } else if (std::holds_alternative<Expr>(*object)) {
-        throw IILInternalEvalError(*object,
-                                   "Can not call isTruthy() on an Expr");
-    } else if (std::holds_alternative<UnaryExpr>(*object)) {
-        throw IILInternalEvalError(*object,
-                                   "Can not call isTruthy() on a UnaryExpr");
-    } else if (std::holds_alternative<Grouping>(*object)) {
-        throw IILInternalEvalError(*object,
-                                   "Can not call isTruthy() on a Grouping");
-    } else if (std::holds_alternative<Literal>(*object)) {
-        throw IILInternalEvalError(*object,
-                                   "Can not call isTruthy() on a Literal");
     }
 }
 

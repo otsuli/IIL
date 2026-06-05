@@ -2,9 +2,9 @@
 #include <exception>
 #include <string>
 #include <utility>
+#include "IIL.hpp"
 #include "exceptions/exceptions.hpp"
 #include "lexer/tokens.hpp"
-#include
 
 class lexerTimeError : public IILException {
    private:

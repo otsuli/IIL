@@ -24,7 +24,7 @@ TEST(lexerTests, HandlesDelimiterSemiColon) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(delimiter), *expectedOutput)
         << "Handles SemiColon test failed";
@@ -47,7 +47,7 @@ TEST(lexerTests, HandlesDelimiterComma) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(delimiter), *expectedOutput)
         << "Handles Comma test failed";
@@ -72,7 +72,7 @@ TEST(lexerTests, HandlesDelimiterNewLine) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(delimiter), *expectedOutput)
         << "Handles NewLine test failed";
@@ -95,7 +95,7 @@ TEST(lexerTests, HandlesDelimiterColon) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(delimiter), *expectedOutput)
         << "Handles Colon test failed";
@@ -118,7 +118,7 @@ TEST(lexerTests, HandlesDelimiterOpenParen) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(delimiter), *expectedOutput)
         << "Handles OpenParen test failed";
@@ -141,7 +141,7 @@ TEST(lexerTests, HandlesDelimiterCloseParen) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(delimiter), *expectedOutput)
         << "Handles CloseParen test failed";
@@ -164,7 +164,7 @@ TEST(lexerTests, HandlesDelimiterIndent) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(delimiter), *expectedOutput)
         << "Handles Indent test failed";

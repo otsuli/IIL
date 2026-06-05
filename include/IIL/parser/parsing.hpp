@@ -22,6 +22,7 @@ class Parser {
 
 class expressionParsing : public Parser {
     u32 current = 0;
+    std::vector<Token> tokens;
 
     Expr* parse();
 
@@ -46,7 +47,6 @@ class expressionParsing : public Parser {
     Expr* factor();
     Expr* term();
     Expr* comparison();
-    std::vector<Token> tokens;
     Token advance() override;
     bool check(TokenType type);
 

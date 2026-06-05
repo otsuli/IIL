@@ -30,6 +30,7 @@ ParseError* expressionParsing::error(const Token& token,
     error->message_ = message;
     error->token_ = token;
 
+    // This is gonna be a seg fault because the pointer will hang. Fix this.
     return error;
 }
 
@@ -153,10 +154,5 @@ Expr* expressionParsing::expression() {
 }
 
 Expr* expressionParsing::parse() {
-    try {
-        return expression();
-    } catch (ParseError error) {
-        //! Handle error messages!
-        return nullptr;
-    }
+    return expression();
 }

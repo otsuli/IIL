@@ -24,7 +24,7 @@ TEST(lexerTests, HandlesPlusOperator) {
 
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(op), *expectedOutput)
         << "Handles Operators test failed.";
@@ -47,7 +47,7 @@ TEST(lexerTests, HandlesSubtractionOperator) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(op), *expectedOutput)
         << "Handles Subtraction Operators test failed.";
@@ -69,7 +69,7 @@ TEST(lexerTests, HandlesDivisionOperator) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(op), *expectedOutput)
         << "Handles Division Operators test failed.";
@@ -92,7 +92,7 @@ TEST(lexerTests, HandlesMultiplicationOperator) {
 
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(op), *expectedOutput)
         << "Handles Mutliplication Operators test failed.";
@@ -115,7 +115,7 @@ TEST(lexerTests, HandlesModuloOperator) {
 
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(op), *expectedOutput)
         << "Handles Modulo Operators test failed.";
@@ -138,7 +138,7 @@ TEST(lexerTests, HandlesFloorDivOperator) {
 
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(op), *expectedOutput)
         << "Handles FloorDiv Operators test failed.";

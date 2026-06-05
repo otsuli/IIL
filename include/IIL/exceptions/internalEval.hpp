@@ -5,8 +5,8 @@
 #include "parser/expr.hpp"
 
 class IILInternalEvalError : public std::exception {
-    using Object = std::variant<double, std::string, bool, std::nullptr_t,
-                                Token, Expr, UnaryExpr, Grouping, Literal>;
+    using Object =
+        std::variant<double, std::string, bool, std::nullptr_t, Token, Expr>;
 
    private:
     Object err_instance_object_;

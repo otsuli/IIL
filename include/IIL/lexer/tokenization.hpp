@@ -5,7 +5,7 @@
 #include <vector>
 #include "tokens.hpp"
 
-class tokenizing {
+class Tokenizing {
     unsigned int line = 1;
     unsigned int column = 1;
 

@@ -24,7 +24,7 @@ TEST(lexerTests, HandlesNumber) {
         std::make_unique<std::vector<Token>>();
     expectedOutput->push_back(tok);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(string), *expectedOutput)
         << "Handles Numbers test failed";

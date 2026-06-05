@@ -27,7 +27,7 @@ TEST(lexerTests, HandlesDelimiterSeperation) {
     expectedOutput->push_back(tok1);
     expectedOutput->push_back(tok2);
     expectedOutput->push_back(EOFTok);
-    tokenizing lexer;
+    Tokenizing lexer;
 
     EXPECT_EQ(lexer.tokenize(string), *expectedOutput)
         << "Handles Delimiter Seperation test failed.";

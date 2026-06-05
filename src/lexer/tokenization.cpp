@@ -14,7 +14,7 @@
 #include "utils/isSkippable.hpp"
 #include "utils/shift.hpp"
 
-std::vector<std::string> tokenizing::splitString(
+std::vector<std::string> Tokenizing::splitString(
     const std::unique_ptr<std::string>& source) {
 
     std::vector<std::string> chunks;
@@ -111,7 +111,7 @@ std::vector<std::string> tokenizing::splitString(
     return chunks;
 }
 
-std::vector<Token> tokenizing::tokenize(
+std::vector<Token> Tokenizing::tokenize(
     const std::unique_ptr<std::string>& sourceCode) {
 
     std::vector<Token> tokens;
