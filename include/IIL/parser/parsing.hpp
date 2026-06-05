@@ -3,19 +3,10 @@
 #include <memory>
 #include <new>
 #include <vector>
+#include "exceptions/parseTime.hpp"
 #include "lexer/tokens.hpp"
 #include "parser/expr.hpp"
 #include "parser/parsing.hpp"
-
-struct ParseError {
-    Token token_;
-    std::string message_;
-
-    ParseError() : token_(null::nullToken), message_(" ") {}
-    ParseError(Token token, std::string message)
-        : token_(token), message_(message) {}
-};
-
 class Parser {
    protected:
     Arena arena;
