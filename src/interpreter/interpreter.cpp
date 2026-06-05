@@ -1,5 +1,6 @@
 #include "interpreter/interpreter.hpp"
 #include "exceptions/evalTime.hpp"
+#include "exceptions/internalEval.hpp"
 #include "lexer/tokens.hpp"
 #include "parser/expr.hpp"
 
@@ -84,7 +85,7 @@ Object Interpreter::visitBinaryExpr(BinaryExpr* expr) {
             return isEqual(&left, &right);
             break;
         default:
-            //! Throw or smth
+            throw evalTimeError(expr->op_, "Unexpected Binary Expr");
             break;
     }
     return nullptr;
@@ -98,9 +99,11 @@ bool Interpreter::isTruthy(Object* object) {
             return false;
         }
     } else if (std::holds_alternative<std::string>(*object)) {
-        //! Throw
+        throw IILInternalEvalError(*object,
+                                   "Can not call isTruthy() on a string");
     } else if (std::holds_alternative<double>(*object)) {
-        //! Throw
+        throw IILInternalEvalError(*object,
+                                   "Can not call isTruthy() on a double");
     } else if (std::holds_alternative<bool>(*object)) {
         switch (std::get<bool>(*object)) {
             case true:
@@ -113,15 +116,20 @@ bool Interpreter::isTruthy(Object* object) {
                 break;
         }
     } else if (std::holds_alternative<std::nullptr_t>(*object)) {
-        //! Throw
+        throw IILInternalEvalError(*object,
+                                   "Can not call isTruthy() on a nullptr");
     } else if (std::holds_alternative<Expr>(*object)) {
-        //! Throw
+        throw IILInternalEvalError(*object,
+                                   "Can not call isTruthy() on an Expr");
     } else if (std::holds_alternative<UnaryExpr>(*object)) {
-        //! Throw
+        throw IILInternalEvalError(*object,
+                                   "Can not call isTruthy() on a UnaryExpr");
     } else if (std::holds_alternative<Grouping>(*object)) {
-        //! Throw
+        throw IILInternalEvalError(*object,
+                                   "Can not call isTruthy() on a Grouping");
     } else if (std::holds_alternative<Literal>(*object)) {
-        //! Throw
+        throw IILInternalEvalError(*object,
+                                   "Can not call isTruthy() on a Literal");
     }
 }
 
@@ -151,7 +159,8 @@ Object Interpreter::visitUnaryExpr(UnaryExpr* expr) {
             return !isTruthy(&right);
             break;
         default:
-            //! Handle
+            throw IILInternalEvalError(*expr,
+                                       "Unexpected type in visitUnaryExpr()");
             break;
     }
     return nullptr;

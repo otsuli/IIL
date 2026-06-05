@@ -18,14 +18,11 @@ struct BinaryExpr : public Expr {
     BinaryExpr() : left_(nullptr), right_(nullptr), op_(null::nullToken) {}
 };
 
-// TODO: finish these...
-// TODO: rename to UnaryExpr, and PrimaryExpr, and LiteralExpr etc.
 struct UnaryExpr : public Expr {
     Token op_;
     Expr* right_;
 };
 struct PrimaryExpr : public Expr {
-    // TODO: this def not correct fix this:
     Token op_;
     Expr* right_;
 };
