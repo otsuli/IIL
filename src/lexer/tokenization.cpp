@@ -6,6 +6,7 @@
 #include <utility>
 #include <variant>
 #include <vector>
+#include "exceptions/runTimeWarning.hpp"
 #include "lexer/stringPool.hpp"
 #include "lexer/tokens.hpp"
 #include "utils/isDelimiter.hpp"
@@ -27,15 +28,22 @@ std::vector<std::string> tokenizing::splitString(
         if (ch == '"') {
             std::string buf;
             buf.push_back('"');
-            std::cout << "size is: " << buf.size() << '\n';
             for (int k = i + 1; i < source->size(); k++) {
                 if ((*source)[k] == '"') {
                     buf.push_back('"');
                     i += buf.size() - 1;
                     chunks.emplace_back(std::move(buf));
                     break;
+                } else if (utils::isDelimiter((*source)[k + 1])) {
+                    buf.push_back((*source)[k]);
+                    buf.push_back('"');
+                    //! Add line or add something else idk.
+                    IILWarnings::runTimeWarning(
+                        "Closing quote was automatically inserted");
+                    break;
                 } else if ((*source)[k + 1] > source->size()) {
-                    //! Log error
+                    throw lexerTimeError(std::nullopt,
+                                         "Expected a closing quote '\"'");
                 }
                 buf.push_back((*source)[k]);
             }
@@ -70,7 +78,9 @@ std::vector<std::string> tokenizing::splitString(
                 i++;
             }
             if (i + 2 >= source->size()) {
-                //! Implement error handling
+                throw lexerTimeError(std::nullopt,
+                                     "Expected ending hashtags for multi-line "
+                                     "comment: '\"###\"'");
             }
             i += 3;  // skip last 3 hashtags
         }
@@ -269,14 +279,16 @@ std::vector<Token> tokenizing::tokenize(
         else if (utils::isNumber(src.front())) {
             int number;
             // src.front().data() is a pointer to the first character of the
-            // string src.front().data() + user_input.size() calculates the
+            // string. src.front().data() + user_input.size() calculates the
             // memory address exactly one byte past the last char of the string
             // result is the destination variable
             auto [ptr, ec] = std::from_chars(
                 src.front().data(), src.front().data() + src.front().size(),
                 number);
             if (ec == std::errc::result_out_of_range) {
-                //! Handle error
+                throw lexerTimeError(
+                    Token::make_token(TokenType::Number, number, line, column),
+                    "Integer overflow, maximum integer size is 16 bytes");
             } else {
                 Token tok =
                     Token::make_token(TokenType::Number, number, line, column);

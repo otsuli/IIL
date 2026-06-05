@@ -31,10 +31,12 @@ class evalTimeError : public IILException {
 
     evalTimeError(const Token& Err_instance_token, const std::string& Message)
         : err_instance_token_(Err_instance_token), message_(Message) {}
+
     evalTimeError(const std::optional<Token>& Err_instance_token,
                   const std::string& Message, int err_code)
         : err_instance_token_(Err_instance_token),
           message_(Message),
           IILException(err_code) {}
+
     evalTimeError() = default;
 };
