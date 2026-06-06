@@ -71,9 +71,13 @@ target_include_directories(IIL PRIVATE ${CMAKE_SOURCE_DIR}/include/IIL
 # -------------------------------------
 # REPL:
 # -------------------------------------
+file(GLOB_RECURSE ASCII_SRC CONFIGURE_DEPENDS
+     ${CMAKE_SOURCE_DIR}/external/ascii-art/*.cpp)
 
+add_library(ascii_art INTERFACE)
 add_subdirectory(stdlib/REPL)
 add_custom_target(IIL_STDLIB_REPL DEPENDS IIL_REPL)
+
 # -----------------------------------
 # TESTING:
 # -----------------------------------

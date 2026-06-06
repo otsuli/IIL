@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "Ascii.h"
 #include "utils.hpp"
 
@@ -12,8 +13,10 @@ int main() {
         std::string input;
         std::cout << "IIL>";
         std::cin >> input;
-        if (REPLUtils::removeSpaces(input) == "exit")
-            input_cache.emplace_back(input);
+        if (REPLUtils::removeSpaces(input) == "exit") {
+            break;
+        }
+        input_cache.emplace_back(input);
     }
 
     //! for the future: use another thread to listen for arrow presses to to
