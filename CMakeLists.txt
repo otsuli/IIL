@@ -31,7 +31,6 @@ set(BENCHMARK_ENABLE_GTEST_TESTS
     OFF
     CACHE BOOL "" FORCE)
 
-# Now add the directories safely
 add_subdirectory(external/googletest)
 add_subdirectory(external/benchmark)
 
@@ -76,7 +75,6 @@ file(GLOB_RECURSE ASCII_SRC CONFIGURE_DEPENDS
      ${CMAKE_SOURCE_DIR}/external/ascii-art/*.cpp)
 
 add_library(ascii_art INTERFACE)
-add_subdirectory(stdlib/REPL)
 add_custom_target(IIL_STDLIB_REPL DEPENDS IIL_REPL)
 
 # -----------------------------------
@@ -87,7 +85,7 @@ enable_testing()
 add_subdirectory(tests)
 
 add_custom_target(
-  all_tests
+  all_tests_IIL
   DEPENDS IIL_lexer_arithmetic_operators_test
           IIL_lexer_comparison_operators_test
           IIL_lexer_string_test
@@ -99,3 +97,7 @@ add_custom_target(
           IIL_lexer_single_line_comments_test
           IIL_lexer_multi_line_comments_test
           IIL_lexer_delimiter_seperation_test)
+
+enable_testing()
+add_subdirectory(stdlib/REPL)
+add_custom_target(IIL_STDLIB_REPL_TEST DEPENDS IIL_REPL_TEST_EXIT)

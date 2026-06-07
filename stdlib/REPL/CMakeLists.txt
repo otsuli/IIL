@@ -21,6 +21,5 @@ target_link_libraries(IIL_REPL PRIVATE ascii_art)
 
 enable_testing()
 add_executable(IIL_REPL_TEST_EXIT tests/exits.cpp)
-target_link_libraries(IIL_REPL_TEST_EXIT PRIVATE GTest::gtest_main IIL_lexer)
-
+target_link_libraries(IIL_REPL_TEST_EXIT PRIVATE GTest::gtest_main)
 add_test(NAME REPL_EXIT_TEST COMMAND IIL_REPL_TEST_EXIT)
