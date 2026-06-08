@@ -6,7 +6,7 @@
 #include "exceptions/lexTime.hpp"
 #include "types.hpp"
 
-enum TokenType {
+enum class TokenType {
     Number,
     Identifier,
     ivar,

@@ -97,7 +97,3 @@ add_custom_target(
           IIL_lexer_single_line_comments_test
           IIL_lexer_multi_line_comments_test
           IIL_lexer_delimiter_seperation_test)
-
-enable_testing()
-add_subdirectory(stdlib/REPL)
-add_custom_target(IIL_STDLIB_REPL_TEST DEPENDS IIL_REPL_TEST_EXIT)

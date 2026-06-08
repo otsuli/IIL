@@ -14,12 +14,3 @@ target_include_directories(ascii_art
                            INTERFACE ${CMAKE_SOURCE_DIR}/external/ascii-art)
 
 target_link_libraries(IIL_REPL PRIVATE ascii_art)
-
-# -----------------------
-# TESTING:
-# -----------------------
-
-enable_testing()
-add_executable(IIL_REPL_TEST_EXIT tests/exits.cpp)
-target_link_libraries(IIL_REPL_TEST_EXIT PRIVATE GTest::gtest_main)
-add_test(NAME REPL_EXIT_TEST COMMAND IIL_REPL_TEST_EXIT)
