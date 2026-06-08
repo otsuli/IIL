@@ -98,7 +98,7 @@ struct Token {
     Token operator*(const Token& other) = delete;
 };
 namespace null {
-inline Token nullToken{Token::make_token(TokenType::NONE, " ", 0, 0)};
+inline Token* nullToken{&Token::make_token(TokenType::NONE, " ", 0, 0)};
 }
 
 inline std::unordered_set<char> delimiters{

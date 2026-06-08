@@ -2,8 +2,13 @@
 #include <memory>
 #include "lexer/tokens.hpp"
 
-// These are AST nodes:
+// Forward declarations:
 struct Token;
+namespace null {
+inline Token* nullToken;
+}
+
+// These are AST nodes:
 struct Expr {
     virtual ~Expr() = default;
 };
@@ -14,8 +19,8 @@ struct BinaryExpr : public Expr {
     Token* op_;
 
     BinaryExpr(Expr& left, Expr& right, Token& op)
-        : left_(&left), right_(&right), op_(op) {}
-    BinaryExpr() : left_(nullptr), right_(nullptr), op_(null::nullToken) {}
+        : left_(&left), right_(&right), op_(&op) {}
+    BinaryExpr() : left_(nullptr), right_(nullptr), op_(&*null::nullToken) {}
 };
 
 struct UnaryExpr : public Expr {
@@ -29,8 +34,8 @@ struct PrimaryExpr : public Expr {
 
 struct Literal : public Expr {
     Token* value_;
-    Literal(Token& value) : value_(value) {}
-    Literal() : value_(null::nullToken) {}
+    Literal(Token& value) : value_(&value) {}
+    Literal() : value_(&*null::nullToken) {}
 };
 struct Grouping : public Expr {
     // Contained expression is the inner node for the exprtession contained
