@@ -6,6 +6,8 @@
 #include "exceptions/exceptions.hpp"
 #include "lexer/tokens.hpp"
 
+struct Token;
+
 class lexerTimeError : public IILException {
     typedef const u16 ConstU16;
 

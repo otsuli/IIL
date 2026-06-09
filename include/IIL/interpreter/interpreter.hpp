@@ -4,7 +4,7 @@
 
 // Object type is used to store multiple different datatypes
 // so we can make returned values objects of any type.
-
+struct Token;
 using Object =
     std::variant<double, std::string, bool, std::nullptr_t, Token, Expr>;
 

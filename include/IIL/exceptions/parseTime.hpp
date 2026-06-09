@@ -6,7 +6,7 @@
 #include "lexer/tokens.hpp"
 #include "parser/expr.hpp"
 #include "parser/parsing.hpp"
-
+struct Token;
 struct ParseError : public std::exception {
     Token token_;
     std::string message_;

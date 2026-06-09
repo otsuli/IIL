@@ -4,6 +4,7 @@
 #include "lexer/tokens.hpp"
 #include "parser/expr.hpp"
 
+struct Token;
 class IILInternalEvalError : public std::exception {
     using Object =
         std::variant<double, std::string, bool, std::nullptr_t, Token, Expr>;

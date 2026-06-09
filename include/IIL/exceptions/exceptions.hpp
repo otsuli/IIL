@@ -4,7 +4,7 @@
 #include <utility>
 #include "lexer/tokens.hpp"
 #include "types.hpp"
-
+struct Token;
 enum class TokenType;
 class IILException : public std::exception {
     typedef const std::variant<std::string, int> ConstTokenValue;
