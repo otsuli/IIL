@@ -7,6 +7,8 @@
 #include "lexer/tokens.hpp"
 
 class lexerTimeError : public IILException {
+    typedef const u16 ConstU16;
+
    private:
     std::optional<Token> err_instance_token_;
     std::string message_;
@@ -23,10 +25,13 @@ class lexerTimeError : public IILException {
 
     // This function returns the line and the column (order is: line, column)
     // You can use a structured binding for unpacking the return. (C++ 17)
-    std::pair<const u16, const u16> get_line() const override {
+    std::pair<ConstU16, ConstU16> get_line() const override {
         if (err_instance_token_.has_value()) {
-            return {err_instance_token_.value().line_,
-                    err_instance_token_.value().line_};
+            ConstU16 constantline =
+                static_cast<const u16&>(err_instance_token_.value().line_);
+            ConstU16 constantColumn =
+                static_cast<const u16&>(err_instance_token_.value().column_);
+            return {constantline, constantColumn};
         }
         throw(lexerTimeError(std::nullopt, "No line and/or column value"));
     }
