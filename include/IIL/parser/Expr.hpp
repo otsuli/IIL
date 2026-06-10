@@ -1,6 +1,5 @@
 #pragma once
 #include <memory>
-#include "lexer/tokens.hpp"
 
 // Forward declarations:
 struct Token;

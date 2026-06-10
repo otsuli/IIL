@@ -7,10 +7,6 @@
 struct Token;
 enum class TokenType;
 class IILException : public std::exception {
-    typedef const std::variant<std::string, int> ConstTokenValue;
-    typedef const TokenType ConstTokenType;
-    typedef const u16 ConstU16;
-
    protected:
     int err_code_ = 1;
 

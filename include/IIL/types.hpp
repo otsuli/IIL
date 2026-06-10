@@ -11,3 +11,9 @@ using i8 = int8_t;
 
 using f64 = double;
 using f32 = float;
+
+typedef const u16 ConstU16;
+
+typedef const std::variant<std::string, int> ConstTokenValue;
+typedef const TokenType ConstTokenType;
+typedef const u16 ConstU16;
