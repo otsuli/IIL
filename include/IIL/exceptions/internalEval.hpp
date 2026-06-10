@@ -1,7 +1,6 @@
 #pragma once
 #include <exception>
 #include <variant>
-#include "lexer/tokens.hpp"
 #include "parser/expr.hpp"
 
 struct Token;
@@ -15,12 +14,11 @@ class IILInternalEvalError : public std::exception {
 
    public:
     // Returns the error message
-    const char* what() const noexcept { return message_.c_str(); }
+    const char* what() const noexcept override;
 
     // Returns the error token
-    Object get_err_instance() const { return err_instance_object_; }
+    Object get_err_instance() const noexcept;
 
     IILInternalEvalError(const Object& Err_instance_Object,
-                         const std::string& Message)
-        : err_instance_object_(Err_instance_Object), message_(Message) {}
+                         const std::string& Message);
 };

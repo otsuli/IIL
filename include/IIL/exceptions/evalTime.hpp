@@ -15,7 +15,7 @@ class evalTimeError : public IILException {
 
    public:
     // Returns the error message
-    const char* what() const noexcept;
+    const char* what() const noexcept override;
     // Returns the error token
     std::unique_ptr<Token*> get_err_instance() const;
 
@@ -32,4 +32,4 @@ class evalTimeError : public IILException {
                   const std::string& Message, int err_code);
 
     evalTimeError() = default;
-}
+};
