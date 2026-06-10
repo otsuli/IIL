@@ -1,3 +1,4 @@
+#include "exceptions/lexTime.hpp"
 #include <exception>
 #include <string>
 #include <utility>
@@ -10,6 +11,8 @@ std::optional<Token> lexerTimeError::get_err_instance() const {
     return err_instance_token_.has_value() ? err_instance_token_
                                            : null::nullToken;
 }
+std::pair<ConstTokenType, ConstTokenValue> lexerTimeError::get_value()
+    const noexcept {}
 
 const char* lexerTimeError::what() const {
     return message_.c_str();

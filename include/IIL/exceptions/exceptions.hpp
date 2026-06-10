@@ -3,33 +3,20 @@
 #include <exception>
 #include <string>
 #include <utility>
-#include "lexer/tokens.hpp"
 #include "types.hpp"
 
 struct Token;
 enum class TokenType;
 class IILException : public std::exception {
+   private:
+    // 11 characters for a 32 bit unsigned int (last one is the null terminator)
+    std::array<char, 12> buffer;
+
    protected:
     unsigned int err_code_ = 1;
 
    public:
-    const char* what() const noexcept override {
-        // 11 characters for a 32 bit unsigned int
-        std::array<char, 12> buffer;
-
-        auto [ptr, ec] = std::to_chars(
-            buffer.data(), buffer.data() + buffer.size(), err_code_);
-
-        if (ec == std::errc{}) {
-            *ptr = '\0';
-
-            const char* c_str = buffer.data();
-
-            return c_str;
-        } else {
-            throw IILException(15);
-        }
-    }
+    const char* what() const noexcept override;
 
     // Returns the value as a pair, (order is: TokenType, Value)
     // You can use a structured binding for unpacking the return. (C++ 17)

@@ -1,3 +1,4 @@
+#include "exceptions/parseTime.hpp"
 #include <cstddef>
 #include <memory>
 #include <new>

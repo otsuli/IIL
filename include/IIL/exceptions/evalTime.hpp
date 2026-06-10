@@ -24,7 +24,8 @@ class evalTimeError : public IILException {
     std::pair<ConstU16, ConstU16> get_line() const override;
     // Returns the value as a pair, (order is: TokenType, Value)
     // You can use a structured binding for unpacking the return. (C++ 17)
-    std::pair<ConstTokenType, ConstTokenValue> get_value() const override;
+    std::pair<ConstTokenType, ConstTokenValue> get_value()
+        const noexcept override;
 
     evalTimeError(const Token& Err_instance_token, const std::string& Message);
 

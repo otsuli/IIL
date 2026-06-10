@@ -18,6 +18,16 @@ std::pair<ConstU16, ConstU16> evalTimeError::get_line() const {
     return {err_instance_token_->line_, err_instance_token_->column_};
 }
 
+std::pair<ConstTokenType, ConstTokenValue> evalTimeError::get_value()
+    const noexcept {
+    ConstTokenType tempType{
+        static_cast<ConstTokenType>(err_instance_token_->type_)};
+    ConstTokenValue tempVal{
+        static_cast<ConstTokenValue>(err_instance_token_->value_)};
+
+    return {tempType, tempVal};
+}
+
 evalTimeError::evalTimeError(const Token& Err_instance_token,
                              const std::string& Message)
     : err_instance_token_(&Err_instance_token), message_(Message) {}
