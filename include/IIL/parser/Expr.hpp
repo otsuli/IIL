@@ -23,6 +23,7 @@ struct UnaryExpr : public Expr {
     const Token* op_;
     Expr* right_;
 };
+
 struct PrimaryExpr : public Expr {
     const Token* op_;
     Expr* right_;
@@ -33,6 +34,7 @@ struct Literal : public Expr {
     Literal(Token& value);
     Literal();
 };
+
 struct Grouping : public Expr {
     // Contained expression is the inner node for the exprtession contained
     // inside the parentheses

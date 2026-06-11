@@ -1,5 +1,6 @@
 #include "IIL.hpp"
 #include <iostream>
+#include "exceptions/exceptions.hpp"
 
 Interpreter* IIL::interpreter = new Interpreter();
 
