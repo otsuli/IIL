@@ -1,4 +1,7 @@
 #include <cstdint>
+#include "lexer/tokens.hpp"
+enum class TokenType;
+
 using u64 = uint64_t;
 using u32 = uint32_t;
 using u16 = uint16_t;

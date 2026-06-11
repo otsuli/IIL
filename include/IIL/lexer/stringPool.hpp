@@ -4,7 +4,6 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
-#include "lexer/tokens.hpp"
 #include "types.hpp"
 
 struct Token;
@@ -27,9 +26,11 @@ class TokenProcessor {
     std::unordered_map<const std::string*, TokenType> keywordMap;
     void initKeywordMap();
     StringPool stringPool;
-    Token* processPooledString(const std::string* str, u16 line, u16 column);
+    std::unique_ptr<Token> processPooledString(const std::string* str, u16 line,
+                                               u16 column);
 
    public:
-    Token* processTokenVal(const std::string& command, u16 line, u16 column);
+    std::unique_ptr<Token> processTokenVal(const std::string& command, u16 line,
+                                           u16 column);
     TokenProcessor() { initKeywordMap(); }
 };  // class CommandProcessor

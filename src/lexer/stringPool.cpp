@@ -1,5 +1,6 @@
 #include "lexer/stringPool.hpp"
 #include <cstdint>
+#include <memory>
 #include "lexer/tokens.hpp"
 #include "types.hpp"
 #include "vector"
@@ -50,17 +51,19 @@ void TokenProcessor::initKeywordMap() {
     add("//", TokenType::FloorDiv);
 }
 
-Token* TokenProcessor::processPooledString(const std::string* str, u16 line,
-                                           u16 column) {
+std::unique_ptr<Token> TokenProcessor::processPooledString(
+    const std::string* str, u16 line, u16 column) {
     auto it = keywordMap.find(str);
     if (it != keywordMap.end())
-        return Token::make_token(it->second, *str, line, column);
-    return null::nullToken;
+        return std::make_unique<Token>(
+            Token::make_token(it->second, *str, line, column));
+    return std::make_unique<Token>(null::nullToken);
 }
 
-Token* TokenProcessor::processTokenVal(const std::string& command, u16 line,
-                                       u16 column) {
+std::unique_ptr<Token> TokenProcessor::processTokenVal(
+    const std::string& command, u16 line, u16 column) {
     const std::string* pooledString = stringPool.intern(command);
-    Token token = processPooledString(*&pooledString, line, column);
+    auto token = std::make_unique<Token>(
+        processPooledString(*&pooledString, line, column));
     return token;
 }

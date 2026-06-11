@@ -4,8 +4,7 @@
 // Forward declarations:
 struct Token;
 namespace null {
-inline Token* nullToken;
-}
+inline const Token* nullToken;
 
 // These are AST nodes:
 struct Expr {
@@ -15,30 +14,28 @@ struct Expr {
 struct BinaryExpr : public Expr {
     Expr* left_;
     Expr* right_;
-    Token* op_;
+    const Token* op_;
 
-    BinaryExpr(Expr& left, Expr& right, Token& op)
-        : left_(&left), right_(&right), op_(&op) {}
-    BinaryExpr() : left_(nullptr), right_(nullptr), op_(&*null::nullToken) {}
+    BinaryExpr(Expr& left, Expr& right, Token& op);
 };
 
 struct UnaryExpr : public Expr {
-    Token* op_;
+    const Token* op_;
     Expr* right_;
 };
 struct PrimaryExpr : public Expr {
-    Token* op_;
+    const Token* op_;
     Expr* right_;
 };
 
 struct Literal : public Expr {
-    Token* value_;
-    Literal(Token& value) : value_(&value) {}
-    Literal() : value_(&*null::nullToken) {}
+    const Token* value_;
+    Literal(Token& value);
+    Literal();
 };
 struct Grouping : public Expr {
     // Contained expression is the inner node for the exprtession contained
     // inside the parentheses
     Expr* contained_expression_;
-    Grouping() : contained_expression_(nullptr) {}
+    Grouping();
 };
