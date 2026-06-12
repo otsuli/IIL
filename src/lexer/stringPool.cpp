@@ -53,17 +53,20 @@ void TokenProcessor::initKeywordMap() {
 
 std::unique_ptr<Token> TokenProcessor::processPooledString(
     const std::string* str, u16 line, u16 column) {
+
     auto it = keywordMap.find(str);
     if (it != keywordMap.end())
         return std::make_unique<Token>(
             Token::make_token(it->second, *str, line, column));
+
     return std::make_unique<Token>(null::nullToken);
 }
 
 std::unique_ptr<Token> TokenProcessor::processTokenVal(
     const std::string& command, u16 line, u16 column) {
+
     const std::string* pooledString = stringPool.intern(command);
-    auto token = std::make_unique<Token>(
-        processPooledString(*&pooledString, line, column));
+    auto token = processPooledString(*&pooledString, line, column);
+
     return token;
 }

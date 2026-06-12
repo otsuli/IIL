@@ -55,6 +55,7 @@ enum class TokenType {
     Modulo,
     iexception,
 };
+
 struct Token {
     const TokenType type_;
     const std::variant<std::string, int> value_;
@@ -62,19 +63,19 @@ struct Token {
     const u16 line_;
     const u16 column_;
 
-    Token() = default;
-
     Token(TokenType type, std::variant<std::string, int> value, u16 line,
           u16 column);
     Token(Token* tok);
 
+    Token(const Token& tok);
+
     Token(const std::optional<Token>& tok);
 
-    Token(std::unique_ptr<Token> tok);
+    Token(std::unique_ptr<Token>& tok);
 
     inline static Token make_token(TokenType type,
                                    std::variant<std::string, int> value,
-                                   u16 line, u16 column);
+                                   u16 line, u16 column) noexcept;
 
     bool operator!=(const Token& token) const;
     bool operator==(const Token& token) const;
@@ -90,6 +91,6 @@ namespace null {
 inline const Token nullToken{Token::make_token(TokenType::NONE, " ", 0, 0)};
 }  // namespace null
 
-inline std::unordered_set<char> delimiters{
+inline const std::unordered_set<char> delimiters{
     ';', ',', '\n', ':', '(', ')',
 };
