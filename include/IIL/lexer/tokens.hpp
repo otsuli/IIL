@@ -65,9 +65,12 @@ struct Token {
 
     Token(TokenType type, std::variant<std::string, int> value, u16 line,
           u16 column);
-    Token(Token* tok);
 
     Token(const Token& tok);
+
+    Token(Token* tok);
+
+    Token(const Token* tok);
 
     Token(const std::optional<Token>& tok);
 

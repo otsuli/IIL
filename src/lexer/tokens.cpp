@@ -34,3 +34,5 @@ Token::Token& operator=(const Token& t) {
 Token::Token(std::unique_ptr<Token>& tok) : Token(*tok) {}
 
 Token::Token(const Token& tok) : Token(tok) {}
+
+Token::Token(const Token* tok) : Token(*tok) {}
