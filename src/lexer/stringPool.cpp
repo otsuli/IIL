@@ -56,10 +56,10 @@ std::unique_ptr<Token> TokenProcessor::processPooledString(
 
     auto it = keywordMap.find(str);
     if (it != keywordMap.end())
-        return std::make_unique<Token>(
-            Token::make_token(it->second, *str, line, column));
+        return std::make_unique<Token>(it->second, *str, line, column);
 
-    return std::make_unique<Token>(null::nullToken);
+    return std::make_unique<Token>(TokenType::NONE, std::string(" "), line,
+                                   column);
 }
 
 std::unique_ptr<Token> TokenProcessor::processTokenVal(

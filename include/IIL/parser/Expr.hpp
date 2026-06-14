@@ -3,8 +3,7 @@
 
 // Forward declarations:
 struct Token;
-namespace null {
-inline const Token* nullToken;
+namespace null {}  // namespace null
 
 // These are AST nodes:
 struct Expr {

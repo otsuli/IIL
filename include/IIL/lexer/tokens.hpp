@@ -1,6 +1,8 @@
 #pragma once
 #include <cstdint>
 #include <iostream>
+#include <memory>
+#include <optional>
 #include <unordered_set>
 #include <variant>
 #include "types.hpp"
@@ -66,24 +68,16 @@ struct Token {
     Token(TokenType type, std::variant<std::string, int> value, u16 line,
           u16 column);
 
-    Token(const Token& tok);
+    Token(const Token&) = default;
 
-    Token(Token* tok);
-
-    Token(const Token* tok);
-
-    Token(const std::optional<Token>& tok);
-
-    Token(std::unique_ptr<Token>& tok);
-
-    inline static Token make_token(TokenType type,
-                                   std::variant<std::string, int> value,
-                                   u16 line, u16 column) noexcept;
+    static Token make_token(TokenType type,
+                            std::variant<std::string, int> value, u16 line,
+                            u16 column) noexcept;
 
     bool operator!=(const Token& token) const;
     bool operator==(const Token& token) const;
 
-    Token& operator=(const Token& t) { return *this; }
+    Token& operator=(const Token&) = delete;
     Token operator+(const Token& other) = delete;
     Token operator-(const Token& other) = delete;
     Token operator/(const Token& other) = delete;

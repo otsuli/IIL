@@ -6,6 +6,7 @@
 #include <utility>
 #include <variant>
 #include <vector>
+#include "exceptions/lexTime.hpp"
 #include "exceptions/runTimeWarning.hpp"
 #include "lexer/stringPool.hpp"
 #include "lexer/tokens.hpp"
