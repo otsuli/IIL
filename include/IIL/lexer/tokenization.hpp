@@ -3,6 +3,8 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "exceptions/lexTime.hpp"
+#include "exceptions/runTimeWarning.hpp"
 #include "tokens.hpp"
 
 class Tokenizing {

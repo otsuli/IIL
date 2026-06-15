@@ -16,7 +16,7 @@ class IILException : public std::exception {
     unsigned int err_code_ = 1;
 
    public:
-    const char* what() const noexcept override;
+    virtual const char* what() const noexcept override;
 
     // Returns the value as a pair, (order is: TokenType, Value)
     // You can use a structured binding for unpacking the return. (C++ 17)

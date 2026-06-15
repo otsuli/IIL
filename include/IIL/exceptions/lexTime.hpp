@@ -21,6 +21,9 @@ class lexerTimeError : public IILException {
     // Remember to check if it returned anything.
     std::optional<Token> get_err_instance() const;
 
+    std::pair<ConstTokenType, ConstTokenValue> get_value()
+        const noexcept override;
+
     // This function returns the line and the column (order is: line, column)
     // You can use a structured binding for unpacking the return. (C++ 17)
     std::pair<ConstU16, ConstU16> get_line() const override;

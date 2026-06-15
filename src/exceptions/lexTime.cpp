@@ -38,3 +38,9 @@ lexerTimeError::lexerTimeError(const std::optional<Token>& Err_instance_token,
     : err_instance_token_(Err_instance_token),
       message_(Message),
       IILException(err_code) {}
+
+std::pair<ConstTokenType, ConstTokenValue> lexerTimeError::get_value()
+    const noexcept {
+    throw(lexerTimeError(std::nullopt,
+                         "Can't call get_value on a lexerTimeError"));
+}
