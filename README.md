@@ -1,6 +1,6 @@
 # Interesting Interpreted Language
 
-IIL. The newest, best, and most advanced interpreted coding language.
+IIL. The newest, best, and most advanced interpreted coding language. Built to be faster and better than python.
 
 ### What is IIL?
 
